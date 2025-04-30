@@ -1,29 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../Institucional/css/styles_ex.css">
 </head>
+
 <body>
     <div class="bar_lateral">
         <div class="bar_titulo">
             SONAR
         </div>
         <div class="bar_nome_user">
-            <a href="">
-                NOME 
-            </a>
-            <a href="">
-                USER
-            </a>
-
+            NOME USER
         </div>
         <div class="bar_p_e">
             <a href="">
                 PESQUISAR
-            </a>   
+            </a>
         </div>
         <div class="bar_p_e">
             <a href="">
@@ -52,7 +48,7 @@
             </div>
             <div class="curtida">
                 <button onclick="curtida()">
-                    <div id="cond_curtida">
+                    <div class="cond_curtida" id="ID DO POST (BANCO DE DADOS)">
                         <img src="assets/imgs/coracao preto e branco.svg" alt="">
                     </div>
                 </button>
@@ -65,9 +61,9 @@
                     nome user
                 </div>
                 <div class="desc_txt">
-                    Lorem ipsum dolor sit 
-                    amet consectetur adipisicing elit. Sunt modi, optio labore 
-                    eveniet vero vitae voluptatum quaerat, nulla ab tempora voluptas 
+                    Lorem ipsum dolor sit
+                    amet consectetur adipisicing elit. Sunt modi, optio labore
+                    eveniet vero vitae voluptatum quaerat, nulla ab tempora voluptas
                     eius id voluptates fuga vossssssssssssssssssssssssssluptate odit aut illum provident.
                 </div>
             </div>
@@ -75,26 +71,27 @@
     </div>
     <button onclick="criar()">criar</button>
 </body>
+
 </html>
 <script>
 
     var cor_curtida = 0
     function curtida() {
         if (cor_curtida == 0) {
-            cond_curtida.innerHTML = 
-            `<img src="assets/imgs/coracao vermelho.svg" alt="">`
-            cor_curtida ++
+            cond_curtida.innerHTML =
+                `<img src="assets/imgs/coracao vermelho.svg" alt="">`
+            cor_curtida++
         } else {
-            cor_curtida --
-            cond_curtida.innerHTML = 
-            `<img src="assets/imgs/coracao preto e branco.svg" alt="">`
+            cor_curtida--
+            cond_curtida.innerHTML =
+                `<img src="assets/imgs/coracao preto e branco.svg" alt="">`
         }
     }
 </script>
 <script>
     function criar() {
-        container.innerHTML += 
-        `<div class="post">
+        container.innerHTML +=
+            `<div class="post">
             <div class="post_user">
                 Nome User
             </div>
@@ -103,7 +100,7 @@
             </div>
             <div class="curtida">
                 <button onclick="curtida()">
-                    <div id="cond_curtida">
+                    <div class="cond_curtida" id="ID DO POST (BANCO DE DADOS)">
                         <img src="assets/imgs/coracao preto e branco.svg" alt="">
                     </div>
                 </button>
@@ -123,6 +120,6 @@
                 </div>
             </div>
         </div>`
-        
+
     }
 </script>

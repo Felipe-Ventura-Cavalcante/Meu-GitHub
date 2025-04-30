@@ -34,7 +34,6 @@ header {
   align-items: center;
   z-index: 999;
   border: 1px;
-  border-color: red;
 }
 
 header a img {
