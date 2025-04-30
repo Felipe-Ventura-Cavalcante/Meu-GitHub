@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Keania One";
+  text-decoration: none;
+  list-style: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  max-width: 1900px;
+  background-color: #ffffffff;
+}
+
+.bar_lateral {
+    position: fixed;
+    background-color: #EDEDED;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    top: 0px;
+    width: 15%;
+    height: 100%;
+    align-items: flex-start;
+    z-index: 999;
+    border: 1px;
+  }
+
+  .bar_lateral .bar_titulo {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 2rem;
+    font-family: "Keania One";
+  }
+
+  .bar_lateral .bar_nome_user {
+    width: 60%;
+    padding-top: 8%;
+    padding-bottom: 8%;
+    font-family: "Keania One";
+    background-color: #d9d9d9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-bottom: 150px;
+    margin-top: 30px;
+  }
+
+  .bar_lateral a {
+    color: black;
+  }
+  .bar_lateral .bar_p_e {
+    background-color: #d9d9d9;
+    margin-bottom: 20px;
+    width: 60%;
+    padding-top: 8%;
+    padding-bottom: 8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+  }
+
+  .bar_lateral .bar_new {
+
+    font-family: "Keania One";
+    width: 60%;
+    padding-top: 8%;
+    padding-bottom: 8%;
+    background-color: #d9d9d9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-bottom: 150px;
+  }
+
+  .bar_lateral .bar_sair {
+    background-color: #d9d9d9;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 5%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+    margin-left: 15%;
+    background-color: #2A2A2A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .post {
+    width: 40%;
+    height: 100%;
+    background-color: #D9D9D9;
+  }
+
+  .post .post_user {
+    font-family: "Sofia Sans";
+    font-size: 1.5rem;
+    width: 100%;
+    height: 20px;
+    padding-left: 10px;
+  }
+  .post .img_post {
+    width: 100%;
+    margin-top: 10px;
+    height: auto;
+
+  }
+
+  .img_post img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+  .curtida {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 10px;
+    margin-top: 5px;
+  }
+  .curtida button {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  .curtida .qtd_curtida {
+    font-family: "Sofia Sans";
+  }
+
+  .desc_post {
+    padding: 10px;
+    border-bottom: #2A2A2A solid 3px;
+  }
