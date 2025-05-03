@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro - SONAR</title>
+  <link rel="stylesheet" href="css/styles_login_cadastro.css">
+</head>
+
+<body>
+  <header>
+    <a href="">
+      <img src="assets/imgs/logo sem fundo 1.svg" alt="">
+    </a>
+    <nav>
+      <div class="nav_um">
+        <ul>
+          <li><a href="">EXPLORER</a></li>
+          <li><a href="">NEW POST</a></li>
+        </ul>
+      </div>
+
+      <div class="nav_dois">
+        <ul>
+          <li><a href="">CADASTRAR</a></li>
+          <li><a href="">LOGIN</a></li>
+        </ul>
+      </div>
+    </nav>
+
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h1>
+        Cadastro
+      </h1>
+      <div class="campo">
+        <div class="txt">nome do usuário</div>
+        <input type="text" id="input_nome_user">
+      </div>
+      <div class="campo">
+        <div class="txt">email</div>
+        <input type="text" id="input_email">
+      </div>
+      <div class="campo">
+        <div class="txt">senha</div>
+        <input type="password" id="input_senha">
+      </div>
+      <div class="campo">
+        <div class="txt">confirmar senha</div>
+        <input type="password" id="input_confirmar_senha">
+      </div>
+      <button onclick="cadastrar()">Cadastrar</button>
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  function cadastrar() {
+    // receber valores das inputs
+    var nomeVar = input_nome_user.value;
+    var emailVar = input_email.value;
+    var senhaVar = input_senha.value;
+    var confirmar_senhaVar = input_confirmar_senha.value;
+
+    // Vá para routes.usuario
+    fetch("/usuario/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // Criação dos objetos com o valor das inputs
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar
+      })
+    })
+  }
+</script>
