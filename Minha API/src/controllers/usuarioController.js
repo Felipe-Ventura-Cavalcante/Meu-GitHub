@@ -41,16 +41,19 @@ function logar(req, res) {
     // caso esteja tudo certo
     else {
         usuarioModel.logar(email, senha)
+
         // é feito uma promessa onde é criado o 'resultado =>'
-        // esse resultado recebe todos os valores retornados pelo 
-        // select da função login (diUsuario, nome, email, senha)
+        // esse resultado recebe todos os valores retornados pelo select da função login (diUsuario, nome, email, senha)
+        // esses valores vem em um array[] com varios objetos, ex: idUsuario:
             .then((resultado) => {
                 if (resultado.length > 0) {
                     res.json({
                         idUsuario: resultado[0].idUsuario,
                         email: resultado[0].email,
                         nome: resultado[0].nome,
-                        senha: resultado[0].senha
+                        senha: resultado[0].senha,
+                        descricao: resultado[0].descricao,
+                        imagem_perfil: resultado[0].imagem_perfil
                     })
                 } else {
                     res.status(403).send("Email e/ou senhas inválidos")

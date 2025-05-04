@@ -157,13 +157,19 @@ nav {
     align-items: center;
 }
 
-.botao_add button {
+.botao_add input {
+    display: none;
+}
+.botao_add span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     padding: 8%;
-    font-size: 1.1rem;
+    background-color: #121212;
+    font-size: 1rem;
     border-radius: 10px;
     border: none;
-    background-color: #121212;
     color: #FFFFFF;
     cursor: pointer;
 }

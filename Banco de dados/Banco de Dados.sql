@@ -6,6 +6,7 @@ idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(45),
 email VARCHAR(100) UNIQUE,
 senha VARCHAR(45),
+descricao VARCHAR(100),
 dtCriacao_conta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 imagem_perfil VARCHAR(45)
 );
@@ -24,6 +25,9 @@ CONSTRAINT fkUser_Post
 
 INSERT INTO post (quem_postou, descricao, imagem_post) VALUES
 (1, "foto de golfinho", "imagem de golfinho");
+
+INSERT INTO post (quem_postou, descricao, imagem_post) VALUES
+(1, "foto de melancia", "imagem de melancia");
 
 CREATE TABLE curtida (
 quem_curtiu INT,

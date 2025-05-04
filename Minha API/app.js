@@ -20,6 +20,7 @@ var app = express()
 
 var usuarioRouter = require("./src/routes/usuario")
 var explorerRouter = require("./src/routes/explorer")
+var perfilRouter = require("./src/routes/perfil")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -29,6 +30,7 @@ app.use(cors())
 
 app.use("/usuario", usuarioRouter)
 app.use("/explorer", explorerRouter)
+app.use("/perfil", perfilRouter)
 
 app.listen(PORTA_APP, function () {
     console.log(`

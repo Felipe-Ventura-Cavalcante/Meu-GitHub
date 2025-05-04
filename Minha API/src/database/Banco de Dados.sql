@@ -6,6 +6,7 @@ idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(45),
 email VARCHAR(100) UNIQUE,
 senha VARCHAR(45),
+descricao VARCHAR(100),
 dtCriacao_conta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 imagem_perfil VARCHAR(45)
 );

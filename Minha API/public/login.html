@@ -6,25 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - SONAR</title>
   <link rel="stylesheet" href="css/styles_login_cadastro.css">
+  <link rel="shortcut icon" href="assets/icon/favicon2.ico" type="image/x-icon">
 </head>
 
 <body>
   <header>
-    <a href="">
+    <a href="index.html">
       <img src="assets/imgs/logo sem fundo 1.svg" alt="">
     </a>
     <nav>
       <div class="nav_um">
         <ul>
-          <li><a href="">EXPLORER</a></li>
-          <li><a href="">NEW POST</a></li>
+          <li><a href="cadastro.html">CADASTRAR</a></li>
         </ul>
       </div>
 
       <div class="nav_dois">
         <ul>
-          <li><a href="">CADASTRAR</a></li>
-          <li><a href="">LOGIN</a></li>
+          <li><a href="login.html">LOGIN</a></li>
         </ul>
       </div>
     </nav>
@@ -45,6 +44,11 @@
         <input type="password" id="input_senha">
       </div>
       <button onclick="logar()">Login</button>
+      <div>Não tem uma conta ainda?
+        <a href="cadastro.html">
+          Clique aqui.
+        </a>
+      </div>
     </div>
   </div>
 </body>
@@ -81,9 +85,11 @@
           console.log(JSON.stringify(json))
 
           // armazena as informações para uma sessão
-          sessionStorage.EMAIL_USUARIO = json.email
-          sessionStorage.NOME_USUARIO = json.nome
           sessionStorage.ID_USUARIO = json.idUsuario
+          sessionStorage.NOME_USUARIO = json.nome
+          sessionStorage.EMAIL_USUARIO = json.email
+          sessionStorage.DESCRICAO_USUARIO = json.descricao
+          sessionStorage.IMAGEM_PERFIL = json.imagem_perfil
 
           window.location = "site/explorer.html"
         })

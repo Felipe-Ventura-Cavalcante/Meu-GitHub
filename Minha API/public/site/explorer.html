@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explorer - SONAR</title>
     <link rel="stylesheet" href="css/styles_ex.css">
+    <link rel="shortcut icon" href="assets/icon/favicon2.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -14,14 +15,14 @@
             SONAR
         </div>
         <div class="bar_nome_user">
-            <a href="">
+            <a href="perfil.html">
                 <div id="div_nome_user">
                     NOME USER
                 </div>
             </a>
         </div>
         <div class="bar_p_e">
-            <a href="">
+            <a href="explorer.html">
                 EXPLORER
             </a>
         </div>
@@ -31,45 +32,13 @@
             </a>
         </div>
         <div class="bar_sair">
-            <a href="../login.html">
+            <button onclick="sair()">
                 SAIR
-            </a>
+            </button>
         </div>
     </div>
 
     <div class="container" id="container">
-
-        <div class="post">
-            <div class="post_user">
-                Nome User
-            </div>
-            <div class="img_post">
-                <img src="assets/imgs/image 2.svg" alt="">
-            </div>
-            <div class="curtida">
-                <button onclick="curtida()">
-                    <div class="cond_curtida" id="ID DO POST (BANCO DE DADOS)">
-                        <img src="assets/imgs/coracao preto e branco.svg" alt="">
-                    </div>
-                </button>
-                <div class="qtd_curtida" id="0">
-                    123
-                </div>
-            </div>
-            <div class="desc_post">
-                <div class="desc_user">
-                    nome user
-                </div>
-                <div class="desc_txt">
-                    Lorem ipsum dolor sit
-                    amet consectetur adipisicing elit. Sunt modi, optio labore
-                    eveniet vero vitae voluptatum quaerat, nulla ab tempora voluptas
-                    eius id voluptates fuga vossssssssssssssssssssssssssluptate odit aut illum provident.
-                </div>
-            </div>
-        </div>
-
-
     </div>
 </body>
 
@@ -78,30 +47,38 @@
 
     // Para exibir o nome do usuario logado
     // utilizamos o dado da sessão do login
+    var idUsuario = sessionStorage.ID_USUARIO
     var nomeUsuario = sessionStorage.NOME_USUARIO
+    var email = sessionStorage.EMAIL_USUARIO
+    var descricaoUsuario = sessionStorage.DESCRICAO_USUARIO
+    var imagem_perfil = sessionStorage.IMAGEM_PERFIL
+
+
     div_nome_user.innerHTML = `Olá, ${nomeUsuario}`
 
-    fetch("/explorer/listar", {
-        method: "GET"
-    })
+    fetch("/explorer/listar")
 
-    // Se a requisição der certo, pegue esses dados
-    .then(res => res.json())
+        // Se a requisição der certo, pegue esses dados
+        .then(res => res.json())
 
-    // se esses dados forem chegarem, abre eles em dados_post
-    .then(dados_post => {
-        
-        // agora eu posso fazer o que eu quiser com esses dados
-        for (var contador = 0; contador < dados_post.length; contador++) {
-            
-            // Essa var vem como array com vários objetos
-            var post = dados_post[contador]
-            // para usar cada ojetivo individualmente eu utilizo o nome da var "post". "nome do campo"
+        // eu exibo os meus dados.json(res) em dados_post
+        //    (res =>)
+        .then(dados_post => {
 
-            var id_post = post.idPost
+            // agora eu posso fazer o que eu quiser com esses dados
+            for (var contador = 0; contador < dados_post.length; contador++) {
+
+                // Essa var vem como array com vários objetos
+                var post = dados_post[contador]
+
+                // para usar cada ojetivo individualmente eu utilizo o nome da var "post". "nome do campo"
+                var nome = post.nome
+                var idPost = post.idPost
+                var descricao = post.descricao
+                var imagem_post = post.imagem_post
 
 
-            container.innerHTML += `
+                container.innerHTML += `
             <div class="post">
             <div class="post_user">
                 ${post.nome}
@@ -110,7 +87,7 @@
                 <img src="assets/imgs/image 2.svg" alt="">
             </div>
             <div class="curtida">
-                <button onclick="curtida()" id="${id_post}">
+                <button onclick="curtida()" id="${post.idPost}">
                     <div class="cond_curtida" id="ID DO POST (BANCO DE DADOS)">
                         <img src="assets/imgs/coracao preto e branco.svg" alt="">
                     </div>
@@ -129,9 +106,9 @@
             </div>
         </div>`
 
-            console.log("post separado", post)
-        }
-    })
+                console.log("post separado", post)
+            }
+        })
 
     var cor_curtida = 0
     function curtida() {
@@ -144,5 +121,11 @@
             id_post.innerHTML =
                 `<img src="assets/imgs/coracao preto e branco.svg" alt="">`
         }
+    }
+
+
+    function sair() {
+        sessionStorage.clear()
+        window.location = "../index.html"
     }
 </script>

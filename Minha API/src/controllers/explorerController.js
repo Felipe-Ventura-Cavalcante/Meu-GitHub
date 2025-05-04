@@ -5,6 +5,7 @@ function listar(req, res) {
     explorerModel.listar()
     // se a busca por esses dados der tudo certo
     .then(
+        
         resultado => {
             res.status(200).json(resultado)
         }

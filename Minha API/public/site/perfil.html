@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - SONAR</title>
+    <link rel="stylesheet" href="css/styles_perfil.css">
+    <link rel="shortcut icon" href="assets/icon/favicon2.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div class="bar_lateral">
+        <div class="bar_titulo">
+            SONAR
+        </div>
+        <div class="bar_nome_user">
+            <a href="perfil.html">
+                <div id="div_nome_user">
+                    NOME USER
+                </div>
+            </a>
+        </div>
+        <div class="bar_p_e">
+            <a href="explorer.html">
+                EXPLORER
+            </a>
+        </div>
+        <div class="bar_new">
+            <a href="newpost.html">
+                NEW POST
+            </a>
+        </div>
+        <div class="bar_sair">
+            <button onclick="sair()">
+                SAIR
+            </button>
+        </div>
+    </div>
+
+
+    <div class="container" id="container">
+        <div class="superior" id="superior">
+
+        </div>
+
+        <div class="posts_do_user">
+            <div class="titulo_postagens">
+                Postagens do usuario
+            </div>
+            <div class="exibicao_post" id="exibicao_post">
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script>
+    window.onload = function () {
+
+        var emailUser = sessionStorage.EMAIL_USUARIO
+        var nomeUser = sessionStorage.NOME_USUARIO
+        var idUsuario = sessionStorage.ID_USUARIO
+        var descricaoUser = sessionStorage.DESCRICAO_USUARIO
+        var imagem_perfilUser = sessionStorage.IMAGEM_PERFIL
+
+        superior.innerHTML = `
+        <div class="imagem_perfil">
+                <label for="imagem_perfil" class="imagem_perfilcss">
+                    <input type="file" id="imagem_perfil">
+                    <span><img src="assets/imgs/${imagem_perfilUser}" alt="imagem de Perfil do Usuario"></span>
+                </label>
+            </div>
+            <div class="info_perfil">
+                <div class="nome_do_usuario">
+                    ${nomeUser}
+                </div>
+                <div class="botao_editar">
+                    <button onclick="editar()">
+                        Editar descrição
+                    </button>
+                    <div id="div_editar">
+                    </div>
+                </div>
+                <div class="descricao_do_perfil">
+                    ${descricaoUser}
+                </div>
+            </div>`
+
+        fetch(`/perfil/${idUsuario}`,)
+            .then(res => res.json())
+            .then(dados_post => {
+                for (var contador = 0; contador < dados_post.length; contador++) {
+                    var dados = dados_post[contador]
+                    console.log(dados)
+
+                    var nomePost = dados.nome
+                    var idPost = dados.idPost
+                    var descricaoPost = dados.descricao
+                    var imagemPost = dados.imagem_post
+
+                    exibicao_post.innerHTML += `
+                    <div class="post">
+                    <div class="post_user">
+                        ${nomePost}
+                    </div>
+                    <div class="img_post">
+                        <img src="assets/imgs/image 2.svg" alt="">
+                    </div>
+                    <div class="curtida">
+                        <button onclick="curtida()">
+                            <div class="cond_curtida" id="${idPost}">
+                                <img src="assets/imgs/coracao branco.svg" alt="">
+                            </div>
+                        </button>
+                        <div class="qtd_curtida" id="0">
+                            123
+                        </div>
+                    </div>
+                    <div class="desc_post">
+                        <div class="desc_user">
+                            ${nomePost}
+                        </div>
+                        <div class="desc_txt">
+                           ${descricaoPost}
+                        </div>
+                    </div>
+                </div>`
+                }
+            }
+            )
+        }
+
+    function editar() {
+        var descricaoUser = sessionStorage.DESCRICAO_USUARIO
+        div_editar.innerHTML = `
+        <input type="text" id="input_nova_desc" value="${descricaoUser}">
+        <button onclick="update()">ENVIAR</button>`
+    }
+
+    function update() {
+        var novaDesc = input_nova_desc.value
+        var idUsuario = sessionStorage.ID_USUARIO
+
+        fetch("/perfil/atualizarDesc", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idUsuarioServer: idUsuario,
+                descricaoServer: novaDesc
+            })
+        })
+
+        div_editar.innerHTML = ``
+    }
+
+    function sair() {
+        sessionStorage.clear()
+        window.location = "../index.html"
+    }
+</script>

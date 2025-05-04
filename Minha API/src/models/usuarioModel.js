@@ -7,8 +7,8 @@ function cadastrar(nome, email, senha) {
 
     // comando para inserção dos dados no banco de dados
     var instrucaoSql = `
-    INSERT INTO usuario (nome, email, senha) VALUES
-    ('${nome}', '${email}', '${senha}')`
+    INSERT INTO usuario (nome, email, senha, descricao, imagem_perfil) VALUES
+    ('${nome}', '${email}', '${senha}', '...', 'perfil_anonimo.jpeg')`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
     return database.executar(instrucaoSql);
@@ -21,7 +21,7 @@ function logar(email, senha) {
 
     // comando para verificar informações do banco de dados
     var instrucaoSql = `
-    SELECT idUsuario, nome, email, senha FROM usuario WHERE email = "${email}" AND senha = "${senha}";`
+    SELECT * FROM usuario WHERE email = "${email}" AND senha = "${senha}";`
     
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
     return database.executar(instrucaoSql)
