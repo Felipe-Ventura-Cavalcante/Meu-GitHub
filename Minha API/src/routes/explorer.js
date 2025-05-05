@@ -9,4 +9,8 @@ router.get("/listar", function (req, res) {
     explorerController.listar(req, res)
 })
 
+router.get("/:idPost", function (req, res) {
+    explorerController.listarComentario(req, res)
+})
+
 module.exports = router

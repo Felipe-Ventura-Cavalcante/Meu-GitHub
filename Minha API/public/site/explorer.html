@@ -44,88 +44,154 @@
 
 </html>
 <script>
+    window.onload = function () {
 
-    // Para exibir o nome do usuario logado
-    // utilizamos o dado da sessão do login
-    var idUsuario = sessionStorage.ID_USUARIO
-    var nomeUsuario = sessionStorage.NOME_USUARIO
-    var email = sessionStorage.EMAIL_USUARIO
-    var descricaoUsuario = sessionStorage.DESCRICAO_USUARIO
-    var imagem_perfil = sessionStorage.IMAGEM_PERFIL
+        // Para exibir o nome do usuario logado
+        // utilizamos o dado da sessão do login
+        var idUsuario = sessionStorage.ID_USUARIO
+        var nomeUsuario = sessionStorage.NOME_USUARIO
+        var email = sessionStorage.EMAIL_USUARIO
+        var descricaoUsuario = sessionStorage.DESCRICAO_USUARIO
+        var imagem_perfil = sessionStorage.IMAGEM_PERFIL
 
+        div_nome_user.innerHTML = `Olá, ${nomeUsuario}`
 
-    div_nome_user.innerHTML = `Olá, ${nomeUsuario}`
+        fetch("/explorer/listar")
 
-    fetch("/explorer/listar")
+            // Se a requisição der certo, pegue esses dados
+            .then(res => res.json())
 
-        // Se a requisição der certo, pegue esses dados
-        .then(res => res.json())
+            // eu exibo os meus dados.json(res) em dados_post
+            //    (res =>)
+            .then(dados_post => {
 
-        // eu exibo os meus dados.json(res) em dados_post
-        //    (res =>)
-        .then(dados_post => {
+                // agora eu posso fazer o que eu quiser com esses dados
+                for (var contador = 0; contador < dados_post.length; contador++) {
 
-            // agora eu posso fazer o que eu quiser com esses dados
-            for (var contador = 0; contador < dados_post.length; contador++) {
+                    // Essa var vem como array com vários objetos
+                    var post = dados_post[contador]
 
-                // Essa var vem como array com vários objetos
-                var post = dados_post[contador]
+                    // para usar cada ojetivo individualmente eu utilizo o nome da var "post". "nome do campo"
+                    var nome = post.nome
+                    var quem_postou = post.quem_postou
+                    var idPost = post.idPost
+                    var descricao = post.descricao
+                    var imagem_post = post.imagem_post
 
-                // para usar cada ojetivo individualmente eu utilizo o nome da var "post". "nome do campo"
-                var nome = post.nome
-                var idPost = post.idPost
-                var descricao = post.descricao
-                var imagem_post = post.imagem_post
-
-
-                container.innerHTML += `
-            <div class="post">
-            <div class="post_user">
-                ${post.nome}
-            </div>
-            <div class="img_post">
-                <img src="assets/imgs/image 2.svg" alt="">
-            </div>
-            <div class="curtida">
-                <button onclick="curtida()" id="${post.idPost}">
-                    <div class="cond_curtida" id="ID DO POST (BANCO DE DADOS)">
-                        <img src="assets/imgs/coracao preto e branco.svg" alt="">
+                    container.innerHTML += `
+                    <div class="post">
+                <div class="post_user" id="${quem_postou}">
+                    ${nome}
+                </div>
+                <div class="img_post">
+                    <img src="assets/imgs/image 2.svg" alt="">
+                </div>
+                <div class="curtida">
+                    <button onclick="curtida(this, '${idPost}')">
+                        <div class="cond_curtida" id="condCurtida${idPost}">
+                            <img src="assets/imgs/coracao preto e branco.svg" alt="">
+                        </div>
+                    </button>
+                    <div class="qtd_curtida">
+                        123
                     </div>
-                </button>
-                <div class="qtd_curtida">
-                    123
+                    <div class="comentarios">
+                        <button onclick="comentario(this, '${idPost}', '${quem_postou}')">
+                            <img src="" alt="comentario">
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="desc_post">
-                <div class="desc_user">
-                    ${post.nome}
+                <div class="desc_post">
+                    <div class="desc_user">
+                        ${nome}
+                    </div>
+                    <div class="desc_txt">
+                        ${descricao}
+                    </div>
+                    <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
                 </div>
-                <div class="desc_txt">
-                    ${post.descricao}
-                </div>
-            </div>
-        </div>`
-
-                console.log("post separado", post)
-            }
-        })
-
-    var cor_curtida = 0
-    function curtida() {
-        if (cor_curtida == 0) {
-            id_post.innerHTML =
-                `<img src="assets/imgs/coracao vermelho.svg" alt="">`
-            cor_curtida++
-        } else {
-            cor_curtida--
-            id_post.innerHTML =
-                `<img src="assets/imgs/coracao preto e branco.svg" alt="">`
-        }
+            </div>`
+                }
+            })
     }
 
-
+    // função para finalizar sessão e voltar para a home
     function sair() {
         sessionStorage.clear()
         window.location = "../index.html"
+    }
+
+    var contador_comentário = 0
+    function comentario(botao, idPost, quem_postou) {
+
+        var div = document.getElementById(`div_texto_comentario${idPost}`)
+
+        if (contador_comentário == 0) {
+            fetch(`/explorer/${idPost}`)
+                .then((res) => res.json())
+                .then(todos_os_comentarios => {
+
+                    div.innerHTML = `
+                    <div class="adicionar comentario">
+                        <div class="titulo_comentario">
+                            Comentar
+                        </div>
+                            <input type="text" id="input_add_comentario">
+                            <button onclick="enviar_comentario(${idPost}, ${quem_postou})" id="${quem_postou}">
+                                enviar
+                            </button>
+                        </div>`
+
+                    for (var cont = 0; cont < todos_os_comentarios.length; cont++) {
+                        var comentario = todos_os_comentarios[cont]
+
+                        var txt_comentario = comentario.texto_comentario
+                        var nome_quem_comentou = comentario.nome
+
+                        div.innerHTML += `
+
+                    <div class="texto_dos_comentarios">
+                        <div class="nome_quem_comentou">
+                            ${nome_quem_comentou}
+                        </div>
+                        ${txt_comentario}
+                    </div>`
+                    }
+                }).catch(function (erro) {
+                    console.log("Este post não tem comentário")
+                    console.log(erro)
+                    div.innerHTML = `
+                    Esse post não tem comentário`
+                })
+            contador_comentário++
+        }
+        else {
+            div.innerHTML = ``
+            contador_comentário--
+        }
+    }
+
+    // Função de Adicionar um novo comentário
+    function enviar_comentario(idPost, quem_postou) {
+
+        var novo_comentario = input_add_comentario.value
+        var idUsuario = sessionStorage.ID_USUARIO
+        var quem_postouVar = quem_postou
+
+        fetch(`/novoComentario/${idPost}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+
+            // Transformo os dados em Json pois o servidor espera dados em JSON
+            body: JSON.stringify({
+
+                idUsuarioServer: idUsuario,
+                idPostServer: idPost,
+                novo_comentarioServer: novo_comentario,
+                quem_postouServer: quem_postouVar
+            })
+        })
     }
 </script>

@@ -27,6 +27,7 @@ function listar(req, res) {
     var id = req.params.id
 
     perfilModel.listar(id)
+    
         .then(resultado => {
             res.status(200).json(resultado)
         }).catch(

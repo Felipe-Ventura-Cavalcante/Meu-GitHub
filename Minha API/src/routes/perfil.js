@@ -9,7 +9,7 @@ router.post("/atualizarDesc", function(req, res) {
     perfilController.atualizarDesc(req, res)
 })
 
-router.get("/:id",
+router.get("/novoComentario/:id",
     perfilController.listar
 )
 
