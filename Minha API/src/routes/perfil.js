@@ -9,8 +9,9 @@ router.post("/atualizarDesc", function(req, res) {
     perfilController.atualizarDesc(req, res)
 })
 
-router.get("/novoComentario/:id",
-    perfilController.listar
+router.get("/:id", function(req, res) {
+    perfilController.listar(req, res)
+}
 )
 
 module.exports = router

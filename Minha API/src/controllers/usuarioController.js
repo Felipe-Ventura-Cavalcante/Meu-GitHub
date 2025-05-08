@@ -2,7 +2,7 @@
 var usuarioModel = require("../models/usuarioModel")
 
 function cadastrar(req, res) {
-
+    
     // criação das variáveis que irão captar os valores das inputs do cadastro.html
     var nome = req.body.nomeServer
     var email = req.body.emailServer

@@ -91,15 +91,17 @@
 
         fetch(`/perfil/${idUsuario}`,)
             .then(res => res.json())
+
             .then(dados_post => {
+
                 for (var contador = 0; contador < dados_post.length; contador++) {
                     var dados = dados_post[contador]
-                    console.log(dados)
 
                     var nomePost = dados.nome
                     var idPost = dados.idPost
                     var descricaoPost = dados.descricao
                     var imagemPost = dados.imagem_post
+                    var quem_postou = dados.quem_postou
 
                     exibicao_post.innerHTML += `
                     <div class="post">
@@ -110,14 +112,19 @@
                         <img src="assets/imgs/image 2.svg" alt="">
                     </div>
                     <div class="curtida">
-                        <button onclick="curtida()">
-                            <div class="cond_curtida" id="${idPost}">
+
+                        
+                        <button onclick="curtida('${idPost}','${quem_postou}')">
+                            <div class="cond_curtida" id="condCurtida${idPost}">
                                 <img src="assets/imgs/coracao branco.svg" alt="">
                             </div>
                         </button>
-                        <div class="qtd_curtida" id="0">
-                            123
-                        </div>
+
+
+
+
+                        <div class="qtd_curtida" id="qtd_curtida${idPost}"></div>
+                        
                     </div>
                     <div class="desc_post">
                         <div class="desc_user">
@@ -128,10 +135,18 @@
                         </div>
                     </div>
                 </div>`
+
+                    qtd_curtida(idPost)
                 }
-            }
-            )
-        }
+
+                listarCurtida()
+
+            }).catch((erro) => {
+                console.log(erro)
+            })
+
+
+    }
 
     function editar() {
         var descricaoUser = sessionStorage.DESCRICAO_USUARIO
@@ -156,6 +171,102 @@
         })
 
         div_editar.innerHTML = ``
+    }
+
+    // Lista de curtida
+    function listarCurtida() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        fetch(`/listaCurtida/${idUsuario}`)
+            .then(res => res.json())
+            .then(lista_deCurtida => {
+
+                for (var cont_lista_curtida = 0; cont_lista_curtida < lista_deCurtida.length; cont_lista_curtida++) {
+
+                    var lista = lista_deCurtida[cont_lista_curtida]
+
+                    var post_da_curtida = lista.post_curtida
+
+                    var div_cond_curtida = document.getElementById(`condCurtida${post_da_curtida}`)
+                    div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao vermelho.svg" alt="">`
+                }
+            })
+            .catch((erro) => {
+                console.log(erro)
+            }
+            )
+    }
+
+    // Função de adicionar curtida
+    function curtida(idPost, quem_postou) {
+        var idUsuario = sessionStorage.ID_USUARIO
+        var quem_postouVar = quem_postou
+
+        var div_cond_curtida = document.getElementById(`condCurtida${idPost}`)
+
+        // Me responde um valor booleano = true ou false para eu verificar se está ou não curtido
+        var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes(`<img src="assets/imgs/coracao vermelho.svg" alt="">`)
+
+        // Se for true
+        if (curtida_coracao_vermelho) {
+
+            fetch(`/deletarCurtida/${idPost}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                }, body: JSON.stringify({
+
+                    idUsuarioServer: idUsuario,
+                    idPostServer: idPost,
+                })
+            }).then((res) => {
+                console.log(res)
+
+                div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao branco.svg" alt="">`
+
+                listarCurtida()
+                qtd_curtida(idPost)
+            })
+        } else {
+
+            fetch(`/curtida/${idPost}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                }, body: JSON.stringify({
+
+                    idUsuarioServer: idUsuario,
+                    idPostServer: idPost,
+                    quem_postouServer: quem_postouVar
+                })
+            }).then(res => res.json())
+                .then(respostaCurtida => {
+
+                    console.log(respostaCurtida)
+                    console.log("Deu certo a curtida")
+
+                    listarCurtida()
+                    qtd_curtida(idPost)
+                }).catch(erro => {
+                    console.log(erro)
+                })
+        }
+    }
+
+    function qtd_curtida(idPost) {
+        console.log(`Função qtdCuritda: ${idPost}`)
+
+        fetch(`/qtdCurtida/${idPost}`)
+            .then((res) => res.json())
+            .then(quantidade_curtida => {
+
+                var campo = quantidade_curtida[0]
+                var qtd = campo.qtd
+
+                var div_qtd = document.getElementById(`qtd_curtida${idPost}`)
+                div_qtd.innerHTML = `${qtd}`
+
+            })
     }
 
     function sair() {

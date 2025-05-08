@@ -43,6 +43,7 @@
         <div class="txt">senha</div>
         <input type="password" id="input_senha">
       </div>
+      <div id="div_erro"> </div>
       <button onclick="logar()">Login</button>
       <div>Não tem uma conta ainda?
         <a href="cadastro.html">
@@ -56,10 +57,14 @@
 </html>
 <script>
   function logar() {
-    // Recebe os valores das inputs
+
     var emailVar = input_email.value
     var senhaVar = input_senha.value
 
+
+    if( emailVar == `` || senhaVar == ``) {
+      div_erro.innerHTML = `Preencha todos os campos`
+    } else {
     // Vá para routes.usuario
     fetch("/usuario/logar", {
       method: "POST",
@@ -71,6 +76,7 @@
         senhaServer: senhaVar
       })
     })
+
     // caso tudo der certo
     .then(function (resposta) {
       console.log("Estou no THEN do login()")
@@ -95,19 +101,21 @@
         })
       } else {
 
+        div_erro.innerHTML = `Email/senha estão incorretos`
         console.log("Houve um problema ao tentar realizar o login!")
 
         resposta.text().then(texto => {
           console.error(texto)
-
+          return true
         })
       }
     })
     // caso tudo der errado
     .catch(function (erro) {
       console.log(erro)
+
     })
     return false
   }
-
+  }
 </script>

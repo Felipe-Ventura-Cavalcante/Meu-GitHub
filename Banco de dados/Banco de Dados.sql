@@ -11,9 +11,6 @@ dtCriacao_conta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 imagem_perfil VARCHAR(45)
 );
 
-INSERT INTO usuario (nome, email, senha, descricao, imagem_perfil) VALUES
-("Felipe", "felipe@gmail.com", "123456", "...", "imagem de perfil");
-
 CREATE TABLE post (
 idPost INT PRIMARY KEY AUTO_INCREMENT,
 quem_postou INT,
@@ -25,15 +22,6 @@ CONSTRAINT fkUser_Post
 	FOREIGN KEY (quem_postou)
 		REFERENCES usuario(idUsuario)
 );
-
-INSERT INTO post (quem_postou, descricao, imagem_post) VALUES
-(1, "foto de golfinho", "imagem de golfinho");
-
-INSERT INTO post (quem_postou, descricao, imagem_post) VALUES
-(1, "foto de melancia", "imagem de melancia");
-
-INSERT INTO post (quem_postou, descricao, imagem_post) VALUES
-(1, "https://agendaculturalsaopaulo.com/", "imagem de melancia");
 
 CREATE TABLE curtida (
 quem_curtiu INT,
@@ -66,16 +54,15 @@ CONSTRAINT fkpost_comentario
 CONSTRAINT fkDono_post
 	FOREIGN KEY (dono_do_post)
 		REFERENCES post(quem_postou)
-        
 );
-INSERT INTO comentario (usuario_que_comentou, post_comentado, dono_do_post, texto_comentario) VALUES
-(1, 1, 1, "eu amo golfinhos");
 
+INSERT INTO post (quem_postou, descricao, imagem_post) VALUES
+(1, "foto de golfinho", "imagem de golfinho");
+
+INSERT INTO post (quem_postou, descricao, imagem_post) VALUES
+(1, "foto de melancia", "imagem de melancia");
 
 select * from usuario;
 select * from post;
-select u.nome, p.descricao, p.imagem_post FROM usuario AS u JOIN post as p on p.quem_postou = u.idUsuario WHERE p.idPost = 1;
-UPDATE usuario SET descricao = 'ola' WHERE idUsuario = '1';
-
-select u.nome, c.idComentario, c.usuario_que_comentou, c.post_comentado, c.dono_do_post, c.texto_comentario, c.dtComentário FROM usuario AS u
-	JOIN comentario AS c on c.usuario_que_comentou = u.idUsuario;
+select * from comentario;
+select * from curtida;

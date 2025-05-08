@@ -22,6 +22,10 @@ var usuarioRouter = require("./src/routes/usuario")
 var explorerRouter = require("./src/routes/explorer")
 var perfilRouter = require("./src/routes/perfil")
 var novoComentarioRouter = require("./src/routes/novoComentario")
+var curtidaRouter = require("./src/routes/curtida")
+var listaCurtidaRouter = require("./src/routes/listaCurtida")
+var qtdCurtidaRouter = require("./src/routes/qtdCurtida");
+var deletarCurtidaRouter = require("./src/routes/deletarCurtida");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -33,6 +37,10 @@ app.use("/usuario", usuarioRouter)
 app.use("/explorer", explorerRouter)
 app.use("/perfil", perfilRouter)
 app.use("/novoComentario", novoComentarioRouter)
+app.use("/curtida", curtidaRouter)
+app.use("/listaCurtida", listaCurtidaRouter)
+app.use("/qtdCurtida", qtdCurtidaRouter)
+app.use("/deletarCurtida", deletarCurtidaRouter)
 
 app.listen(PORTA_APP, function () {
     console.log(`

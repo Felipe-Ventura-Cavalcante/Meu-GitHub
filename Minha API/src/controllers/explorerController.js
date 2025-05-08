@@ -28,8 +28,8 @@ function listarComentario(req, res) {
     explorerModel.listarComentario(idPostComentario)
 
         .then(resultado => {
-                res.status(200).json(resultado)
-            }
+            res.status(200).json(resultado)
+        }
         ).catch(
             function (erro) {
                 console.log(erro)
