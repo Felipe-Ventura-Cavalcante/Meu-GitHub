@@ -16,23 +16,33 @@
         </div>
         <div class="bar_nome_user">
             <a href="perfil.html">
-                <div id="div_nome_user">
+                <div class="div_nome_user" id="div_nome_user">
+                    <img src="assets/imgs/perfil.svg" alt="">
                     NOME USER
                 </div>
             </a>
         </div>
         <div class="bar_p_e">
             <a href="explorer.html">
+                <img src="assets/imgs/casa.svg" alt="">
                 EXPLORER
             </a>
         </div>
         <div class="bar_new">
             <a href="newpost.html">
+                <img src="assets/imgs/new.svg" alt="">
                 NEW POST
+            </a>
+        </div>
+        <div class="bar_new">
+            <a href="">
+                <img src="assets/imgs/estatistica.svg" alt="">
+                ESTATÍSTICAS
             </a>
         </div>
         <div class="bar_sair">
             <button onclick="sair()">
+                <img src="assets/imgs/sair.svg" alt="">
                 SAIR
             </button>
         </div>
@@ -65,6 +75,9 @@
         var idUsuario = sessionStorage.ID_USUARIO
         var descricaoUser = sessionStorage.DESCRICAO_USUARIO
         var imagem_perfilUser = sessionStorage.IMAGEM_PERFIL
+
+        div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
+        Olá, ${nomeUser}`
 
         superior.innerHTML = `
         <div class="imagem_perfil">
@@ -109,14 +122,14 @@
                         ${nomePost}
                     </div>
                     <div class="img_post">
-                        <img src="assets/imgs/image 2.svg" alt="">
+                        <img src="../assets/imagens dos posts/${imagemPost}" alt="">
                     </div>
                     <div class="curtida">
 
                         
                         <button onclick="curtida('${idPost}','${quem_postou}')">
                             <div class="cond_curtida" id="condCurtida${idPost}">
-                                <img src="assets/imgs/coracao branco.svg" alt="">
+                                <img src="assets/imgs/coracao bordas vermelhas.png" alt="">
                             </div>
                         </button>
 
@@ -188,7 +201,7 @@
                     var post_da_curtida = lista.post_curtida
 
                     var div_cond_curtida = document.getElementById(`condCurtida${post_da_curtida}`)
-                    div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao vermelho.svg" alt="">`
+                    div_cond_curtida.innerHTML = `<img src="assets/imgs/coraação vermelho.png" alt="">`
                 }
             })
             .catch((erro) => {
@@ -205,7 +218,7 @@
         var div_cond_curtida = document.getElementById(`condCurtida${idPost}`)
 
         // Me responde um valor booleano = true ou false para eu verificar se está ou não curtido
-        var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes(`<img src="assets/imgs/coracao vermelho.svg" alt="">`)
+        var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes(`<img src="assets/imgs/coraação vermelho.png" alt="">`)
 
         // Se for true
         if (curtida_coracao_vermelho) {
@@ -222,7 +235,7 @@
             }).then((res) => {
                 console.log(res)
 
-                div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao branco.svg" alt="">`
+                div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao bordas vermelhas.png" alt="">`
 
                 listarCurtida()
                 qtd_curtida(idPost)

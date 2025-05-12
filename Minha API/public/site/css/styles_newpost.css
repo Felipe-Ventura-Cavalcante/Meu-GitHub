@@ -16,94 +16,111 @@ html {
 
 body {
     display: flex;
-    flex-direction: row;
     margin: auto;
     max-width: 1900px;
-    height: 100vh;
-    background-image: url(../assets/imgs/fundo\ new\ post.svg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    justify-content: center;
-    align-items: center;
+    height: 100%;
+    background-color: #121212;
 }
 
-header {
+.bar_lateral {
+    position: absolute;
     position: fixed;
-    background-color: #ffffffff;
-    display: flex;
-    justify-content: space-between;
-    padding: 0px 40px;
-    top: 0px;
-    width: 100%;
-    height: 10%;
-    align-items: center;
+    font-family: "Arial";
     z-index: 999;
-    box-shadow: #2a2a2a1d 10px 10px 10px 10px;
-}
-
-header a img {
-    width: 70%;
-    height: auto;
-    background-color: #D9D9D9;
-    border-radius: 10px;
-}
-
-nav {
+    width: 300px;
+    height: 100%;
+    padding: 3%;
     display: flex;
-    width: 45%;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 3%;
+    flex-direction: column;
+    color: #ffffffff;
+    background-color: #121212;
+    box-shadow: #2a2a2a2a 10px 10px 10px 10px;
 }
 
-.nav_um ul {
-    display: flex;
-    gap: 10%;
-    align-items: center;
+.bar_lateral button {
+    background: none;
+    border: none;
 }
 
-.nav_dois {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1.5%;    
-    border-radius: 10px;
-}
-
-.nav_um ul li {
-    background-color: #D9D9D9;
-    padding: 5%;
-    padding-left: 8%;
-    padding-right: 8%;
-    border-radius: 10px;
-}
-
-
-.nav_dois,
-.nav_um ul li a {
+.bar_titulo {
     font-family: "Keania One";
-    color: black;
+    font-size: 2rem;
+    width: 100%;
+    display: flex;
+}
+
+.bar_nome_user a .div_nome_user {
+    color: #ffffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.bar_p_e a,
+.bar_new a,
+.bar_sair button {
+    color: #ffffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.bar_p_e a {
+    margin-top: 150px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bar_new a,
+.bar_sair button,
+.div_nome_user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.bar_p,
+.bar_new {
+    margin-top: 10px;
+}
+
+.bar_sair {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.bar_lateral img {
+    width: 30px;
 }
 
 .container {
     height: 100%;
     width: 100%;
+    padding-left: 200px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     gap: 1%;
-    padding-top: 5%;
+    padding-top: 2%;
 }
 
 .card {
     height: 85%;
-    width: 25%;
+    width: 35%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-left: 23%;
+    position: relative;
 }
 
 .titulo {
@@ -126,8 +143,8 @@ nav {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #D9D9D9;
-    border-radius: 0px 0px 15px 15px;
+    background-color: #f3f3f3;
+    border-radius: 15px 15px 15px 15px;
 }
 
 .add_arquivo .imagem {
@@ -137,12 +154,13 @@ nav {
     align-items: center;
     margin-top: 10%;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .add_arquivo .imagem img {
-    width:  70%;
+    width: 250px;
     height: auto;
-    object-fit: cover;
+    object-fit: cover;  
 }
 
 .add_arquivo .txt_add_arquivo {
@@ -160,6 +178,7 @@ nav {
 .botao_add input {
     display: none;
 }
+
 .botao_add span {
     display: flex;
     justify-content: center;
@@ -187,19 +206,19 @@ nav {
 }
 
 .desc textarea {
-    max-width: 345px;
+    max-width: 100%;
     max-height: 120px;
     width: 100%;
-    background-color: #2A2A2A;
+    background-color: #121212;
     height: 85%;
     padding: 5%;
     color: #FFFFFF;
     border-radius: 10px;
-    margin-bottom: 4%;
+    resize: none;
 }
 
 .botao_enviar {
-    height: 72%;
+    height: 100%;
     width: 25%;
     display: flex;
     align-items: flex-end;
@@ -213,4 +232,11 @@ nav {
     border: none;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.tudo_certo { 
+    margin-bottom: 30px;  
+    color: red;
+    font-size: 1.2rem;
+    font-weight: bold;
 }

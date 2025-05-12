@@ -14,10 +14,10 @@ imagem_perfil VARCHAR(45)
 CREATE TABLE post (
 idPost INT PRIMARY KEY AUTO_INCREMENT,
 quem_postou INT,
-descricao VARCHAR(100),
+descricao VARCHAR(255),
 dtPostagem TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 qtdCurtida INT  DEFAULT 0,
-imagem_post VARCHAR(45),
+imagem_post TEXT,
 CONSTRAINT fkUser_Post
 	FOREIGN KEY (quem_postou)
 		REFERENCES usuario(idUsuario)

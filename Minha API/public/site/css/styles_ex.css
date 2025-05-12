@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  list-style: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  margin: auto;
+  max-width: 1900px;
+  height: 100%;
+  background-color: #121212;
+}
+
+button {
+  cursor: pointer;
+}
+
+.bar_lateral {
+  position: absolute;
+  position: fixed;
+  font-family: "Keania One";
+  z-index: 999;
+  width: 300px;
+  height: 100%;
+  padding: 3%;
+  display: flex;
+  flex-direction: column;
+  color: #ffffffff;
+  background-color: #121212;
+  box-shadow: #2a2a2a2a 10px 10px 10px 10px;
+}
+
+.bar_titulo {
+  font-family: "Keania One";
+  font-size: 2rem;
+  width: 100%;
+  display: flex;
+}
+
+.bar_nome_user a .div_nome_user {
+  color: #ffffffff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 50px;
+}
+
+.bar_p_e a,
+.bar_new a,
+.bar_sair button {
+  color: #ffffffff;
+  font-size: 1.2rem;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.bar_p_e a {
+  margin-top: 150px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bar_new a,
+.bar_sair button,
+.div_nome_user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bar_p,
+.bar_new {
+  margin-top: 10px;
+}
+
+.bar_sair {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.bar_lateral img {
+  width: 30px;
+}
+
+
+.container {
+  width: 100%;
+  height: 100%;
+  padding-left: 280px;
+  display: flex;
+  flex-direction: column;
+  color: #ffffffff;
+}
+
+.titulo_ex {
+  font-size: 2rem;
+  font-weight: bolder;
+  padding: 50px;
+  margin-left: 100px;
+}
+
+.exibicao {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 40px;
+  padding-left: 100px;
+  margin-bottom: 30px;
+  border-bottom: #ffffffff solid 3px;
+  padding-bottom: 30px;
+  justify-content: center;
+}
+
+.post {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.img_post img {
+  border-radius: 10px;
+  width: 400px;
+  height: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  object-fit: cover;
+}
+
+.post_user {
+  font-size: 1.3rem;
+}
+
+.botões_cc {
+  display: flex;
+  gap: 5%;
+}
+
+.curtida {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+  color: #FD5560;
+}
+
+.qtd_curtida {
+  display: flex;
+}
+
+.curtida img {
+  width: 70px;
+  height: 55px;
+}
+
+.curtida button {
+  background: none;
+  border: none;
+}
+
+.comentario {
+  width: 100px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.comentarios button {
+  border: none;
+}
+
+.comentarios img {
+  width: 60px;
+  height: 50px;
+}
+
+.desc_post {
+  display: flex;
+  flex-direction: column;
+}
+
+.desc_txt {
+  margin-top: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.adicionar_comentario {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.titulo_comentario {
+  margin-right: 30px;
+}
+
+.adicionar_comentario textarea {
+  display: flex;
+  text-align: start;
+  min-width: 200px;
+  max-width: 200px;
+  background: none;
+  border: none;
+  height: 20px;
+  color: #ffffffff;
+  resize: none;
+  padding: 2px;
+}
+
+.adicionar_comentario button {
+  width: 30px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.adicionar_comentario button img {
+  width: 20px;
+}
+
+.todos_com {
+  z-index: 999;
+  width: 400px;
+  border-radius: 10px;
+  padding-bottom: 50px;
+}
+
+.texto_dos_comentarios {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: gray solid 1px;
+}
+
+.texto_dos_comentarios .nome_quem_comentou {
+  margin-bottom: 3px;
+  font-size: 0.9rem;
+}
+
+.new_com {
+  font-size: 1rem;
+  margin-left: 5px;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+button {
+  background: none;
+  border: none;
+}

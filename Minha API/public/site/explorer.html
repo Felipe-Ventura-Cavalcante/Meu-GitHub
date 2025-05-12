@@ -16,37 +16,53 @@
         </div>
         <div class="bar_nome_user">
             <a href="perfil.html">
-                <div id="div_nome_user">
+                <div class="div_nome_user" id="div_nome_user">
+                    <img src="assets/imgs/perfil.svg" alt="">
                     NOME USER
                 </div>
             </a>
         </div>
         <div class="bar_p_e">
             <a href="explorer.html">
+                <img src="assets/imgs/casa.svg" alt="">
                 EXPLORER
             </a>
         </div>
         <div class="bar_new">
             <a href="newpost.html">
+                <img src="assets/imgs/new.svg" alt="">
                 NEW POST
+            </a>
+        </div>
+        <div class="bar_new">
+            <a href="">
+                <img src="assets/imgs/estatistica.svg" alt="">
+                ESTATÍSTICAS
             </a>
         </div>
         <div class="bar_sair">
             <button onclick="sair()">
+                <img src="assets/imgs/sair.svg" alt="">
                 SAIR
             </button>
         </div>
     </div>
 
     <div class="container" id="container">
-        
+        <div class="titulo_ex">
+            Explorer
+        </div>
+
     </div>
 </body>
 
 </html>
 <script>
     window.onload = function () {
-        container.innerHTML = ``
+        container.innerHTML = `
+        <div class="titulo_ex">
+            Explorer
+        </div>`
 
         // Para exibir o nome do usuario logado
         // utilizamos o dado da sessão do login
@@ -56,7 +72,8 @@
         var descricaoUsuario = sessionStorage.DESCRICAO_USUARIO
         var imagem_perfil = sessionStorage.IMAGEM_PERFIL
 
-        div_nome_user.innerHTML = `Olá, ${nomeUsuario}`
+        div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
+        Olá, ${nomeUsuario}`
 
         fetch("/explorer/listar")
 
@@ -80,50 +97,57 @@
                     var descricao = post.descricao
                     var imagem_post = post.imagem_post
 
+
                     container.innerHTML += `
-        <div class="post">
+                    <div class="exibicao" id="exibicao">
+                    <div class="post">
 
-            <div class="post_user" id="${quem_postou}">
-                ${nome}
-            </div>
+                        <div class="post_user" id="${quem_postou}">
+                            ${nome}
+                        </div>
 
-            <div class="img_post">
-                <img src="assets/imgs/image 2.svg" alt="">
-            </div>
+                        <div class="img_post">
+                            <img src="../assets/imagens dos posts/${imagem_post}" alt="">
+                        </div>
 
-            <div class="curtida">
+                        <div class ="botões_cc">
+                            <div class="curtida">
 
-                <button onclick="curtida('${idPost}','${quem_postou}')">
-                    <div class="cond_curtida" id="condCurtida${idPost}">
-                        <img src="assets/imgs/coracao preto e branco.svg" alt="">
-                    </div>
-                </button>
+                                <button onclick="curtida('${idPost}','${quem_postou}')">
+                                    <div class="cond_curtida" id="condCurtida${idPost}">
+                                        <img src="assets/imgs/coracao bordas vermelhas.png" alt="">
+                                    </div>
+                                </button>
 
-                <div class="qtd_curtida" id="qtd_curtida${idPost}"></div>
+                                <div class="qtd_curtida" id="qtd_curtida${idPost}"></div>
 
-            </div>
+                        </div>
 
-            <div class="comentarios">
+                        <div class="comentarios">
 
-                <button onclick="comentario('${idPost}', '${quem_postou}')">
-                    <img src="" alt="comentario">
-                </button>
+                                <button onclick="comentario('${idPost}', '${quem_postou}')">
+                                    <img src="assets/imgs/chat.svg" alt="comentário">
+                                </button>
 
-            </div>
+                            </div>
 
-            <div class="desc_post">
+                        </div>
 
-                <div class="desc_user">
-                    ${nome}
-                </div>
-                <div class="desc_txt">
-                    ${descricao}
-                </div>
+                        <div class="desc_post">
 
-                <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
-
-            </div>
-        </div>`
+                                <div class="desc_user">
+                                    ${nome}
+                                </div>
+                                <div class="desc_txt">
+                                    ${descricao}
+                                </div>
+                            </div>
+                        </div>
+                        
+                            <div class="todos_com">
+                            <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
+                            </div>
+                    </div>`
 
                     qtd_curtida(idPost)
                 }
@@ -152,7 +176,7 @@
                     console.log(post_da_curtida)
 
                     var div_cond_curtida = document.getElementById(`condCurtida${post_da_curtida}`)
-                    div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao vermelho.svg" alt="">`
+                    div_cond_curtida.innerHTML = `<img src="assets/imgs/coraação vermelho.png" alt="">`
                 }
             })
             .catch((erro) => {
@@ -170,7 +194,7 @@
         var div_cond_curtida = document.getElementById(`condCurtida${idPost}`)
 
         // Me responde um valor booleano = true ou false para eu verificar se está ou não curtido
-        var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes(`<img src="assets/imgs/coracao vermelho.svg" alt="">`)
+        var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes(`<img src="assets/imgs/coraação vermelho.png" alt="">`)
 
         // Se for true
         if (curtida_coracao_vermelho) {
@@ -187,7 +211,7 @@
             }).then((res) => {
                 console.log(res)
 
-                div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao preto e branco.svg" alt="">`
+                div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao bordas vermelhas.png" alt="">`
 
                 listarCurtida()
                 qtd_curtida(idPost)
@@ -230,13 +254,20 @@
                 var qtd = campo.qtd
 
                 var div_qtd = document.getElementById(`qtd_curtida${idPost}`)
-                div_qtd.innerHTML = `${qtd}`
+                div_qtd.innerHTML = `${qtd} curtidas`
             })
     }
 
     // Função de listar comentário
     var contador_comentário = 0
     function comentario(idPost, quem_postou) {
+
+        // Seleciono todos os elementos HTML que tem essa classe
+        var todasDivsComentario = document.getElementsByClassName("texto_comentario");
+        for (var i = 0; i < todasDivsComentario.length; i++) {
+            todasDivsComentario[i].innerHTML = "";
+        }
+
 
         var div = document.getElementById(`div_texto_comentario${idPost}`)
 
@@ -247,16 +278,16 @@
                 .then(todos_os_comentarios => {
 
                     div.innerHTML = `
-                    <div class="adicionar comentario">
+                    <div class="adicionar_comentario">
 
                         <div class="titulo_comentario">
                             Comentar
                         </div>
-
-                            <input type="text" id="input_add_comentario">
+                        <textarea type="text" id="input_add_comentario" placeholder="Adicione um comentário"></textarea>
+                            
 
                             <button onclick="enviar_comentario(${idPost}, ${quem_postou})" id="${quem_postou}">
-                                enviar
+                                <img src="assets/imgs/enviar.svg" alt="">
                             </button>
 
                         </div>`
@@ -275,7 +306,9 @@
                             ${nome_quem_comentou}
                         </div>
 
+                        <div class="new_com">
                         ${txt_comentario}
+                        </div>
 
                     </div>`
                         }
@@ -292,7 +325,6 @@
             contador_comentário++
         }
         else {
-
             div.innerHTML = ``
             contador_comentário--
         }

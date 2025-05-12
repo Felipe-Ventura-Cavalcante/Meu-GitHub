@@ -110,21 +110,27 @@
       mensagem_erro = `Senhas incoerentes`
     } else {
       console.log(`Cheguei na função de inserir`)
-
-      // Vá para routes.usuario
+      
       fetch("/usuario/cadastrar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          // Criação dos objetos com o valor das inputs
           nomeServer: nomeVar,
           emailServer: emailVar,
           senhaServer: senhaVar
         })
-      })
-      window.location = "login.html"
+      }).then(res => {
+        if (!res.ok) {
+          throw new Error("Erro ao cadastrar");
+        }
+        window.location = "login.html";
+      }).catch(err => {
+        console.error("Erro no cadastro:", err);
+        div_erro.innerHTML = `Email já está em uso`;
+      });
+
     }
     div_erro.innerHTML = mensagem_erro
   }

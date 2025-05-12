@@ -26,6 +26,7 @@ var curtidaRouter = require("./src/routes/curtida")
 var listaCurtidaRouter = require("./src/routes/listaCurtida")
 var qtdCurtidaRouter = require("./src/routes/qtdCurtida");
 var deletarCurtidaRouter = require("./src/routes/deletarCurtida");
+var newPostRouter = require("./src/routes/newPost");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -41,6 +42,7 @@ app.use("/curtida", curtidaRouter)
 app.use("/listaCurtida", listaCurtidaRouter)
 app.use("/qtdCurtida", qtdCurtidaRouter)
 app.use("/deletarCurtida", deletarCurtidaRouter)
+app.use("/newPost", newPostRouter)
 
 app.listen(PORTA_APP, function () {
     console.log(`

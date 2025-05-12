@@ -17,105 +17,94 @@ html {
 
 body {
     display: flex;
-    flex-direction: row;
     margin: auto;
     max-width: 1900px;
-    background-color: black;
+    height: 100%;
+    background-color: #121212;
 }
 
 .bar_lateral {
+    position: absolute;
     position: fixed;
-    background-color: #EDEDED;
-    display: flex;
-    flex-direction: column;
-    padding-left: 1%;
-    padding-top: 2%;
-    top: 0px;
-    width: 10%;
-    height: 100%;
-    align-items: flex-start;
+    font-family: "Arial";
     z-index: 999;
-    border: 1px;
-    box-shadow: 5px 5px 5px #1212124f;
-}
-
-.bar_lateral .bar_titulo {
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    font-size: 2rem;
-    font-family: "Keania One";
-}
-
-.bar_lateral .bar_nome_user {
-    width: 90%;
-    padding-top: 10%;
-    padding-bottom: 10%;
-    font-family: "Keania One";
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    margin-bottom: 150px;
-    margin-top: 40px;
-}
-
-.bar_lateral a {
-    color: black;
-}
-
-.bar_lateral .bar_p_e {
-    background-color: #d9d9d9;
-    margin-bottom: 20px;
-    width: 90%;
-    padding-top: 10%;
-    padding-bottom: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-}
-
-.bar_lateral .bar_new {
-    font-family: "Keania One";
-    width: 90%;
-    padding-top: 10%;
-    padding-bottom: 10%;
-    background-color: #d9d9d9;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    margin-bottom: 150px;
-}
-
-.bar_lateral .bar_sair {
-    background-color: #d9d9d9;
-    width: 90%;
-    margin-bottom: 20px;
-    padding: 5%;
-    padding-top: 10%;
-    padding-bottom: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-}
-
-.bar_sair button {
-    border: none;
-    background: none;
-    width: 100%;
+    width: 300px;
     height: 100%;
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
+    color: #ffffffff;
+    background-color: #121212;
+    box-shadow: #2a2a2a2a 10px 10px 10px 10px;
+}
+
+.bar_lateral button {
+    background: none;
+    border: none;
+}
+
+.bar_titulo {
+    font-family: "Keania One";
+    font-size: 2rem;
+    width: 100%;
+    display: flex;
+}
+
+.bar_nome_user a .div_nome_user {
+    color: #ffffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
     cursor: pointer;
+    margin-top: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.bar_p_e a,
+.bar_new a,
+.bar_sair button {
+    color: #ffffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+        font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+.bar_p_e a {
+    margin-top: 150px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bar_new a,
+.bar_sair button,
+.div_nome_user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+}
+
+.bar_p,
+.bar_new {
+    margin-top: 10px;
+}
+
+.bar_sair {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.bar_lateral img {
+    width: 30px;
 }
 
 .container {
     width: 100%;
     height: 100%;
-    margin-left: 10%;
+    margin-left: 280px;
     padding: 5%;
     padding-right: 0%;
     display: flex;
@@ -219,6 +208,7 @@ body {
     width: 100%;
     display: flex;
 }
+
 .post {
     width: 300px;
     height: auto;
@@ -249,13 +239,18 @@ body {
 }
 
 .curtida {
-    width: 100%;
-    height: 45px;
+    width: 100px;
+    height: 50px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 10px;
-    padding-left: 10px;
-    margin-top: 5px;
+    gap: 5%;
+    color: #FD5560;
+}
+
+.curtida img {
+    width: 70px;
+    height: 55px;
 }
 
 .curtida button {
@@ -272,10 +267,18 @@ body {
     width: 300px;
     height: auto;
     border-bottom: #2A2A2A solid 3px;
-    padding: 5%;
+    padding-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
 }
+
 .desc_txt {
+    margin-top: 10px;
     font-family: Arial, Helvetica, sans-serif;
     word-wrap: break-word;
     white-space: normal;
-  }
+}
+
+.cond_curtida img {
+    width: 60px;
+}

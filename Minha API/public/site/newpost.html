@@ -10,26 +10,45 @@
 </head>
 
 <body>
-    <header>
-        <a href="../index.html">
-            <img src="assets/imgs/logo sem fundo 1.svg" alt="">
-        </a>
-        <nav>
-            <div class="nav_um">
-                <ul>
-                    <li><a href="explorer.html">EXPLORER</a></li>
-                    <li><a href="newpost.html">NEW POST</a></li>
-                </ul>
-            </div>
+    <div class="bar_lateral">
+        <div class="bar_titulo">
+            SONAR
+        </div>
+        <div class="bar_nome_user">
+            <a href="perfil.html">
+                <div class="div_nome_user" id="div_nome_user">
+                    <img src="assets/imgs/perfil.svg" alt="">
+                    NOME USER
+                </div>
+            </a>
+        </div>
+        <div class="bar_p_e">
+            <a href="explorer.html">
+                <img src="assets/imgs/casa.svg" alt="">
+                EXPLORER
+            </a>
+        </div>
+        <div class="bar_new">
+            <a href="newpost.html">
+                <img src="assets/imgs/new.svg" alt="">
+                NEW POST
+            </a>
+        </div>
+        <div class="bar_new">
+            <a href="">
+                <img src="assets/imgs/estatistica.svg" alt="">
+                ESTATÍSTICAS
+            </a>
+        </div>
+        <div class="bar_sair">
+            <button onclick="sair()">
+                <img src="assets/imgs/sair.svg" alt="">
+                SAIR
+            </button>
+        </div>
+    </div>
 
-            <div class="nav_dois">
-                nome user
-            </div>
-        </nav>
-
-    </header>
-
-    <div class="container">
+    <div class="container" id="container">
         <div class="card">
 
             <div class="titulo">
@@ -38,8 +57,8 @@
 
             <div class="add_arquivo">
 
-                <div class="imagem">
-                    <img src="assets/imgs/add imagem.svg" alt="">
+                <div class="imagem" id="imagem_post">
+                    <img src="assets/imgs/image.png" alt="">
 
                     <div class="txt_add_arquivo">
                         Adicione arquivos aqui
@@ -49,9 +68,9 @@
 
                 <!-- o label ele é uma etiqueta para a input que está invisivel
                  e o span é o texto dessas etiqueta -->
-                <label class="botao_add" for="input_imagem">
+                <label class="botao_add" for="foto">
                     <span>Selecione o seu arquivo</span>
-                    <input type="file" accept="image/*" id="input_imagem">
+                    <input type="file" accept="image/*" name="foto" id="foto" oninput="exibir()">
                 </label>
 
                 <div class="desc">
@@ -60,7 +79,7 @@
                     </div>
                     <textarea id="input_desc"></textarea>
                 </div>
-
+                <div class="tudo_certo" id="tudo_certo"></div>
             </div>
 
         </div>
@@ -76,7 +95,88 @@
 
 </html>
 <script>
+    window.onload = function () {
+
+        var emailUser = sessionStorage.EMAIL_USUARIO
+        var nomeUser = sessionStorage.NOME_USUARIO
+        var idUsuario = sessionStorage.ID_USUARIO
+        var descricaoUser = sessionStorage.DESCRICAO_USUARIO
+        var imagem_perfilUser = sessionStorage.IMAGEM_PERFIL
+
+        div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
+        Olá, ${nomeUser}`
+    }
+
+    function exibir() {
+        var arquivo = foto.files[0]; // pega o arquivo selecionado
+
+        if (arquivo) {
+            var leitor = new FileReader(); // cria um leitor de arquivos
+
+            leitor.onload = function (evento) {
+                imagem_post.innerHTML = `<img src="${evento.target.result}" alt="imagem escolhida">`;
+            };
+
+            leitor.readAsDataURL(arquivo); // lê o arquivo como uma URL de imagem (base64)
+        }
+    }
+
     function enviar() {
-        
+        console.log("Cheigeui na função")
+        var idUsuario = sessionStorage.ID_USUARIO
+
+        if (foto.value == `` ||
+            input_desc.value == ``
+        ) {
+            tudo_certo.innerHTML = `Preecha todos os campos para enviar o post`
+
+            setTimeout(() => {
+                tudo_certo.innerHTML = ``
+            }, 5000)
+        } else if (
+            !foto.value.endsWith(".png") &&
+            !foto.value.endsWith(".jpeg") &&
+            !foto.value.endsWith(".gif") &&
+            !foto.value.endsWith(".webp") &&
+            !foto.value.endsWith(".svg")) {
+
+            tudo_certo.innerHTML = `Tipo de imagem não suportado`
+
+            setTimeout(() => {
+                tudo_certo.innerHTML = ``
+            }, 5000)
+        } else {
+
+
+            console.log(idUsuario, foto.files[0], input_desc.value)
+            const formData = new FormData()
+            formData.append('foto', foto.files[0])
+            formData.append('input_desc', input_desc.value)
+            formData.append('idUsuario', idUsuario)
+
+            fetch("/newPost/enviarPost", {
+                method: "POST",
+                body: formData
+            }).then(res => {
+                console.log(res)
+
+                tudo_certo.innerHTML = `<p style="color: blue;">Post enviado com sucesso</p>`
+
+                setTimeout(() => {
+                    window.location = "explorer.html"
+                }, 1000)
+
+            }).catch(err => {
+                console.log(erro)
+
+            })
+        }
+    }
+
+    // função para finalizar sessão e voltar para a home
+    function sair() {
+
+        sessionStorage.clear()
+        window.location = "../index.html"
     }
 </script>
