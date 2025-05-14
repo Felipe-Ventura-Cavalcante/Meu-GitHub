@@ -60,14 +60,15 @@ body {
 }
 
 .bar_p_e a,
+.bar_e a,
 .bar_new a,
 .bar_sair button {
     color: #ffffffff;
     font-size: 1.2rem;
     font-weight: 500;
     cursor: pointer;
-        font-family: Arial, Helvetica, sans-serif;
-    
+    font-family: Arial, Helvetica, sans-serif;
+
 }
 
 .bar_p_e a {
@@ -77,13 +78,21 @@ body {
     gap: 10px;
 }
 
+.bar_e a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
 .bar_new a,
+.bar_e a,
 .bar_sair button,
 .div_nome_user {
     display: flex;
     align-items: center;
     gap: 10px;
-    
+
 }
 
 .bar_p,
@@ -163,7 +172,7 @@ body {
 .botao_editar button {
     background-color: #fff;
     border: none;
-    color: black;
+    color: #121212;
     padding: 3%;
     border-radius: 10px;
     cursor: pointer;
@@ -210,29 +219,46 @@ body {
 }
 
 .post {
+    margin-top: 20px;
+    margin-right: 10px;
     width: 300px;
     height: auto;
-    background-color: black;
+    background-color: #121212;
     color: #ffffff;
-    border-right: black solid 5px;
+    border-right: #121212 solid 5px;
 }
 
 .post .post_user {
     font-family: "Sofia Sans";
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     width: 100%;
     height: 20px;
     padding-left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.post_user img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .post .img_post {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 20px;
     height: auto;
 
 }
 
 .img_post img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+}
+.img_post video {
     object-fit: cover;
     width: 100%;
     height: auto;
@@ -266,7 +292,6 @@ body {
 .desc_post {
     width: 300px;
     height: auto;
-    border-bottom: #2A2A2A solid 3px;
     padding-bottom: 5%;
     padding-left: 5%;
     padding-right: 5%;

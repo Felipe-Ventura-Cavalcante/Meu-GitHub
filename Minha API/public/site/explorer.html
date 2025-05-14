@@ -24,7 +24,7 @@
         </div>
         <div class="bar_p_e">
             <a href="explorer.html">
-                <img src="assets/imgs/casa.svg" alt="">
+                <img src="assets/imgs/casa_branco.svg" alt="">
                 EXPLORER
             </a>
         </div>
@@ -49,6 +49,7 @@
     </div>
 
     <div class="container" id="container">
+
         <div class="titulo_ex">
             Explorer
         </div>
@@ -70,7 +71,7 @@
         var nomeUsuario = sessionStorage.NOME_USUARIO
         var email = sessionStorage.EMAIL_USUARIO
         var descricaoUsuario = sessionStorage.DESCRICAO_USUARIO
-        var imagem_perfil = sessionStorage.IMAGEM_PERFIL
+        var imagem_perfil_user = sessionStorage.IMAGEM_PERFIL
 
         div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
         Olá, ${nomeUsuario}`
@@ -96,18 +97,24 @@
                     var idPost = post.idPost
                     var descricao = post.descricao
                     var imagem_post = post.imagem_post
+                    var imagem_post_perfil = post.imagem_perfil
 
+                    if (imagem_post.endsWith('.mp4')) {
 
-                    container.innerHTML += `
+                        container.innerHTML += `
                     <div class="exibicao" id="exibicao">
                     <div class="post">
 
                         <div class="post_user" id="${quem_postou}">
+                           <img src="../assets/imagens perfil/${imagem_post_perfil}" alt="imagem de Perfil do Usuario">
                             ${nome}
                         </div>
 
                         <div class="img_post">
-                            <img src="../assets/imagens dos posts/${imagem_post}" alt="">
+                            <video width="640" height="360" controls>
+                            <source src="../assets/imagens dos posts/${imagem_post}" type="video/mp4">
+                            Seu navegador não suporta a reprodução de vídeo.
+                            </video>
                         </div>
 
                         <div class ="botões_cc">
@@ -123,10 +130,12 @@
 
                         </div>
 
-                        <div class="comentarios">
+                        <div class="comentarios${idPost}">
 
                                 <button onclick="comentario('${idPost}', '${quem_postou}')">
+                                    <div id="comentario_aberto${idPost}">
                                     <img src="assets/imgs/chat.svg" alt="comentário">
+                                    </div>
                                 </button>
 
                             </div>
@@ -148,6 +157,62 @@
                             <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
                             </div>
                     </div>`
+                    } else {
+                        container.innerHTML += `
+                    <div class="exibicao" id="exibicao">
+                    <div class="post">
+
+                        <div class="post_user" id="${quem_postou}">
+                           <img src="../assets/imagens perfil/${imagem_post_perfil}" alt="imagem de Perfil do Usuario">
+                            ${nome}
+                        </div>
+
+                        <div class="img_post">
+                            <img src="../assets/imagens dos posts/${imagem_post}" alt="">
+                        </div>
+
+                        <div class ="botões_cc">
+                            <div class="curtida">
+
+                                <button onclick="curtida('${idPost}','${quem_postou}')">
+                                    <div class="cond_curtida" id="condCurtida${idPost}">
+                                        <img src="assets/imgs/coracao bordas vermelhas.png" alt="">
+                                    </div>
+                                </button>
+
+                                <div class="qtd_curtida" id="qtd_curtida${idPost}"></div>
+
+                        </div>
+
+                        <div class="comentarios${idPost}">
+
+                                <button onclick="comentario('${idPost}', '${quem_postou}')">
+                                    <div id="comentario_aberto${idPost}">
+                                    <img src="assets/imgs/chat.svg" alt="comentário">
+                                    </div>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="desc_post">
+
+                                <div class="desc_user">
+                                    ${nome}
+                                </div>
+                                <div class="desc_txt">
+                                    ${descricao}
+                                </div>
+                            </div>
+                        </div>
+                        
+                            <div class="todos_com">
+                            <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
+                            </div>
+                    </div>`
+                    }
+
 
                     qtd_curtida(idPost)
                 }
@@ -161,7 +226,6 @@
     // Lista de curtida
     function listarCurtida() {
         var idUsuario = sessionStorage.ID_USUARIO;
-        console.log(`Esse é o idUsuario: ${idUsuario}`)
 
         fetch(`/listaCurtida/${idUsuario}`)
             .then(res => res.json())
@@ -262,14 +326,26 @@
     var contador_comentário = 0
     function comentario(idPost, quem_postou) {
 
-        // Seleciono todos os elementos HTML que tem essa classe
+        var div_comentario = document.getElementById(`comentario_aberto${idPost}`)
+        var div = document.getElementById(`div_texto_comentario${idPost}`)
+
+        // Seleciona todos os elementos HTML que tem essa classe
         var todasDivsComentario = document.getElementsByClassName("texto_comentario");
         for (var i = 0; i < todasDivsComentario.length; i++) {
+
+            // Fecho todas as div de comentário que estão abertas
             todasDivsComentario[i].innerHTML = "";
+
+            // estou pegando o numero do contador e colocando no id da minha div
+            var idAtual = todasDivsComentario[i].id.replace("div_texto_comentario", "");
+            // estou pegando a div específica que tem esse id
+            var iconeComentario = document.getElementById(`comentario_aberto${idAtual}`);
+
+            if (iconeComentario) {
+                iconeComentario.innerHTML = `<img src="assets/imgs/chat.svg" alt="">`;
+            }
         }
 
-
-        var div = document.getElementById(`div_texto_comentario${idPost}`)
 
         if (contador_comentário == 0) {
 
@@ -287,15 +363,20 @@
                             
 
                             <button onclick="enviar_comentario(${idPost}, ${quem_postou})" id="${quem_postou}">
+
                                 <img src="assets/imgs/enviar.svg" alt="">
+
                             </button>
 
                         </div>`
 
                     if (todos_os_comentarios.length > 0) {
+
+                        div_comentario.innerHTML = `<img src="assets/imgs/chat_branco.svg" alt="">`
+
+
                         for (var cont = 0; cont < todos_os_comentarios.length; cont++) {
                             var comentario = todos_os_comentarios[cont]
-
                             var txt_comentario = comentario.texto_comentario
                             var nome_quem_comentou = comentario.nome
 
@@ -313,6 +394,7 @@
                     </div>`
                         }
                     } else {
+                        div_comentario.innerHTML = `<img src="assets/imgs/chat_branco.svg" alt="">`
 
                         div.innerHTML += `
                     <div class="texto_dos_comentarios"> 
@@ -325,6 +407,7 @@
             contador_comentário++
         }
         else {
+            div_comentario.innerHTML = `<img src="assets/imgs/chat.svg" alt="">`
             div.innerHTML = ``
             contador_comentário--
         }

@@ -67,6 +67,8 @@ button {
 }
 
 .bar_p_e a {
+  width: 150px;
+  border-bottom: #ffffffff solid 2px;
   margin-top: 150px;
   display: flex;
   align-items: center;
@@ -141,8 +143,27 @@ button {
   object-fit: cover;
 }
 
+.img_post video {
+  border-radius: 10px;
+  width: 400px;
+  height: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  object-fit: cover;
+}
+
 .post_user {
   font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.post_user img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .botões_cc {

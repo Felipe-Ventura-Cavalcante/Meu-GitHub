@@ -17,8 +17,7 @@
         <div class="bar_nome_user">
             <a href="perfil.html">
                 <div class="div_nome_user" id="div_nome_user">
-                    <img src="assets/imgs/perfil.svg" alt="">
-                    NOME USER
+                    <img src="assets/imgs/perfil_branco.svg" alt="">
                 </div>
             </a>
         </div>
@@ -34,7 +33,7 @@
                 NEW POST
             </a>
         </div>
-        <div class="bar_new">
+        <div class="bar_e">
             <a href="">
                 <img src="assets/imgs/estatistica.svg" alt="">
                 ESTATÍSTICAS
@@ -47,7 +46,6 @@
             </button>
         </div>
     </div>
-
 
     <div class="container" id="container">
         <div class="superior" id="superior">
@@ -68,23 +66,23 @@
 
 </html>
 <script>
+    var emailUser = sessionStorage.EMAIL_USUARIO
+    var nomeUser = sessionStorage.NOME_USUARIO
+    var idUsuario = sessionStorage.ID_USUARIO
+    var descricaoUser = sessionStorage.DESCRICAO_USUARIO
+    var imagem_perfilUser = sessionStorage.IMAGEM_PERFIL
     window.onload = function () {
 
-        var emailUser = sessionStorage.EMAIL_USUARIO
-        var nomeUser = sessionStorage.NOME_USUARIO
-        var idUsuario = sessionStorage.ID_USUARIO
-        var descricaoUser = sessionStorage.DESCRICAO_USUARIO
-        var imagem_perfilUser = sessionStorage.IMAGEM_PERFIL
 
-        div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
+        div_nome_user.innerHTML = `<img src="assets/imgs/perfil_branco.svg" alt="">
         Olá, ${nomeUser}`
 
         superior.innerHTML = `
-        <div class="imagem_perfil">
-                <label for="imagem_perfil" class="imagem_perfilcss">
-                    <input type="file" id="imagem_perfil">
-                    <span><img src="assets/imgs/${imagem_perfilUser}" alt="imagem de Perfil do Usuario"></span>
-                </label>
+        <div class="imagem_perfil" id="imagem_perfil">
+                <label for="foto" class="imagem_perfilcss">
+    <input type="file" id="foto" oninput="enviar()">
+    <span><img src="../assets/imagens perfil/${imagem_perfilUser}" alt=""></span>
+</label>
             </div>
             <div class="info_perfil">
                 <div class="nome_do_usuario">
@@ -100,7 +98,8 @@
                 <div class="descricao_do_perfil">
                     ${descricaoUser}
                 </div>
-            </div>`
+            </div>
+            `
 
         fetch(`/perfil/${idUsuario}`,)
             .then(res => res.json())
@@ -109,6 +108,7 @@
 
                 for (var contador = 0; contador < dados_post.length; contador++) {
                     var dados = dados_post[contador]
+                    console.log(idUsuario)
 
                     var nomePost = dados.nome
                     var idPost = dados.idPost
@@ -116,39 +116,103 @@
                     var imagemPost = dados.imagem_post
                     var quem_postou = dados.quem_postou
 
-                    exibicao_post.innerHTML += `
+                    if (imagemPost.endsWith('.mp4')) {
+
+                        exibicao_post.innerHTML += `
+                    <div class="exibicao" id="exibicao">
                     <div class="post">
-                    <div class="post_user">
-                        ${nomePost}
-                    </div>
-                    <div class="img_post">
-                        <img src="../assets/imagens dos posts/${imagemPost}" alt="">
-                    </div>
-                    <div class="curtida">
 
-                        
-                        <button onclick="curtida('${idPost}','${quem_postou}')">
-                            <div class="cond_curtida" id="condCurtida${idPost}">
-                                <img src="assets/imgs/coracao bordas vermelhas.png" alt="">
-                            </div>
-                        </button>
-
-
-
-
-                        <div class="qtd_curtida" id="qtd_curtida${idPost}"></div>
-                        
-                    </div>
-                    <div class="desc_post">
-                        <div class="desc_user">
+                        <div class="post_user" id="${quem_postou}">
+                           <img src="../assets/imagens perfil/${imagem_perfilUser}" alt="">
                             ${nomePost}
                         </div>
-                        <div class="desc_txt">
-                           ${descricaoPost}
-                        </div>
-                    </div>
-                </div>`
 
+                        <div class="img_post">
+                            <video width="640" height="360" controls>
+                            <source src="../assets/imagens dos posts/${imagemPost}" type="video/mp4">
+                            Seu navegador não suporta a reprodução de vídeo.
+                            </video>
+                        </div>
+
+                        <div class ="botões_cc">
+                            <div class="curtida">
+
+                                <button onclick="curtida('${idPost}','${quem_postou}')">
+                                    <div class="cond_curtida" id="condCurtida${idPost}">
+                                        <img src="assets/imgs/coracao bordas vermelhas.png" alt="">
+                                    </div>
+                                </button>
+
+                                <div class="qtd_curtida" id="qtd_curtida${idPost}"></div>
+
+                        </div>
+
+                        
+
+                        </div>
+
+                        <div class="desc_post">
+
+                                <div class="desc_user">
+                                    ${nomePost}
+                                </div>
+                                <div class="desc_txt">
+                                    ${descricaoPost}
+                                </div>
+                            </div>
+                        </div>
+                        
+                            <div class="todos_com">
+                            <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
+                            </div>
+                    </div>`
+                    } else {
+                        exibicao_post.innerHTML += `
+                    <div class="exibicao" id="exibicao">
+                    <div class="post">
+
+                        <div class="post_user" id="${quem_postou}">
+                           <img src="../assets/imagens perfil/${imagem_perfilUser}" alt="">
+                            ${nomePost}
+                        </div>
+
+                        <div class="img_post">
+                            <img src="../assets/imagens dos posts/${imagemPost}" alt="">
+                        </div>
+
+                        <div class ="botões_cc">
+                            <div class="curtida">
+
+                                <button onclick="curtida('${idPost}','${quem_postou}')">
+                                    <div class="cond_curtida" id="condCurtida${idPost}">
+                                        <img src="assets/imgs/coracao bordas vermelhas.png" alt="">
+                                    </div>
+                                </button>
+
+                                <div class="qtd_curtida" id="qtd_curtida${idPost}"></div>
+
+                        </div>
+
+                        
+
+                        </div>
+
+                        <div class="desc_post">
+
+                                <div class="desc_user">
+                                    ${nomePost}
+                                </div>
+                                <div class="desc_txt">
+                                    ${descricaoPost}
+                                </div>
+                            </div>
+                        </div>
+                        
+                            <div class="todos_com">
+                            <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
+                            </div>
+                    </div>`
+                    }
                     qtd_curtida(idPost)
                 }
 
@@ -159,6 +223,20 @@
             })
 
 
+    }
+
+    function atualizarInfo() {
+        console.log(`Esse é o idUsuario: ${idUsuario}`)
+        fetch(`/atualizarInfo/${idUsuario}`)
+            .then(res => res.json())
+            .then(info_atualizado => {
+
+                var info = info_atualizado[0]
+
+                sessionStorage.NOME_USUARIO = info.nome
+                sessionStorage.DESCRICAO_USUARIO = info.descricao
+                sessionStorage.IMAGEM_PERFIL = info.imagem_perfil
+            })
     }
 
     function editar() {
@@ -181,6 +259,12 @@
                 idUsuarioServer: idUsuario,
                 descricaoServer: novaDesc
             })
+        }).then(res => {
+            console.log(res)
+            alert(`Descrição atualizada, atualize a página`)
+            atualizarInfo()
+        }).catch(err => {
+            console.log(erro)
         })
 
         div_editar.innerHTML = ``
@@ -199,12 +283,15 @@
                     var lista = lista_deCurtida[cont_lista_curtida]
 
                     var post_da_curtida = lista.post_curtida
+                    console.log(lista_deCurtida)
+                    console.log(post_da_curtida)
 
                     var div_cond_curtida = document.getElementById(`condCurtida${post_da_curtida}`)
                     div_cond_curtida.innerHTML = `<img src="assets/imgs/coraação vermelho.png" alt="">`
                 }
             })
             .catch((erro) => {
+
                 console.log(erro)
             }
             )
@@ -261,6 +348,7 @@
                     listarCurtida()
                     qtd_curtida(idPost)
                 }).catch(erro => {
+
                     console.log(erro)
                 })
         }
@@ -277,9 +365,44 @@
                 var qtd = campo.qtd
 
                 var div_qtd = document.getElementById(`qtd_curtida${idPost}`)
-                div_qtd.innerHTML = `${qtd}`
-
+                div_qtd.innerHTML = `${qtd} curtidas`
             })
+    }
+
+    function enviar() {
+
+        var idUsuario = sessionStorage.ID_USUARIO
+
+        if (
+            !foto.value.endsWith(".png") &&
+            !foto.value.endsWith(".jpeg") &&
+            !foto.value.endsWith(".jpg") &&
+            !foto.value.endsWith(".gif") &&
+            !foto.value.endsWith(".webp") &&
+            !foto.value.endsWith(".mp4") &&
+            !foto.value.endsWith(".svg")) {
+
+            alert(`Tipo de imagem não suportado`)
+
+        } else {
+            console.log(idUsuario, foto.files[0])
+
+            const formData = new FormData()
+            formData.append('foto', foto.files[0])
+            formData.append('idUsuario', idUsuario)
+
+            fetch("/fotoPerfil/enviarFoto", {
+                method: "POST",
+                body: formData
+            }).then(res => {
+                console.log(res)
+
+                alert(`Imagem enviada, atualize a página`)
+                atualizarInfo()
+            }).catch(err => {
+                console.log(erro)
+            })
+        }
     }
 
     function sair() {

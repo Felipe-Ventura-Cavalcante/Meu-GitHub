@@ -60,6 +60,7 @@ body {
 
 .bar_p_e a,
 .bar_new a,
+.bar_e a,
 .bar_sair button {
     color: #ffffffff;
     font-size: 1.2rem;
@@ -67,6 +68,18 @@ body {
     cursor: pointer;
     font-family: Arial, Helvetica, sans-serif;
 
+}
+
+.bar_new a {
+    width: 150px;
+    border-bottom: #ffffffff solid 2px;
+}
+
+.bar_e a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .bar_p_e a {
@@ -158,9 +171,15 @@ body {
 }
 
 .add_arquivo .imagem img {
-    width: 250px;
+    width: 300px;
     height: auto;
-    object-fit: cover;  
+    object-fit: cover;
+}
+
+.add_arquivo .imagem video {
+    width: 300px;
+    height: auto;
+    object-fit: cover;
 }
 
 .add_arquivo .txt_add_arquivo {
@@ -234,8 +253,8 @@ body {
     cursor: pointer;
 }
 
-.tudo_certo { 
-    margin-bottom: 30px;  
+.tudo_certo {
+    margin-bottom: 30px;
     color: red;
     font-size: 1.2rem;
     font-weight: bold;

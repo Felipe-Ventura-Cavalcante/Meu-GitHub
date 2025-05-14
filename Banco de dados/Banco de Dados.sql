@@ -8,7 +8,7 @@ email VARCHAR(100) UNIQUE,
 senha VARCHAR(45),
 descricao VARCHAR(100),
 dtCriacao_conta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-imagem_perfil VARCHAR(45)
+imagem_perfil TEXT
 );
 
 CREATE TABLE post (
@@ -66,3 +66,11 @@ select * from usuario;
 select * from post;
 select * from comentario;
 select * from curtida;
+
+delete from post where quem_postou = 1;
+
+SELECT * FROM usuario WHERE idUsuario = 1;
+
+delete from post where quem_postou = 1;
+
+

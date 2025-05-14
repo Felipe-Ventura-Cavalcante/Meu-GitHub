@@ -18,7 +18,7 @@
             <a href="perfil.html">
                 <div class="div_nome_user" id="div_nome_user">
                     <img src="assets/imgs/perfil.svg" alt="">
-                    NOME USER
+
                 </div>
             </a>
         </div>
@@ -30,11 +30,11 @@
         </div>
         <div class="bar_new">
             <a href="newpost.html">
-                <img src="assets/imgs/new.svg" alt="">
+                <img src="assets/imgs/new_branco.svg" alt="">
                 NEW POST
             </a>
         </div>
-        <div class="bar_new">
+        <div class="bar_e">
             <a href="">
                 <img src="assets/imgs/estatistica.svg" alt="">
                 ESTATÍSTICAS
@@ -58,7 +58,7 @@
             <div class="add_arquivo">
 
                 <div class="imagem" id="imagem_post">
-                    <img src="assets/imgs/image.png" alt="">
+                    <img src="assets/imgs/muitos_arquivos.png" alt="">
 
                     <div class="txt_add_arquivo">
                         Adicione arquivos aqui
@@ -70,7 +70,7 @@
                  e o span é o texto dessas etiqueta -->
                 <label class="botao_add" for="foto">
                     <span>Selecione o seu arquivo</span>
-                    <input type="file" accept="image/*" name="foto" id="foto" oninput="exibir()">
+                    <input type="file" accept="image/*, video/*" name="foto" id="foto" oninput="exibir()">
                 </label>
 
                 <div class="desc">
@@ -108,16 +108,28 @@
     }
 
     function exibir() {
-        var arquivo = foto.files[0]; // pega o arquivo selecionado
+        var arquivo = foto.files[0] // pega o arquivo selecionado
 
         if (arquivo) {
-            var leitor = new FileReader(); // cria um leitor de arquivos
+            var leitor = new FileReader() // cria um leitor de arquivos
 
             leitor.onload = function (evento) {
-                imagem_post.innerHTML = `<img src="${evento.target.result}" alt="imagem escolhida">`;
-            };
+                var tipo = arquivo.type
 
-            leitor.readAsDataURL(arquivo); // lê o arquivo como uma URL de imagem (base64)
+                if (tipo.startsWith("image/")) {
+                    imagem_post.innerHTML = `<img src="${evento.target.result}" alt="Imagem escolhida">`
+                } else if (tipo.startsWith("video/")) {
+                    imagem_post.innerHTML = `
+                    <video width="320" height="240" controls>
+                        <source src="${evento.target.result}" type="${tipo}">
+                        Seu navegador não suporta a reprodução de vídeo.
+                    </video>`;
+                } else {
+                    imagem_post.innerHTML = `<p>Arquivo não suportado</p>`
+                }
+            }
+
+            leitor.readAsDataURL(arquivo); // lê o arquivo como base64
         }
     }
 
@@ -132,23 +144,25 @@
 
             setTimeout(() => {
                 tudo_certo.innerHTML = ``
-            }, 5000)
+            }, 4000)
+
         } else if (
             !foto.value.endsWith(".png") &&
             !foto.value.endsWith(".jpeg") &&
+            !foto.value.endsWith(".jpg") &&
             !foto.value.endsWith(".gif") &&
             !foto.value.endsWith(".webp") &&
+            !foto.value.endsWith(".mp4") &&
             !foto.value.endsWith(".svg")) {
 
-            tudo_certo.innerHTML = `Tipo de imagem não suportado`
+            tudo_certo.innerHTML = `Nome do arquivo muito cumprido`
 
             setTimeout(() => {
                 tudo_certo.innerHTML = ``
             }, 5000)
         } else {
-
-
             console.log(idUsuario, foto.files[0], input_desc.value)
+
             const formData = new FormData()
             formData.append('foto', foto.files[0])
             formData.append('input_desc', input_desc.value)
@@ -168,7 +182,6 @@
 
             }).catch(err => {
                 console.log(erro)
-
             })
         }
     }

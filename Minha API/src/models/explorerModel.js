@@ -2,7 +2,7 @@ var database = require("../database/config")
 
 function listar() {
     var instrucaoSql = `
-    select u.nome, p.idPost, p.quem_postou, p.descricao, p.imagem_post
+    select u.nome, u.imagem_perfil, p.idPost, p.quem_postou, p.descricao, p.imagem_post
     FROM usuario AS u JOIN post as p ON p.quem_postou = u.idUsuario ORDER BY p.idPost DESC;`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)

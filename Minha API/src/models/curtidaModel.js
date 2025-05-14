@@ -11,7 +11,7 @@ function curtida(idUsuario, idPost, quem_postou) {
 
 function qtd_Curtida(idPostCurtida) {
     var instrucaoSql = `
-    select count(*)  AS qtd FROM curtida WHERE post_curtida = ${idPostCurtida};`
+    select count(*) AS qtd FROM curtida WHERE post_curtida = ${idPostCurtida};`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
     return database.executar(instrucaoSql);

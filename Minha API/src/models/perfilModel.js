@@ -17,7 +17,23 @@ function listar(id) {
     return database.executar(instrucaoSql)
 }
 
+function salvar(newPost) {
+    var instrucao = `UPDATE usuario SET imagem_perfil = "${newPost.imagem}" WHERE idUsuario = ${newPost.idUsuario};;`
+
+    return database.executar(instrucao);
+}
+
+function atualizarInfo(id) {
+    var instrucaoSql = `
+    SELECT * FROM usuario WHERE idUsuario = ${id};`
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql)
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     atualizarDesc,
-    listar
+    listar,
+    salvar,
+    atualizarInfo
 }
