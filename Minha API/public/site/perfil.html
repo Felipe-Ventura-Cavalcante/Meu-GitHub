@@ -160,12 +160,7 @@
                                     ${descricaoPost}
                                 </div>
                             </div>
-                        </div>
-                        
-                            <div class="todos_com">
-                            <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
-                            </div>
-                    </div>`
+                        </div>`
                     } else {
                         exibicao_post.innerHTML += `
                     <div class="exibicao" id="exibicao">
@@ -206,12 +201,7 @@
                                     ${descricaoPost}
                                 </div>
                             </div>
-                        </div>
-                        
-                            <div class="todos_com">
-                            <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
-                            </div>
-                    </div>`
+                        </div>`
                     }
                     qtd_curtida(idPost)
                 }
@@ -260,11 +250,15 @@
                 descricaoServer: novaDesc
             })
         }).then(res => {
+            if (!res.ok) {
+                throw new Error("Erro ao cadastrar");
+            }
             console.log(res)
             alert(`Descrição atualizada, atualize a página`)
             atualizarInfo()
-        }).catch(err => {
+        }).catch(erro => {
             console.log(erro)
+            alert(`Limite de caracteres excedido`)
         })
 
         div_editar.innerHTML = ``

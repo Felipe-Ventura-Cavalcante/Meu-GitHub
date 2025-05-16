@@ -106,37 +106,41 @@ button {
   display: flex;
   flex-direction: column;
   color: #ffffffff;
+  align-items: center;
 }
 
 .titulo_ex {
+  width: 100%;
   font-size: 2rem;
   font-weight: bolder;
   padding: 50px;
   margin-left: 100px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .exibicao {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: 40px;
-  padding-left: 100px;
+  flex-direction: column;
+  width: 800px;
+  padding-top: 15px;
+
   margin-bottom: 30px;
-  border-bottom: #ffffffff solid 3px;
-  padding-bottom: 30px;
-  justify-content: center;
+  align-items: center;
+  background-color: #2A2A2A;
+  border-radius: 15px;
 }
 
 .post {
-  width: 400px;
+  width: 800px;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 .img_post img {
-  border-radius: 10px;
-  width: 400px;
+
+  width: 800px;
   height: auto;
   margin-bottom: 10px;
   margin-top: 10px;
@@ -144,8 +148,7 @@ button {
 }
 
 .img_post video {
-  border-radius: 10px;
-  width: 400px;
+  width: 800px;
   height: auto;
   margin-bottom: 10px;
   margin-top: 10px;
@@ -157,6 +160,7 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-left: 15px;
 }
 
 .post_user img {
@@ -187,7 +191,7 @@ button {
 
 .curtida img {
   width: 70px;
-  height: 55px;
+  height: 60px;
 }
 
 .curtida button {
@@ -209,12 +213,12 @@ button {
 
 .comentarios img {
   width: 60px;
-  height: 50px;
 }
 
 .desc_post {
   display: flex;
   flex-direction: column;
+  padding-left: 10px;
 }
 
 .desc_txt {
@@ -234,18 +238,35 @@ button {
   padding-right: 10px;
 }
 
+.titulo_comentario1 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: gray solid 1px;
+  padding-top: 10px;
+}
+
+.titulo_comentario1 img {
+  width: 35px;
+}
+
 .titulo_comentario {
+  width: 100%;
   margin-right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .adicionar_comentario textarea {
   display: flex;
   text-align: start;
-  min-width: 200px;
-  max-width: 200px;
+  min-width: 600px;
+  max-width: 600px;
   background: none;
   border: none;
-  height: 20px;
+  height: 30px;
   color: #ffffffff;
   resize: none;
   padding: 2px;
@@ -257,7 +278,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 .adicionar_comentario button img {
@@ -265,18 +286,26 @@ button {
 }
 
 .todos_com {
-  z-index: 999;
-  width: 400px;
-  border-radius: 10px;
-  padding-bottom: 50px;
+  width: 800px;
+  margin-top: 10px;
 }
 
 .texto_dos_comentarios {
-  padding-bottom: 10px;
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-bottom: gray solid 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: rgb(53, 52, 52);
+  border-radius: 10px;
+}
+
+.texto_comentario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
 }
 
 .texto_dos_comentarios .nome_quem_comentou {

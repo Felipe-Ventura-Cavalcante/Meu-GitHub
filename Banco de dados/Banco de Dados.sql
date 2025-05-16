@@ -6,7 +6,7 @@ idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(45),
 email VARCHAR(100) UNIQUE,
 senha VARCHAR(45),
-descricao VARCHAR(100),
+descricao VARCHAR(150),
 dtCriacao_conta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 imagem_perfil TEXT
 );
@@ -14,7 +14,7 @@ imagem_perfil TEXT
 CREATE TABLE post (
 idPost INT PRIMARY KEY AUTO_INCREMENT,
 quem_postou INT,
-descricao VARCHAR(255),
+descricao TEXT,
 dtPostagem TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 qtdCurtida INT  DEFAULT 0,
 imagem_post TEXT,

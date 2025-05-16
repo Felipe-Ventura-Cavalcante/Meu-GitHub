@@ -109,32 +109,45 @@
 
     function exibir() {
         var arquivo = foto.files[0] // pega o arquivo selecionado
+        var nomeArquivo = foto.value.toLowerCase();
 
-        if (arquivo) {
-            var leitor = new FileReader() // cria um leitor de arquivos
+        if (
+            !foto.value.endsWith(".png") &&
+            !foto.value.endsWith(".jpeg") &&
+            !foto.value.endsWith(".jpg") &&
+            !foto.value.endsWith(".gif") &&
+            !foto.value.endsWith(".webp") &&
+            !foto.value.endsWith(".mp4") &&
+            !foto.value.endsWith(".svg")) {
 
-            leitor.onload = function (evento) {
-                var tipo = arquivo.type
+            imagem_post.innerHTML = `<div class ="tudo_certo">Tipo de arquivo não suportado</div>`
+        } else if (arquivo) {
+            tudo_certo.innerHTML = ``
 
-                if (tipo.startsWith("image/")) {
-                    imagem_post.innerHTML = `<img src="${evento.target.result}" alt="Imagem escolhida">`
-                } else if (tipo.startsWith("video/")) {
+            if (nomeArquivo.endsWith(".mp4")) {
+                // para vídeo, usar URL.createObjectURL
+                var urlVideo = URL.createObjectURL(arquivo)
+                imagem_post.innerHTML = `
+                <video controls>
+                    <source src="${urlVideo}" type="video/mp4">
+                    Seu navegador não suporta a reprodução de vídeo.
+                </video>`
+            } else {
+                // para imagem, usar FileReader e dataURL
+                var leitor = new FileReader()
+
+                leitor.onload = function (e) {
                     imagem_post.innerHTML = `
-                    <video width="320" height="240" controls>
-                        <source src="${evento.target.result}" type="${tipo}">
-                        Seu navegador não suporta a reprodução de vídeo.
-                    </video>`;
-                } else {
-                    imagem_post.innerHTML = `<p>Arquivo não suportado</p>`
+                    <img src="${e.target.result}" alt="Prévia da imagem">`
                 }
-            }
 
-            leitor.readAsDataURL(arquivo); // lê o arquivo como base64
+                leitor.readAsDataURL(arquivo)
+            }
         }
     }
 
     function enviar() {
-        console.log("Cheigeui na função")
+        console.log("Cheguei na função")
         var idUsuario = sessionStorage.ID_USUARIO
 
         if (foto.value == `` ||

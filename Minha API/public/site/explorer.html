@@ -62,6 +62,7 @@
     window.onload = function () {
         container.innerHTML = `
         <div class="titulo_ex">
+            <img src="assets/imgs/notas_mus_col.svg" alt="">
             Explorer
         </div>`
 
@@ -86,10 +87,10 @@
             .then(dados_post => {
 
                 // agora eu posso fazer o que eu quiser com esses dados
-                for (var contador = 0; contador < dados_post.length; contador++) {
+                for (var i = 0; i < dados_post.length; i++) {
 
                     // Essa var vem como array com vários objetos
-                    var post = dados_post[contador]
+                    var post = dados_post[i]
 
                     // para usar cada ojetivo individualmente eu utilizo o nome da var "post". "nome do campo"
                     var nome = post.nome
@@ -130,7 +131,7 @@
 
                         </div>
 
-                        <div class="comentarios${idPost}">
+                        <div class="comentarios" id="comentarios${idPost}">
 
                                 <button onclick="comentario('${idPost}', '${quem_postou}')">
                                     <div id="comentario_aberto${idPost}">
@@ -184,7 +185,7 @@
 
                         </div>
 
-                        <div class="comentarios${idPost}">
+                        <div class="comentarios" id="comentarios${idPost}">
 
                                 <button onclick="comentario('${idPost}', '${quem_postou}')">
                                     <div id="comentario_aberto${idPost}">
@@ -354,6 +355,10 @@
                 .then(todos_os_comentarios => {
 
                     div.innerHTML = `
+                    <div class="titulo_comentario1">
+                        <img src="assets/imgs/comentario_ponto.svg" alt="">
+                            Comentários (${todos_os_comentarios.length})
+                    </div>
                     <div class="adicionar_comentario">
 
                         <div class="titulo_comentario">
