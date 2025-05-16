@@ -3,7 +3,7 @@ use sonar;
 
 CREATE TABLE usuario (
 idUsuario INT PRIMARY KEY AUTO_INCREMENT,
-nome VARCHAR(45),
+nome VARCHAR(45) UNIQUE,
 email VARCHAR(100) UNIQUE,
 senha VARCHAR(45),
 descricao VARCHAR(150),

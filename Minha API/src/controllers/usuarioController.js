@@ -2,7 +2,7 @@
 var usuarioModel = require("../models/usuarioModel")
 
 function cadastrar(req, res) {
-    
+
     // criação das variáveis que irão captar os valores das inputs do cadastro.html
     var nome = req.body.nomeServer
     var email = req.body.emailServer
@@ -25,6 +25,27 @@ function cadastrar(req, res) {
         )
 }
 
+function listarNome(req, res) {
+
+    usuarioModel.listarNome()
+        // se a busca por esses dados der tudo certo
+        .then(
+
+            resultado => {
+                res.status(200).json(resultado)
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro)
+                console.log(
+                    "\nHouve um erro ao realizar a busca de dados dos Posts! Erro: ",
+                    erro.sqlMessage
+                )
+                res.status(500).json(erro.sqlMessage)
+            }
+        )
+}
+
 function logar(req, res) {
 
     // Criação das variáveis que irão captar os dados das inputs do login.html
@@ -36,15 +57,15 @@ function logar(req, res) {
         res.status(400).send("Seu email está indefinido")
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinda")
-    } 
-    
+    }
+
     // caso esteja tudo certo
     else {
         usuarioModel.logar(email, senha)
 
-        // é feito uma promessa onde é criado o 'resultado =>'
-        // esse resultado recebe todos os valores retornados pelo select da função login (diUsuario, nome, email, senha)
-        // esses valores vem em um array[] com varios objetos, ex: idUsuario:
+            // é feito uma promessa onde é criado o 'resultado =>'
+            // esse resultado recebe todos os valores retornados pelo select da função login (diUsuario, nome, email, senha)
+            // esses valores vem em um array[] com varios objetos, ex: idUsuario:
             .then((resultado) => {
                 if (resultado.length > 0) {
                     res.json({
@@ -76,5 +97,6 @@ function logar(req, res) {
 
 module.exports = {
     cadastrar,
+    listarNome,
     logar
 }

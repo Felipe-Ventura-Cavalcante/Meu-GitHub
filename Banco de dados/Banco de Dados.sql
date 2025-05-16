@@ -3,7 +3,7 @@ use sonar;
 
 CREATE TABLE usuario (
 idUsuario INT PRIMARY KEY AUTO_INCREMENT,
-nome VARCHAR(45),
+nome VARCHAR(45) UNIQUE,
 email VARCHAR(100) UNIQUE,
 senha VARCHAR(45),
 descricao VARCHAR(150),
@@ -56,21 +56,7 @@ CONSTRAINT fkDono_post
 		REFERENCES post(quem_postou)
 );
 
-INSERT INTO post (quem_postou, descricao, imagem_post) VALUES
-(1, "foto de golfinho", "imagem de golfinho");
-
-INSERT INTO post (quem_postou, descricao, imagem_post) VALUES
-(1, "foto de melancia", "imagem de melancia");
-
 select * from usuario;
 select * from post;
 select * from comentario;
 select * from curtida;
-
-delete from post where quem_postou = 1;
-
-SELECT * FROM usuario WHERE idUsuario = 1;
-
-delete from post where quem_postou = 1;
-
-

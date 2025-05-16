@@ -109,6 +109,7 @@
 
     function exibir() {
         var arquivo = foto.files[0] // pega o arquivo selecionado
+                                    // uniformiso a URL para deixar ela toda em minúsculo
         var nomeArquivo = foto.value.toLowerCase();
 
         if (
@@ -125,7 +126,7 @@
             tudo_certo.innerHTML = ``
 
             if (nomeArquivo.endsWith(".mp4")) {
-                // para vídeo, usar URL.createObjectURL
+                // se for vídeo, transformo ele em URL para exibir a URL no search
                 var urlVideo = URL.createObjectURL(arquivo)
                 imagem_post.innerHTML = `
                 <video controls>

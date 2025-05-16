@@ -214,7 +214,6 @@
                     </div>`
                     }
 
-
                     qtd_curtida(idPost)
                 }
 
@@ -384,11 +383,13 @@
                             var comentario = todos_os_comentarios[cont]
                             var txt_comentario = comentario.texto_comentario
                             var nome_quem_comentou = comentario.nome
+                            var imagem_perfil_comentario = comentario.imagem_perfil
 
                             div.innerHTML += `
                     <div class="texto_dos_comentarios">
 
                         <div class="nome_quem_comentou">
+                           <img src="../assets/imagens perfil/${imagem_perfil_comentario}" alt="">
                             ${nome_quem_comentou}
                         </div>
 

@@ -11,7 +11,7 @@ function listar() {
 
 function listarComentario(idPostComentario) {
     var instrucaoSql = `
-    select u.nome, c.idComentario, c.usuario_que_comentou, c.post_comentado, c.dono_do_post, c.texto_comentario, c.dtComentario FROM usuario AS u
+    select u.nome, u.imagem_perfil, c.idComentario, c.usuario_que_comentou, c.post_comentado, c.dono_do_post, c.texto_comentario, c.dtComentario FROM usuario AS u
 	JOIN comentario AS c on c.usuario_que_comentou = u.idUsuario WHERE c.post_comentado = ${idPostComentario} ORDER BY dtComentario DESC;
     `
 

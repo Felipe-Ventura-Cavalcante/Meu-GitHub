@@ -3,15 +3,14 @@ var router = express.Router();
 
 var usuarioController = require("../controllers/usuarioController");
 
-
-         // Crio uma rota Cadastrar 
-         // (/usuario/cadastrar)
 router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res)
 })
 
-         // Crio uma rota Logar
-         // (/usuario/logar)
+router.get("/listarNome", function (req, res) {
+    usuarioController.listarNome(req, res)
+})
+
 router.post("/logar", function (req, res) {
     usuarioController.logar(req, res)
 })

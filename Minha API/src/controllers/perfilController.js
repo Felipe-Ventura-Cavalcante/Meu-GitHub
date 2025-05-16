@@ -42,7 +42,6 @@ function listar(req, res) {
         )
 }
 
-
 function salvar(req, res) {
     if (!req.file) {
         return res.status(400).send("Arquivo de imagem não enviado.");
