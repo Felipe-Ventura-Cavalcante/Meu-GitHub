@@ -74,13 +74,22 @@ button:hover {
     display: flex;
 }
 
+
 .bar_nome_user a .div_nome_user {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    height: auto;
     color: #ffffffff;
     font-size: 1.2rem;
     font-weight: 500;
     cursor: pointer;
     margin-top: 50px;
-    font-family: Arial, Helvetica, sans-serif;
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .bar_p_e a,
@@ -136,7 +145,6 @@ button:hover {
 
 .container {
     width: 100%;
-    height: 100%;
     margin-left: 280px;
     padding: 5%;
     padding-right: 0%;
@@ -218,7 +226,7 @@ button:hover {
 
 .posts_do_user {
     width: 100%;
-    height: auto;
+
     display: flex;
     padding-left: 5%;
     flex-direction: column;
@@ -241,31 +249,36 @@ button:hover {
     width: 100%;
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .exibicao {
-    background-color: #2A2A2A;
     display: flex;
     justify-content: center;
-    align-items: center;
     border-radius: 10px;
+    height: auto;
 
 }
 
 .post {
-    margin-top: 20px;
-    width: 300px;
-    height: auto;
+    display: flex;
+    flex-direction: column;
     background-color: #2A2A2A;
-    color: #ffffff;
-    border-radius: 10px;
+    color: #fff;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
 }
 
 .post .post_user {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.2rem;
     width: 100%;
-    height: 20px;
+    min-height: 20px;
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
     padding-left: 10px;
     display: flex;
     align-items: center;
@@ -286,16 +299,14 @@ button:hover {
 
 }
 
-.img_post img {
-    object-fit: cover;
-    width: 100%;
-    height: auto;
-}
-
-.img_post video {
-    object-fit: cover;
-    width: 100%;
-    height: auto;
+.post img,
+.post video {
+  max-width: 100%;
+  max-height: 385px;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 10px;
+  object-fit: cover;
 }
 
 .curtida {
@@ -309,7 +320,13 @@ button:hover {
 }
 
 .botões_cc {
-    margin-left: 10px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.botões_cvi {
+    margin-top: -5px;
+    margin-left: 5px;
 }
 
 .curtida button {

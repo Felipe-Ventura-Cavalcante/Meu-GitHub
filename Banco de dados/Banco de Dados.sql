@@ -17,7 +17,7 @@ quem_postou INT,
 descricao TEXT,
 dtPostagem TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 qtdCurtida INT  DEFAULT 0,
-imagem_post TEXT,
+imagem_post TEXT NULL,
 CONSTRAINT fkUser_Post
 	FOREIGN KEY (quem_postou)
 		REFERENCES usuario(idUsuario)
@@ -56,7 +56,12 @@ CONSTRAINT fkDono_post
 		REFERENCES post(quem_postou)
 );
 
+    select u.nome, u.imagem_perfil, p.idPost, p.quem_postou, p.descricao, p.imagem_post
+    FROM usuario AS u JOIN post as p ON p.quem_postou = u.idUsuario ORDER BY p.idPost DESC;
+
 select * from usuario;
 select * from post;
 select * from comentario;
 select * from curtida;
+
+delete from post where quem_postou = 1; 

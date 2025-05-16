@@ -116,7 +116,38 @@
                     var imagemPost = dados.imagem_post
                     var quem_postou = dados.quem_postou
 
-                    if (imagemPost.endsWith('.mp4')) {
+                    if (imagemPost === 'null') {
+                        exibicao_post.innerHTML += `
+                    <div class="exibicao" id="exibicao">
+                    <div class="post">
+
+                        <div class="post_user" id="${quem_postou}">
+                           <img src="../assets/imagens perfil/${imagem_perfilUser}" alt="">
+                            ${nomePost}
+                        </div>
+
+                        <div class ="botões_cc">
+                            <div class="curtida">
+
+                                <button onclick="curtida('${idPost}','${quem_postou}')">
+                                    <div class="cond_curtida" id="condCurtida${idPost}">
+                                        <img src="assets/imgs/coracao bordas vermelhas.png" alt="">
+                                    </div>
+                                </button>
+
+                                <div class="qtd_curtida" id="qtd_curtida${idPost}"></div>
+                        </div>
+                        </div>
+                        <div class="desc_post">
+                                <div class="desc_user">
+                                    ${nomePost}
+                                </div>
+                                <div class="desc_txt">
+                                    ${descricaoPost}
+                                </div>
+                            </div>
+                        </div>`
+                    } else if (imagemPost.endsWith('.mp4')) {
 
                         exibicao_post.innerHTML += `
                     <div class="exibicao" id="exibicao">
@@ -134,7 +165,7 @@
                             </video>
                         </div>
 
-                        <div class ="botões_cc">
+                        <div class ="botões_cvi">
                             <div class="curtida">
 
                                 <button onclick="curtida('${idPost}','${quem_postou}')">
@@ -175,7 +206,7 @@
                             <img src="../assets/imagens dos posts/${imagemPost}" alt="">
                         </div>
 
-                        <div class ="botões_cc">
+                        <div class ="botões_cvi">
                             <div class="curtida">
 
                                 <button onclick="curtida('${idPost}','${quem_postou}')">

@@ -72,6 +72,9 @@
                     <span>Selecione o seu arquivo</span>
                     <input type="file" accept="image/*, video/*" name="foto" id="foto" oninput="exibir()">
                 </label>
+                <div class="opcional-texto">
+                    <small>(Opcional: você pode enviar o post sem arquivo)</small>
+                </div>
 
                 <div class="desc">
                     <div class="txt_desc">
@@ -109,7 +112,7 @@
 
     function exibir() {
         var arquivo = foto.files[0] // pega o arquivo selecionado
-                                    // uniformiso a URL para deixar ela toda em minúsculo
+        // uniformiso a URL para deixar ela toda em minúsculo
         var nomeArquivo = foto.value.toLowerCase();
 
         if (
@@ -151,16 +154,15 @@
         console.log("Cheguei na função")
         var idUsuario = sessionStorage.ID_USUARIO
 
-        if (foto.value == `` ||
-            input_desc.value == ``
-        ) {
-            tudo_certo.innerHTML = `Preecha todos os campos para enviar o post`
+        if (input_desc.value == ``) {
+            tudo_certo.innerHTML = `Preecha o campo descrição`
 
             setTimeout(() => {
                 tudo_certo.innerHTML = ``
             }, 4000)
 
         } else if (
+            !foto.value.endsWith("") &&
             !foto.value.endsWith(".png") &&
             !foto.value.endsWith(".jpeg") &&
             !foto.value.endsWith(".jpg") &&

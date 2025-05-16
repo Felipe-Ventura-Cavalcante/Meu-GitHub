@@ -17,7 +17,7 @@ quem_postou INT,
 descricao TEXT,
 dtPostagem TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 qtdCurtida INT  DEFAULT 0,
-imagem_post TEXT,
+imagem_post TEXT NULL,
 CONSTRAINT fkUser_Post
 	FOREIGN KEY (quem_postou)
 		REFERENCES usuario(idUsuario)

@@ -75,7 +75,7 @@
         var imagem_perfil_user = sessionStorage.IMAGEM_PERFIL
 
         div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
-        Olá, ${nomeUsuario}`
+        <span>Olá, ${nomeUsuario}</span>`
 
         fetch("/explorer/listar")
 
@@ -100,7 +100,57 @@
                     var imagem_post = post.imagem_post
                     var imagem_post_perfil = post.imagem_perfil
 
-                    if (imagem_post.endsWith('.mp4')) {
+                    if (imagem_post === 'null') {
+                        container.innerHTML += `
+                    <div class="exibicao" id="exibicao">
+                    <div class="post">
+
+                        <div class="post_user" id="${quem_postou}">
+                           <img src="../assets/imagens perfil/${imagem_post_perfil}" alt="imagem de Perfil do Usuario">
+                            ${nome}
+                        </div>
+
+                        <div class ="botões_cc">
+                            <div class="curtida">
+
+                                <button onclick="curtida('${idPost}','${quem_postou}')">
+                                    <div class="cond_curtida" id="condCurtida${idPost}">
+                                        <img src="assets/imgs/coracao bordas vermelhas.png" alt="">
+                                    </div>
+                                </button>
+
+                                <div class="qtd_curtida" id="qtd_curtida${idPost}"></div>
+
+                        </div>
+
+                        <div class="comentarios" id="comentarios${idPost}">
+
+                                <button onclick="comentario('${idPost}', '${quem_postou}')">
+                                    <div id="comentario_aberto${idPost}">
+                                    <img src="assets/imgs/chat.svg" alt="comentário">
+                                    </div>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="desc_post">
+
+                                <div class="desc_user">
+                                    ${nome}
+                                </div>
+                                <div class="desc_txt">
+                                    ${descricao}
+                                </div>
+                            </div>
+                        </div>
+                        
+                            <div class="todos_com">
+                            <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
+                            </div>
+                    </div>`
+                    } else if (imagem_post.endsWith('.mp4')) {
 
                         container.innerHTML += `
                     <div class="exibicao" id="exibicao">

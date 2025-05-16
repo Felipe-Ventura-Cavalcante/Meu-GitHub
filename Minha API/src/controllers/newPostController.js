@@ -2,12 +2,8 @@ var newPostModel = require('../models/newPostModel');
 
 
 function salvar(req, res) {
-  if (!req.file) {
-    return res.status(400).send("Arquivo de imagem não enviado.");
-  } else {
 
-
-    var imagem = req.file.filename;
+    var imagem = req.file ? req.file.filename : null;
 
     var { input_desc, idUsuario } = req.body
 
@@ -20,7 +16,6 @@ function salvar(req, res) {
         res.status(500).send(err);
       });
   }
-}
 
 module.exports = {
   salvar

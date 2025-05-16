@@ -69,11 +69,19 @@ button:hover {
 }
 
 .bar_nome_user a .div_nome_user {
+  width: 100%;
+  height: auto;
   color: #ffffffff;
   font-size: 1.2rem;
   font-weight: 500;
   cursor: pointer;
   margin-top: 50px;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: normal;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .bar_p_e a,
@@ -145,7 +153,6 @@ button:hover {
   flex-direction: column;
   width: 800px;
   padding-top: 15px;
-
   margin-bottom: 30px;
   align-items: center;
   background-color: #2A2A2A;
@@ -162,7 +169,6 @@ button:hover {
 
   width: 800px;
   height: auto;
-  margin-bottom: 10px;
   margin-top: 10px;
   object-fit: cover;
 }
@@ -170,7 +176,6 @@ button:hover {
 .img_post video {
   width: 800px;
   height: auto;
-  margin-bottom: 10px;
   margin-top: 10px;
   object-fit: cover;
 }
@@ -193,6 +198,8 @@ button:hover {
 .botões_cc {
   display: flex;
   gap: 5%;
+  align-items: center;
+  margin-top: 5px;
 }
 
 .curtida {
