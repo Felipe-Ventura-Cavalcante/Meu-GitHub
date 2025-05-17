@@ -64,8 +64,30 @@ function deletaCurtida(req, res) {
             }
         )
 }
+
+function listaCurtida(req, res) {
+
+    var idUsuarioAtual = req.params.idUsuario
+
+    curtidaModel.listaCurtida(idUsuarioAtual)
+
+        .then(resultado =>
+            res.status(200).json(resultado)
+        ).catch(
+            function (erro) {
+                console.log(erro)
+                console.log(
+                    "\nHouve um erro ao realizar a listar curtidas! Erro: ",
+                    erro.sqlMessage
+                )
+                res.status(500).json(erro.sqlMessage)
+            }
+        )
+}
+
 module.exports = {
     curtida,
     qtd_Curtida,
-    deletaCurtida
+    deletaCurtida,
+    listaCurtida
 }

@@ -279,18 +279,18 @@
 
         fetch(`/listaCurtida/${idUsuario}`)
             .then(res => res.json())
-            .then(lista_deCurtida => {
+            .then(lista_de_Curtida => {
 
-                for (var cont_lista_curtida = 0; cont_lista_curtida < lista_deCurtida.length; cont_lista_curtida++) {
+                for (var cont_lista_curtida = 0; cont_lista_curtida < lista_de_Curtida.length; cont_lista_curtida++) {
 
-                    var lista = lista_deCurtida[cont_lista_curtida]
+                    var lista = lista_de_Curtida[cont_lista_curtida]
 
                     var post_da_curtida = lista.post_curtida
-                    console.log(lista_deCurtida)
+                    console.log(lista_de_Curtida)
                     console.log(post_da_curtida)
 
                     var div_cond_curtida = document.getElementById(`condCurtida${post_da_curtida}`)
-                    div_cond_curtida.innerHTML = `<img src="assets/imgs/coraação vermelho.png" alt="">`
+                    div_cond_curtida.innerHTML = `<img src="assets/imgs/coração vermelho.png" alt="">`
                 }
             })
             .catch((erro) => {
@@ -308,7 +308,7 @@
         var div_cond_curtida = document.getElementById(`condCurtida${idPost}`)
 
         // Me responde um valor booleano = true ou false para eu verificar se está ou não curtido
-        var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes(`<img src="assets/imgs/coraação vermelho.png" alt="">`)
+        var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes(`<img src="assets/imgs/coração vermelho.png" alt="">`)
 
         // Se for true
         if (curtida_coracao_vermelho) {

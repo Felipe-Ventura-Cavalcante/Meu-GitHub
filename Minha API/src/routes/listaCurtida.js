@@ -2,10 +2,10 @@ var express = require("express")
 
 var router = express.Router()
 
-var listaCurtidaController = require("../controllers/listaCurtidaController")
+var curtidaController = require("../controllers/curtidaController")
 
 router.get("/:idUsuario", function (req, res) {
-    listaCurtidaController.listaCurtida(req, res)
+    curtidaController.listaCurtida(req, res)
 })
 
 module.exports = router

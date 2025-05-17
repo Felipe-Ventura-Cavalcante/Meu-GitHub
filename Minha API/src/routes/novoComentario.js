@@ -2,10 +2,10 @@ var express = require("express")
 
 var router = express.Router()
 
-var novoComentarioController = require("../controllers/novoComentarioController")
+var explorerController = require("../controllers/explorerController")
 
 router.post("/:idPost", function(req, res) {
-    novoComentarioController.novo_comentario(req,res)
+    explorerController.novo_comentario(req,res)
 })
 
 module.exports = router
