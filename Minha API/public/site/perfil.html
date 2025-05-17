@@ -415,7 +415,7 @@
             formData.append('foto', foto.files[0])
             formData.append('idUsuario', idUsuario)
 
-            fetch("/fotoPerfil/enviarFoto", {
+            fetch("/fotoPerfil/enviarFotoPerfil", {
                 method: "POST",
                 body: formData
             }).then(res => {

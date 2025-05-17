@@ -153,8 +153,9 @@
     function enviar() {
         console.log("Cheguei na função")
         var idUsuario = sessionStorage.ID_USUARIO
+        var novaDesc = input_desc.value
 
-        if (input_desc.value == ``) {
+        if (novaDesc.value == ``) {
             tudo_certo.innerHTML = `Preecha o campo descrição`
 
             setTimeout(() => {
@@ -177,11 +178,11 @@
                 tudo_certo.innerHTML = ``
             }, 5000)
         } else {
-            console.log(idUsuario, foto.files[0], input_desc.value)
+            console.log(idUsuario, foto.files[0], novaDesc)
 
             const formData = new FormData()
             formData.append('foto', foto.files[0])
-            formData.append('input_desc', input_desc.value)
+            formData.append('novaDescServer', novaDesc)
             formData.append('idUsuario', idUsuario)
 
             fetch("/newPost/enviarPost", {

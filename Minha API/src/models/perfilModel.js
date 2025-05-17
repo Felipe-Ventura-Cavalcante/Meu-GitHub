@@ -17,7 +17,7 @@ function listar(id) {
     return database.executar(instrucaoSql)
 }
 
-function salvar(newPost) {
+function enviarFotoPerfil(newPost) {
     var instrucao = `UPDATE usuario SET imagem_perfil = "${newPost.imagem}" WHERE idUsuario = ${newPost.idUsuario};;`
 
     return database.executar(instrucao);
@@ -34,6 +34,6 @@ function atualizarInfo(id) {
 module.exports = {
     atualizarDesc,
     listar,
-    salvar,
+    enviarFotoPerfil,
     atualizarInfo
 }

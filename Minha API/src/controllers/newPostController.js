@@ -1,15 +1,15 @@
 var newPostModel = require('../models/newPostModel');
 
 
-function salvar(req, res) {
+function enviarPost(req, res) {
 
     var imagem = req.file ? req.file.filename : null;
 
-    var { input_desc, idUsuario } = req.body
+    var { novaDescServer, idUsuario } = req.body
 
-    var newPost = { input_desc, idUsuario, imagem }
+    var newPost = { novaDescServer, idUsuario, imagem }
 
-    newPostModel.salvar(newPost)
+    newPostModel.enviarPost(newPost)
       .then(resultado => {
         res.status(201).send("Usuario criado com sucesso");
       }).catch(err => {
@@ -18,5 +18,5 @@ function salvar(req, res) {
   }
 
 module.exports = {
-  salvar
+  enviarPost
 }

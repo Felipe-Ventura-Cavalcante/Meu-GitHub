@@ -42,7 +42,7 @@ function listar(req, res) {
         )
 }
 
-function salvar(req, res) {
+function enviarFotoPerfil(req, res) {
     if (!req.file) {
         return res.status(400).send("Arquivo de imagem não enviado.");
     } else {
@@ -54,7 +54,7 @@ function salvar(req, res) {
 
         var newPost = { idUsuario, imagem }
 
-        perfilModel.salvar(newPost)
+        perfilModel.enviarFotoPerfil(newPost)
             .then(resultado => {
                 res.status(201).send("Usuario criado com sucesso");
             }).catch(err => {
@@ -85,6 +85,6 @@ function atualizarInfo(req, res) {
 module.exports = {
     atualizarDesc,
     listar,
-    salvar,
+    enviarFotoPerfil,
     atualizarInfo
 }

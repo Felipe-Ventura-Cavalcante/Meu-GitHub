@@ -78,18 +78,11 @@
         <span>Olá, ${nomeUsuario}</span>`
 
         fetch("/explorer/listar")
-
-            // Se a requisição der certo, pegue esses dados
             .then(res => res.json())
-
-            // eu exibo os meus dados.json(res) em dados_post
-            //    (res =>)
             .then(dados_post => {
 
-                // agora eu posso fazer o que eu quiser com esses dados
                 for (var i = 0; i < dados_post.length; i++) {
 
-                    // Essa var vem como array com vários objetos
                     var post = dados_post[i]
 
                     // para usar cada ojetivo individualmente eu utilizo o nome da var "post". "nome do campo"
@@ -362,10 +355,10 @@
 
         fetch(`/qtdCurtida/${idPost}`)
             .then((res) => res.json())
-            .then(quantidade_curtida => {
+            .then(quantidade => {
 
-                var campo = quantidade_curtida[0]
-                var qtd = campo.qtd
+                var quantidade_curtida = quantidade[0]
+                var qtd = quantidade_curtida.qtd
 
                 var div_qtd = document.getElementById(`qtd_curtida${idPost}`)
                 div_qtd.innerHTML = `${qtd} curtidas`
