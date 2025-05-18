@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - SONAR</title>
+    <link rel="stylesheet" href="css/styles_dash.css">
+    <link rel="shortcut icon" href="assets/icon/favicon2.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div class="bar_lateral">
+        <div class="bar_titulo">
+            SONAR
+        </div>
+        <div class="bar_nome_user">
+            <a href="perfil.html">
+                <div class="div_nome_user" id="div_nome_user">
+                    <img src="assets/imgs/perfil_branco.svg" alt="">
+                </div>
+            </a>
+        </div>
+        <div class="bar_p_e">
+            <a href="explorer.html">
+                <img src="assets/imgs/casa.svg" alt="">
+                EXPLORER
+            </a>
+        </div>
+        <div class="bar_new">
+            <a href="newpost.html">
+                <img src="assets/imgs/new.svg" alt="">
+                NEW POST
+            </a>
+        </div>
+        <div class="bar_e">
+            <a href="">
+                <img src="assets/imgs/estatistica.svg" alt="">
+                ESTATÍSTICAS
+            </a>
+        </div>
+        <div class="bar_sair">
+            <button onclick="sair()">
+                <img src="assets/imgs/sair.svg" alt="">
+                SAIR
+            </button>
+        </div>
+    </div>
+
+    <div class="container" id="container">
+        <div class="titulo">
+            <div class="nome_user" id="card_titulo">    
+            </div>
+            <div class="sub_titulo">
+                Essas são as suas estatisticas!
+            </div>
+        </div>
+        <div class="card_estatiscas">
+
+            <div class="card">
+                <div class="titulo_card">
+                    Publicações
+                    <div class="card_imagem_p">
+                        <img src="assets/imgs/publicacoes.svg" alt="">
+                    </div>
+                </div>
+                <div class="qtd_card" id="qtd_post">
+                </div>
+                <div class="status_qtd" id="status_qtd_postagens">
+                    <img src="" alt="">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="titulo_card">
+                    Curtidas
+                    <div class="card_imagem_c">
+                        <img src="assets/imgs/coracao_icon.svg" alt="">
+                    </div>
+                </div>
+                <div class="qtd_card" id="qtd_curtida">
+                </div>
+                <div class="status_qtd" id="status_qtd_curtidas">
+                    <img src="" alt="">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="titulo_card">
+                    Comentarios
+                    <div class="card_imagem_cc">
+                        <img src="assets/imgs/comentario_icon.svg   " alt="">
+                    </div>
+                </div>
+                <div class="qtd_card" id="qtd_comentario">
+
+                </div>
+                <div class="status_qtd" id="status_qtd_comentarios">
+                    <img src="assets/imgs/seta_verde.svg" alt="">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="grafico">
+            <div class="titulo_grafico">
+                Interações Gerais em suas postagens
+            </div>
+            <canvas></canvas>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var idUsuario = sessionStorage.ID_USUARIO
+    var nomeUsuario = sessionStorage.NOME_USUARIO
+    var email = sessionStorage.EMAIL_USUARIO
+    var descricaoUsuario = sessionStorage.DESCRICAO_USUARIO
+    var imagem_perfil_user = sessionStorage.IMAGEM_PERFIL
+
+    window.onload = function () {
+        div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
+        <span>Olá, ${nomeUsuario}</span>`
+
+        card_titulo.innerHTML = `<div>Bem-vindo,</div> ${nomeUsuario}!`
+
+        fetch(`/dashboard/post/${idUsuario}`)
+            .then(res => res.json())
+            .then(posts => {
+
+                if (posts.length >= 2) {
+                    var atual = posts[0].qtd_post
+                    var anterior = posts[1].qtd_post
+
+                    var mensagem = ''
+                    var imagem = ''
+
+                    if (atual > anterior) {
+                        imagem = 'assets/imgs/seta_verde.svg'
+                        mensagem = `<span>${atual} postagens nesta semana (${atual} é mais que ${anterior})<span>`
+                    } else if (atual < anterior) {
+                        imagem = 'assets/imgs/seta_vermelha.svg'
+                        mensagem = `<span class="vermelho">${atual} postagens nesta semana (${anterior} era mais)<span>`
+                    } else {
+                        imagem = 'assets/imgs/igual.svg'
+                        mensagem = `${atual} postagens nesta semana (mesma quantidade da anterior)`
+                    }
+
+                    status_qtd_postagens.innerHTML = `
+                        <img src="${imagem}" alt="">
+                         ${mensagem}`
+
+                } else if (posts.length === 1) {
+                    status_qtd_postagens.innerHTML = `
+                <img src="assets/imgs/seta_verde.svg" alt="">
+                <span>${posts[0].qtd_post} postagens nesta primeira semana</span>`
+                } else {
+                    status_qtd_postagens.innerHTML = `
+                <img src="assets/imgs/igual.svg" alt="">
+                Nenhuma postagem registrada até agora.`
+                }
+            })
+
+        fetch(`/dashboard/curtida/${idUsuario}`)
+            .then(res => res.json())
+            .then(curtidas => {
+                if (curtidas.length >= 2) {
+                    var atual = curtidas[0].qtd_post
+                    var anterior = curtidas[1].qtd_post
+
+                    var mensagem = ''
+                    var imagem = ''
+
+                    if (atual > anterior) {
+                        imagem = 'assets/imgs/seta_verde.svg'
+                        mensagem = `<span>${atual} curtidas nesta semana (${atual} é mais que ${anterior})</span>`
+                    } else if (atual < anterior) {
+                        imagem = 'assets/imgs/seta_vermelha.svg'
+                        mensagem = `<span class="vermelho">${atual} curtidas nesta semana (${anterior} era mais)</span>`
+                    } else {
+                        imagem = 'assets/imgs/igual.svg'
+                        mensagem = `${atual} curtidas nesta semana (mesma quantidade da anterior)`
+                    }
+
+                    status_qtd_curtidas.innerHTML = `
+                        <img src="${imagem}" alt="">
+                         ${mensagem}`
+
+                } else if (curtidas.length === 1) {
+                    status_qtd_curtidas.innerHTML = `
+                <img src="assets/imgs/seta_verde.svg" alt="">
+                <span>${curtidas[0].qtd_curtida} curtidas nesta primeira semana</span>
+            `
+                } else {
+                    status_qtd_curtidas.innerHTML = `
+                <img src="assets/imgs/igual.svg" alt="">
+                Nenhuma curtida registrada até agora.`
+                }
+            })
+
+        fetch(`/dashboard/comentario/${idUsuario}`)
+            .then(res => res.json())
+            .then(comentarios => {
+                if (comentarios.length >= 2) {
+                    var atual = comentarios[0].qtd_post
+                    var anterior = comentarios[1].qtd_post
+
+                    var mensagem = ''
+                    var imagem = ''
+
+                    if (atual > anterior) {
+                        imagem = 'assets/imgs/seta_verde.svg'
+                        mensagem = `<span>${atual} comentarios nesta semana (${atual} é mais que ${anterior})</span>`
+                    } else if (atual < anterior) {
+                        imagem = 'assets/imgs/seta_vermelha.svg'
+                        mensagem = `<span class="vermelho">${atual} comentarios nesta semana (${anterior} era mais)</span>`
+                    } else {
+                        imagem = 'assets/imgs/igual.svg'
+                        mensagem = `${atual} comentarios nesta semana (mesma quantidade da anterior)`
+                    }
+
+                    status_qtd_comentarios.innerHTML = `
+                        <img src="${imagem}" alt="">
+                         ${mensagem}`
+
+                } else if (comentarios.length === 1) {
+                    status_qtd_comentarios.innerHTML = `
+                <img src="assets/imgs/seta_verde.svg" alt="">
+                <span>${comentarios[0].qtd_comentario} comentarios nesta primeira semana</span>`
+                } else {
+                    status_qtd_comentarios.innerHTML = `
+                <img src="assets/imgs/igual.svg" alt="">
+                Nenhum comentário registrada até agora.`
+                }
+            })
+
+        fetch(`/dashboard/listarPost/${idUsuario}`)
+            .then(res => res.json())
+            .then(todos_post => {
+                qtd_post.innerHTML = todos_post[0].qtd
+            })
+
+        fetch(`/dashboard/listarCurtida/${idUsuario}`)
+            .then(res => res.json())
+            .then(todas_curtida => {
+                qtd_curtida.innerHTML = todas_curtida[0].qtd
+            })
+
+        fetch(`/dashboard/listarComentario/${idUsuario}`)
+            .then(res => res.json())
+            .then(todos_comentario => {
+                qtd_comentario.innerHTML = todos_comentario[0].qtd
+            })
+    }
+
+    function sair() {
+        sessionStorage.clear()
+        window.location = "../index.html"
+    }
+</script>

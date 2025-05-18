@@ -13,4 +13,8 @@ router.get("/:idPost", function (req, res) {
     explorerController.listarComentario(req, res)
 })
 
+router.post("/novoComentario/:idPost", function(req, res) {
+    explorerController.novo_comentario(req,res)
+})
+
 module.exports = router

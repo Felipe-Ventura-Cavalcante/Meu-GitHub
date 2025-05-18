@@ -13,4 +13,7 @@ router.get("/:id", function (req, res) {
     perfilController.listar(req, res)
 })
 
+router.get("/atualizarInfo/:idUsuario", function (req, res) {
+    perfilController.atualizarInfo(req, res)
+})
 module.exports = router

@@ -26,7 +26,7 @@ function curtida(req, res) {
 }
 
 function qtd_Curtida(req, res) {
-    var idPostCurtida = req.params.idPost
+    var idPostCurtida = req.params.id
 
     curtidaModel.qtd_Curtida(idPostCurtida)
         .then(

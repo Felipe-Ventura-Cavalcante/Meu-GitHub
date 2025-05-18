@@ -35,7 +35,7 @@
             </a>
         </div>
         <div class="bar_new">
-            <a href="">
+            <a href="dashboard.html">
                 <img src="assets/imgs/estatistica.svg" alt="">
                 ESTATÍSTICAS
             </a>
@@ -49,16 +49,23 @@
     </div>
 
     <div class="container" id="container">
-
-        <div class="titulo_ex">
-            Explorer
-        </div>
-
     </div>
 </body>
 
 </html>
 <script>
+
+    // Para exibir o nome do usuario logado
+    // utilizamos o dado da sessão do login
+    var idUsuario = sessionStorage.ID_USUARIO
+    var nomeUsuario = sessionStorage.NOME_USUARIO
+    var email = sessionStorage.EMAIL_USUARIO
+    var descricaoUsuario = sessionStorage.DESCRICAO_USUARIO
+    var imagem_perfil_user = sessionStorage.IMAGEM_PERFIL
+
+    div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
+        <span>Olá, ${nomeUsuario}</span>`
+
     window.onload = function () {
         container.innerHTML = `
         <div class="titulo_ex">
@@ -66,16 +73,6 @@
             Explorer
         </div>`
 
-        // Para exibir o nome do usuario logado
-        // utilizamos o dado da sessão do login
-        var idUsuario = sessionStorage.ID_USUARIO
-        var nomeUsuario = sessionStorage.NOME_USUARIO
-        var email = sessionStorage.EMAIL_USUARIO
-        var descricaoUsuario = sessionStorage.DESCRICAO_USUARIO
-        var imagem_perfil_user = sessionStorage.IMAGEM_PERFIL
-
-        div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
-        <span>Olá, ${nomeUsuario}</span>`
 
         fetch("/explorer/listar")
             .then(res => res.json())
@@ -268,9 +265,8 @@
 
     // Lista de curtida
     function listarCurtida() {
-        var idUsuario = sessionStorage.ID_USUARIO;
 
-        fetch(`/listaCurtida/${idUsuario}`)
+        fetch(`/curtida/listaCurtida/${idUsuario}`)
             .then(res => res.json())
             .then(lista_de_Curtida => {
 
@@ -295,7 +291,6 @@
 
     // Função de adicionar curtida
     function curtida(idPost, quem_postou) {
-        var idUsuario = sessionStorage.ID_USUARIO
         var quem_postouVar = quem_postou
 
         var div_cond_curtida = document.getElementById(`condCurtida${idPost}`)
@@ -306,7 +301,7 @@
         // Se for true
         if (curtida_coracao_vermelho) {
 
-            fetch(`/deletarCurtida/${idPost}`, {
+            fetch(`/curtida/deletarCurtida/${idPost}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -353,7 +348,7 @@
     function qtd_curtida(idPost) {
         console.log(`Função qtdCuritda: ${idPost}`)
 
-        fetch(`/qtdCurtida/${idPost}`)
+        fetch(`/curtida/qtdCurtida/${idPost}`)
             .then((res) => res.json())
             .then(quantidade => {
 
@@ -466,10 +461,9 @@
     function enviar_comentario(idPost, quem_postou) {
 
         var novo_comentario = input_add_comentario.value
-        var idUsuario = sessionStorage.ID_USUARIO
         var quem_postouVar = quem_postou
 
-        fetch(`/novoComentario/${idPost}`, {
+        fetch(`/explorer/novoComentario/${idPost}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

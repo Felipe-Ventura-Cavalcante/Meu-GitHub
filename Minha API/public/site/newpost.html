@@ -35,7 +35,7 @@
             </a>
         </div>
         <div class="bar_e">
-            <a href="">
+            <a href="dashboard.html">
                 <img src="assets/imgs/estatistica.svg" alt="">
                 ESTATÍSTICAS
             </a>
@@ -98,8 +98,6 @@
 
 </html>
 <script>
-    window.onload = function () {
-
         var emailUser = sessionStorage.EMAIL_USUARIO
         var nomeUser = sessionStorage.NOME_USUARIO
         var idUsuario = sessionStorage.ID_USUARIO
@@ -108,7 +106,6 @@
 
         div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
         Olá, ${nomeUser}`
-    }
 
     function exibir() {
         var arquivo = foto.files[0] // pega o arquivo selecionado

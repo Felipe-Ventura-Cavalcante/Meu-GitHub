@@ -56,12 +56,13 @@ CONSTRAINT fkDono_post
 		REFERENCES post(quem_postou)
 );
 
-    select u.nome, u.imagem_perfil, p.idPost, p.quem_postou, p.descricao, p.imagem_post
-    FROM usuario AS u JOIN post as p ON p.quem_postou = u.idUsuario ORDER BY p.idPost DESC;
+select u.nome, u.imagem_perfil, p.idPost, p.quem_postou, p.descricao, p.imagem_post
+FROM usuario AS u JOIN post as p ON p.quem_postou = u.idUsuario ORDER BY p.idPost DESC;
 
 select * from usuario;
-select * from post;
-select * from comentario;
-select * from curtida;
+select * from post ORDER BY  dtPostagem DESC;
+select * from comentario where dono_do_post = 1;
+select * from curtida where dono_post_curtida = 1;
 
-delete from post where quem_postou = 1; 
+
+    SELECT COUNT(*) as qtd FROM curtida WHERE dono_post_curtida = 1;

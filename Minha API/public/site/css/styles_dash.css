@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
 
 * {
@@ -75,7 +75,9 @@ button:hover {
     display: flex;
 }
 
+
 .bar_nome_user a .div_nome_user {
+    font-family: Arial, Helvetica, sans-serif;
     width: 100%;
     height: auto;
     color: #ffffffff;
@@ -92,8 +94,8 @@ button:hover {
 }
 
 .bar_p_e a,
-.bar_new a,
 .bar_e a,
+.bar_new a,
 .bar_sair button {
     color: #ffffffff;
     font-size: 1.2rem;
@@ -103,9 +105,11 @@ button:hover {
 
 }
 
-.bar_new a {
-    width: 150px;
-    border-bottom: #ffffffff solid 2px;
+.bar_p_e a {
+    margin-top: 150px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .bar_e a {
@@ -115,14 +119,8 @@ button:hover {
     margin-top: 10px;
 }
 
-.bar_p_e a {
-    margin-top: 150px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
 .bar_new a,
+.bar_e a,
 .bar_sair button,
 .div_nome_user {
     display: flex;
@@ -147,158 +145,165 @@ button:hover {
 }
 
 .container {
-    height: 100%;
     width: 100%;
-    padding-left: 220px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 1%;
-    padding-top: 2%;
-}
-
-.card {
-    height: 80%;
-    width: 30%;
+    height: 100%;
+    padding-left: 280px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    color: #ffffffff;
     align-items: center;
-
-    position: relative;
+    justify-content: center;
 }
 
 .titulo {
-    background-color: #121212;
-    color: #FFFFFF;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1%;
-    font-family: "Sofia Sans";
-    font-size: 1.5rem;
-    border-radius: 15px 15px 0px 0px;
+    margin-top: 30px;
+    padding: 30px;
+    width: 600px;
+    height: 150px;
+    color: #121212;
+    background-color: aliceblue;
+    border-radius: 20px;
+    box-shadow: rgba(137, 137, 137, 0.279) 0px 0px 10px 10px;
 }
 
-.add_arquivo {
+.titulo .nome_user {
     width: 100%;
-    height: 100%;
+    height: 50px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    background-color: #f3f3f3;
-    border-radius: 15px 15px 15px 15px;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 10px;
 }
 
-.add_arquivo .imagem {
+.titulo .sub_titulo {
+    width: 100%;
+    height: 40px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin-top: 10%;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.add_arquivo .imagem img {
-    width: 300px;
-    height: auto;
-    object-fit: cover;
-}
-
-.add_arquivo .imagem video {
-    width: 300px;
-    height: auto;
-    object-fit: cover;
-}
-
-.add_arquivo .txt_add_arquivo {
-    font-family: "Sofia Sans";
-    margin-bottom: 8%;
-    font-size: 1.3rem;
-}
-
-.botao_add {
-    width: 50%;
     justify-content: center;
-    align-items: center;
-}
-
-.botao_add input {
-    display: none;
-}
-
-.botao_add span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 8%;
-    background-color: #121212;
-    font-size: 1rem;
-    border-radius: 10px;
-    border: none;
-    color: #FFFFFF;
-    cursor: pointer;
-}
-
-.add_arquivo .desc {
-    width: 100%;
-    height: 50%;
-    padding: 5%;
-}
-
-.desc .txt_desc {
-    margin-left: 2%;
-    font-family: "Sofia Sans";
+    font-weight: 700;
     font-size: 1.2rem;
 }
 
-.desc textarea {
+.card_estatiscas {
+    margin-top: 40px;
+    width: 1100px;
+    height: 180px;
+    display: flex;
+    color: #121212;
+    gap: 20px;
+}
+
+.card {
+    width: 33.33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: rgb(225, 211, 193);
+    box-shadow: rgba(137, 137, 137, 0.279) 0px 0px 10px 10px;
+}
+
+.titulo_card {
     width: 100%;
-    height: 120px;
-    background-color: #121212;
-    height: 85%;
-    padding: 5%;
-    color: #FFFFFF;
-    border-radius: 10px;
-    resize: none;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.botao_enviar {
-    width: 10%;
+.card_imagem_p {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(97, 68, 56);
+    border-radius: 50%;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card_imagem_c {
+    width: 50px;
+    height: 50px;
+    background-color: #ee84b4;
+    border-radius: 50%;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card_imagem_cc {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(108, 107, 107);
+    border-radius: 50%;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card_imagem_p img,
+.card_imagem_c img,
+.card_imagem_cc img {
+    width: 45px;
     height: 100%;
+}
+
+.qtd_card {
+    width: 100%;
+    font-size: 1.8rem;
+    margin-top: 20px;
+}
+
+.status_qtd {
+    margin-top: 10px;
+    width: 100%;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    gap: 5px;
+    font-weight: 400;
+    font-size: 0.9rem;
+    font-family: sans-serif;
 }
 
-.botao_enviar button {
-    background-color: #23E6A9;
-    font-family: "Keania One";
-    padding: 5%;
-    font-size: 1.1rem;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+.status_qtd span {
+    color: #2ecc71;
+    font-weight: 400;
 }
 
-.tudo_certo {
-    margin-bottom: 30px;
-    color: red;
-    font-size: 1.2rem;
-    font-weight: bold;
+.status_qtd .vermelho {
+    color: #e74c3c;
+    font-weight: 400;
 }
 
-.botões_cc {
-    display: flex;
+.status_qtd img {
+    width: 20px;
+
 }
 
-.opcional-texto {
-    font-size: 0.85rem;
-    color: #666;
-    margin-top: 5px;
-    font-style: italic;
+.grafico {
+    width: 1100px;
+    height: auto;
+    background-color: aliceblue;
+    color: #121212;
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: rgba(137, 137, 137, 0.279) 0px 0px 10px 10px;
+}
+
+.grafico .titulo_grafico {
+    width: 100%;
+    font-size: 2rem;
 }

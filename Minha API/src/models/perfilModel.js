@@ -11,7 +11,7 @@ function atualizarDesc(novaDescricao, idUsuario) {
 function listar(id) {
     var instrucaoSql = `
     SELECT u.nome, p.descricao, p.imagem_post, p.idPost, p.quem_postou
-    FROM usuario as u JOIN  post as p ON p.quem_postou = u.idUsuario WHERE u.idUsuario = ${id}`
+    FROM usuario as u JOIN  post as p ON p.quem_postou = u.idUsuario WHERE u.idUsuario = ${id} ORDER BY  p.dtPostagem DESC`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
     return database.executar(instrucaoSql)
