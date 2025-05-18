@@ -26,15 +26,15 @@ CONSTRAINT fkUser_Post
 CREATE TABLE curtida (
 quem_curtiu INT,
 post_curtida INT,
-dono_post_curtida INT,
+quem_postou INT,
 dtCurtida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-PRIMARY KEY (quem_curtiu, post_curtida, dono_post_curtida),
+PRIMARY KEY (quem_curtiu, post_curtida, quem_postou),
 CONSTRAINT fkUser_curtida
 	FOREIGN KEY (quem_curtiu) REFERENCES usuario(idUsuario),
 CONSTRAINT fkPost_curtida
     FOREIGN KEY (post_curtida) REFERENCES post(idPost),
-CONSTRAINT fkDono_Post_Curtida
-	FOREIGN KEY (dono_post_curtida) REFERENCES post(quem_postou)
+CONSTRAINT fkquem_postou
+	FOREIGN KEY (quem_postou) REFERENCES post(quem_postou)
 );
 
 CREATE TABLE comentario (
@@ -64,5 +64,31 @@ select * from post ORDER BY  dtPostagem DESC;
 select * from comentario where dono_do_post = 1;
 select * from curtida where dono_post_curtida = 1;
 
+INSERT INTO usuario (nome, email, senha, descricao)
+VALUES ('testeUser', 'teste@teste.com', '123456', 'Usuário de teste');
+INSERT INTO post (quem_postou, descricao)
+VALUES (1, 'Primeiro post do teste');
+INSERT INTO usuario (nome, email, senha, descricao) VALUES
+('curtidor1', 'c1@teste.com', '123', 'Curtidor 1'),
+('curtidor2', 'c2@teste.com', '123', 'Curtidor 2'),
+('curtidor3', 'c3@teste.com', '123', 'Curtidor 3');
 
-    SELECT COUNT(*) as qtd FROM curtida WHERE dono_post_curtida = 1;
+INSERT INTO curtida (quem_curtiu, post_curtida, dono_post_curtida, dtCurtida) VALUES
+(2, 1, 1, '2025-05-01 12:00:00'),
+(3, 1, 1, '2025-05-01 14:00:00'),
+(4, 1, 1, '2025-05-02 16:00:00');
+
+INSERT INTO curtida (quem_curtiu, post_curtida, dono_post_curtida, dtCurtida) VALUES
+(1, 1, 1, '2025-05-13 18:00:00'); -- data da próxima semana
+
+    SELECT YEARWEEK(dtCurtida, 1) AS semana, 
+    COUNT(*) AS qtd_curtida FROM curtida WHERE dono_post_curtida = 1
+    GROUP BY semana ORDER BY semana DESC;
+    
+    SELECT YEARWEEK(dtComentario, 1) AS semana, 
+    COUNT(*) AS qtd_comentario FROM comentario WHERE dono_do_post = 5
+    GROUP BY semana ORDER BY semana DESC LIMIT 6;
+    
+        SELECT YEARWEEK(dtCurtida, 1) AS semana, 
+    COUNT(*) AS qtd_curtida FROM curtida WHERE dono_post_curtida = 5
+    GROUP BY semana ORDER BY semana DESC LIMIT 6;

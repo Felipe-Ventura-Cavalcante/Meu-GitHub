@@ -11,7 +11,7 @@ function listar() {
 
 function listarComentario(idPostComentario) {
     var instrucaoSql = `
-    select u.nome, u.imagem_perfil, c.idComentario, c.usuario_que_comentou, c.post_comentado, c.dono_do_post, c.texto_comentario, c.dtComentario FROM usuario AS u
+    select u.nome, u.imagem_perfil, c.idComentario, c.usuario_que_comentou, c.post_comentado, c.quem_postou, c.texto_comentario, c.dtComentario FROM usuario AS u
 	JOIN comentario AS c on c.usuario_que_comentou = u.idUsuario WHERE c.post_comentado = ${idPostComentario} ORDER BY dtComentario DESC;
     `
 
@@ -22,7 +22,7 @@ function listarComentario(idPostComentario) {
 function novo_comentario(idUsuario_novo, idPost, quem_postou, novo_comentarioVar) {
 
     var instrucaoSql = `
-    INSERT INTO comentario (usuario_que_comentou, post_comentado, dono_do_post, texto_comentario) VALUES
+    INSERT INTO comentario (usuario_que_comentou, post_comentado, quem_postou, texto_comentario) VALUES
         (${idUsuario_novo}, ${idPost}, ${quem_postou}, '${novo_comentarioVar}');`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)

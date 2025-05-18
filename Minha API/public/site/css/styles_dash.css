@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+
 
 * {
     margin: 0;
@@ -158,37 +160,45 @@ button:hover {
 }
 
 .titulo {
-    margin-top: 40px;
+    margin-top: 20px;
     padding: 30px;
     width: 1100px;
-    height: 100px;
-    color: #121212;
+    color: #222222;
     border-radius: 20px;
-    box-shadow: rgba(137, 137, 137, 0.279) 0px 0px 10px 10px;
+    box-shadow: rgba(137, 137, 137, 0.134) 0px 0px 7px 7px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
+    background-color: #181818;
+}
 
+.titulo img {
+    width: 100px;;
 }
 
 .titulo .nome_user {
-    background-color: #121212;
+    background-color: #181818;
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    font-weight: 700;
-    font-size: 3rem;
-    margin-bottom: 10px;
-    gap: 20px;
-    padding: 10px;
+    font-family: "Poppins";
+    font-size: 2.5rem;
+    padding: 5px;
     color: #ffffffff;
 }
 
+.subtitulo {
+    font-size: 1rem;
+    color: #cccccc;
+    margin-top: 2px;
+}
+
 .card_estatiscas {
-    margin-top: 30px;
+    margin-top: 20px;
     width: 1100px;
     height: 180px;
     display: flex;
@@ -204,8 +214,8 @@ button:hover {
     justify-content: flex-start;
     padding: 20px;
     border-radius: 15px;
-    background-color: rgb(225, 211, 193);
-    box-shadow: rgba(137, 137, 137, 0.279) 0px 0px 10px 10px;
+    background-color: #f0f4f8;
+    box-shadow: rgba(137, 137, 137, 0.279) 0px 0px 7px 7px;
 }
 
 .titulo_card {
@@ -231,7 +241,7 @@ button:hover {
 .card_imagem_c {
     width: 50px;
     height: 50px;
-    background-color: #f6abcd;
+    background-color: #ec7184;
     border-radius: 50%;
     padding: 7px;
     display: flex;
@@ -243,7 +253,7 @@ button:hover {
 .card_imagem_cc {
     width: 50px;
     height: 50px;
-    background-color: rgb(108, 107, 107);
+    background-color: #7f8c8d;
     border-radius: 50%;
     padding: 7px;
     display: flex;
@@ -263,6 +273,7 @@ button:hover {
     width: 100%;
     font-size: 1.8rem;
     margin-top: 20px;
+    margin-left: 6px;
 }
 
 .status_qtd {
@@ -271,20 +282,19 @@ button:hover {
     display: flex;
     align-items: center;
     gap: 5px;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 0.9rem;
     font-family: sans-serif;
-    text-shadow: 1px 1px 1px #00000099;
 }
 
 .status_qtd span {
-    color: #2ecc71;
-    font-weight: 400;
+    color: #229d55;
+    font-weight: 600;
 }
 
 .status_qtd .vermelho {
     color: #e74c3c;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .status_qtd img {
@@ -294,12 +304,12 @@ button:hover {
 .grafico {
     width: 1100px;
     height: 330px;
-    background-color: #ffffffff;
+    background-color: #fafafa;
     color: #121212;
     margin-top: 20px;
     padding: 20px;
     border-radius: 15px;
-    box-shadow: rgba(137, 137, 137, 0.279) 0px 0px 10px 10px;
+    box-shadow: rgba(137, 137, 137, 0.279) 0px 0px 7px 7px;
 }
 
 .grafico .titulo_grafico {
@@ -311,6 +321,5 @@ button:hover {
 
 .grafico_chart {
     width: 100%;
-    /* ou 100%, auto, etc. */
     height: 100%;
 }

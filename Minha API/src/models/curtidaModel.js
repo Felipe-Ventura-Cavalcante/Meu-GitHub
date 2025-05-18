@@ -2,7 +2,7 @@ var database = require("../database/config")
 
 function curtida(idUsuario, idPost, quem_postou) {
     var instrucaoSql = `
-    INSERT INTO curtida (quem_curtiu, post_curtida, dono_post_curtida) VALUES
+    INSERT INTO curtida (quem_curtiu, post_curtida, quem_postou) VALUES
     (${idUsuario}, ${idPost}, ${quem_postou});`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)

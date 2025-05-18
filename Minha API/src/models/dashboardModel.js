@@ -13,7 +13,7 @@ function post(idUsuario) {
 function curtida(idUsuario) {
     var instrucaoSql = `
     SELECT YEARWEEK(dtCurtida, 1) AS semana, 
-    COUNT(*) AS qtd_curtida FROM curtida WHERE dono_post_curtida = ${idUsuario}
+    COUNT(*) AS qtd_curtida FROM curtida WHERE quem_postou = ${idUsuario}
     GROUP BY semana ORDER BY semana DESC;`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
@@ -23,7 +23,7 @@ function curtida(idUsuario) {
 function comentario(idUsuario) {
     var instrucaoSql = `
     SELECT YEARWEEK(dtComentario, 1) AS semana, 
-    COUNT(*) AS qtd_comentario FROM comentario WHERE dono_do_post = ${idUsuario}
+    COUNT(*) AS qtd_comentario FROM comentario WHERE quem_postou = ${idUsuario}
     GROUP BY semana ORDER BY semana DESC;`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
@@ -40,7 +40,7 @@ select count(*) AS qtd_post from post where quem_postou = ${idUsuario};`
 
 function listarCurtida(idUsuario) {
     var instrucaoSql = `
-    SELECT COUNT(*) AS qtd_curtida  FROM curtida WHERE dono_post_curtida = ${idUsuario};`
+    SELECT COUNT(*) AS qtd_curtida  FROM curtida WHERE quem_postou = ${idUsuario};`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
     return database.executar(instrucaoSql)
@@ -48,7 +48,7 @@ function listarCurtida(idUsuario) {
 
 function listarComentario(idUsuario) {
     var instrucaoSql = `
-    SELECT COUNT(*) AS qtd_comentario  FROM comentario WHERE dono_do_post = ${idUsuario};`
+    SELECT COUNT(*) AS qtd_comentario  FROM comentario WHERE quem_postou = ${idUsuario};`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
     return database.executar(instrucaoSql)
@@ -59,7 +59,7 @@ function dashCurtida(idUsuario) {
         SELECT YEARWEEK(dtCurtida) AS semana, 
     COUNT(*) AS qtd_curtida 
     FROM curtida 
-    WHERE dono_post_curtida = ${idUsuario}
+    WHERE quem_postou = ${idUsuario}
     GROUP BY semana 
     ORDER BY semana ASC LIMIT 6;`
 
@@ -71,7 +71,7 @@ function dashComentario(idUsuario) {
     SELECT YEARWEEK(dtComentario) AS semana, 
     COUNT(*) AS qtd_comentario 
     FROM comentario 
-    WHERE dono_do_post = ${idUsuario}
+    WHERE quem_postou = ${idUsuario}
     GROUP BY semana 
     ORDER BY semana ASC LIMIT 6;`
 
