@@ -1,3 +1,13 @@
 <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M32 4C31.1 4 30.3 4.5 29.9 5.3L12.3 38.5C11.5 40 12.6 42 14.3 42H26V60C26 61.1 26.9 62 28 62H36C37.1 62 38 61.1 38 60V42H49.7C51.4 42 52.5 40 51.7 38.5L34.1 5.3C33.7 4.5 32.9 4 32 4Z" fill="#2ecc71"/>
+  <defs>
+    <filter id="sombraSeta" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="black" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+  <path 
+    d="M32 4C31.1 4 30.3 4.5 29.9 5.3L12.3 38.5C11.5 40 12.6 42 14.3 42H26V60C26 61.1 26.9 62 28 62H36C37.1 62 38 61.1 38 60V42H49.7C51.4 42 52.5 40 51.7 38.5L34.1 5.3C33.7 4.5 32.9 4 32 4Z" 
+    fill="#2ecc71"
+    filter="url(#sombraSeta)"
+  />
 </svg>
+

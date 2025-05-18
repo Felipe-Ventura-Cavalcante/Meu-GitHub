@@ -1,263 +1,315 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+    <!DOCTYPE html>
+    <html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil - SONAR</title>
-    <link rel="stylesheet" href="css/styles_dash.css">
-    <link rel="shortcut icon" href="assets/icon/favicon2.ico" type="image/x-icon">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard - SONAR</title>
+        <link rel="stylesheet" href="css/styles_dash.css">
+        <link rel="shortcut icon" href="assets/icon/favicon2.ico" type="image/x-icon">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
 
-<body>
-    <div class="bar_lateral">
-        <div class="bar_titulo">
-            SONAR
-        </div>
-        <div class="bar_nome_user">
-            <a href="perfil.html">
-                <div class="div_nome_user" id="div_nome_user">
-                    <img src="assets/imgs/perfil_branco.svg" alt="">
-                </div>
-            </a>
-        </div>
-        <div class="bar_p_e">
-            <a href="explorer.html">
-                <img src="assets/imgs/casa.svg" alt="">
-                EXPLORER
-            </a>
-        </div>
-        <div class="bar_new">
-            <a href="newpost.html">
-                <img src="assets/imgs/new.svg" alt="">
-                NEW POST
-            </a>
-        </div>
-        <div class="bar_e">
-            <a href="">
-                <img src="assets/imgs/estatistica_branco.svg" alt="">
-                ESTATÍSTICAS
-            </a>
-        </div>
-        <div class="bar_sair">
-            <button onclick="sair()">
-                <img src="assets/imgs/sair.svg" alt="">
-                SAIR
-            </button>
-        </div>
-    </div>
-
-    <div class="container" id="container">
-        <div class="titulo">
-            <div class="nome_user" id="card_titulo">
+    <body>
+        <div class="bar_lateral">
+            <div class="bar_titulo">
+                SONAR
+            </div>
+            <div class="bar_nome_user">
+                <a href="perfil.html">
+                    <div class="div_nome_user" id="div_nome_user">
+                        <img src="assets/imgs/perfil_branco.svg" alt="">
+                    </div>
+                </a>
+            </div>
+            <div class="bar_p_e">
+                <a href="explorer.html">
+                    <img src="assets/imgs/casa.svg" alt="">
+                    EXPLORER
+                </a>
+            </div>
+            <div class="bar_new">
+                <a href="newpost.html">
+                    <img src="assets/imgs/new.svg" alt="">
+                    NEW POST
+                </a>
+            </div>
+            <div class="bar_e">
+                <a href="">
+                    <img src="assets/imgs/estatistica_branco.svg" alt="">
+                    ESTATÍSTICAS
+                </a>
+            </div>
+            <div class="bar_sair">
+                <button onclick="sair()">
+                    <img src="assets/imgs/sair.svg" alt="">
+                    SAIR
+                </button>
             </div>
         </div>
-        <div class="card_estatiscas">
 
-            <div class="card">
-                <div class="titulo_card">
-                    Publicações
-                    <div class="card_imagem_p">
-                        <img src="assets/imgs/publicacoes.svg" alt="">
-                    </div>
-                </div>
-                <div class="qtd_card" id="qtd_post">
-                </div>
-                <div class="status_qtd" id="status_qtd_postagens">
-                    <img src="" alt="">
+        <div class="container" id="container">
+            <div class="titulo">
+                <div class="nome_user" id="card_titulo">
+                    <img src="assets/imgs/notas_mus_col.svg" alt="">
+                    Estatisticas<img src="assets/imgs/notas_mus_col.svg" alt="">
                 </div>
             </div>
+            <div class="card_estatiscas">
 
-            <div class="card">
-                <div class="titulo_card">
-                    Curtidas
-                    <div class="card_imagem_c">
-                        <img src="assets/imgs/coracao_icon.svg" alt="">
+                <div class="card">
+                    <div class="titulo_card">
+                        Publicações
+                        <div class="card_imagem_p">
+                            <img src="assets/imgs/publicacoes.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="qtd_card" id="qtd_post">
+                    </div>
+                    <div class="status_qtd" id="status_qtd_postagens">
+                        <img src="" alt="">
                     </div>
                 </div>
-                <div class="qtd_card" id="qtd_curtida">
+
+                <div class="card">
+                    <div class="titulo_card">
+                        Curtidas
+                        <div class="card_imagem_c">
+                            <img src="assets/imgs/coracao_icon.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="qtd_card" id="qtd_curtida">
+                    </div>
+                    <div class="status_qtd" id="status_qtd_curtidas">
+                        <img src="" alt="">
+                    </div>
                 </div>
-                <div class="status_qtd" id="status_qtd_curtidas">
-                    <img src="" alt="">
+
+                <div class="card">
+                    <div class="titulo_card">
+                        Comentarios
+                        <div class="card_imagem_cc">
+                            <img src="assets/imgs/comentario_icon.svg   " alt="">
+                        </div>
+                    </div>
+                    <div class="qtd_card" id="qtd_comentario">
+
+                    </div>
+                    <div class="status_qtd" id="status_qtd_comentarios">
+                        <img src="assets/imgs/seta_verde.svg" alt="">
+                    </div>
                 </div>
+
             </div>
 
-            <div class="card">
-                <div class="titulo_card">
-                    Comentarios
-                    <div class="card_imagem_cc">
-                        <img src="assets/imgs/comentario_icon.svg   " alt="">
-                    </div>
-                </div>
-                <div class="qtd_card" id="qtd_comentario">
 
+            <div class="grafico">
+                <div class="titulo_grafico">
+                    Interações Gerais em suas postagens
                 </div>
-                <div class="status_qtd" id="status_qtd_comentarios">
+                <canvas id="myChart" style="position: relative; height: 85%; width:100%; display: flex;"></canvas>
+            </div>
+        </div>
+    </body>
+
+    </html>
+
+    <script>
+        var idUsuario = sessionStorage.ID_USUARIO
+        var nomeUsuario = sessionStorage.NOME_USUARIO
+        var email = sessionStorage.EMAIL_USUARIO
+        var descricaoUsuario = sessionStorage.DESCRICAO_USUARIO
+        var imagem_perfil_user = sessionStorage.IMAGEM_PERFIL
+
+        window.onload = function () {
+            div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
+            <span>Olá, ${nomeUsuario}</span>`
+
+            fetch(`/dashboard/post/${idUsuario}`)
+                .then(res => res.json())
+                .then(posts => {
+
+                    if (posts.length >= 2) {
+                        var atual = posts[0].qtd_post
+                        var anterior = posts[1].qtd_post
+
+                        var mensagem = ''
+                        var imagem_status = ''
+
+                        if (atual > anterior) {
+                            imagem_status = 'assets/imgs/seta_verde.svg'
+                            mensagem = `<span>${atual} postagens nesta semana (${atual} é mais que ${anterior})<span>`
+                        } else if (atual < anterior) {
+                            imagem_status = 'assets/imgs/seta_vermelha.svg'
+                            mensagem = `<span class="vermelho">${atual} postagens nesta semana (menos que os ${anterior} da semana anterior)</span>`;
+                        } else {
+                            imagem_status = 'assets/imgs/igual.svg'
+                            mensagem = `${atual} postagens nesta semana (mesma quantidade da anterior)`
+                        }
+
+                        status_qtd_postagens.innerHTML = `
+                            <img src="${imagem_status}" alt="">
+                            ${mensagem}`
+
+                    } else if (posts.length === 1) {
+                        status_qtd_postagens.innerHTML = `
                     <img src="assets/imgs/seta_verde.svg" alt="">
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="grafico">
-            <div class="titulo_grafico">
-                Interações Gerais em suas postagens
-            </div>
-            <canvas></canvas>
-        </div>
-    </div>
-</body>
-
-</html>
-
-<script>
-    var idUsuario = sessionStorage.ID_USUARIO
-    var nomeUsuario = sessionStorage.NOME_USUARIO
-    var email = sessionStorage.EMAIL_USUARIO
-    var descricaoUsuario = sessionStorage.DESCRICAO_USUARIO
-    var imagem_perfil_user = sessionStorage.IMAGEM_PERFIL
-
-    window.onload = function () {
-        div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
-        <span>Olá, ${nomeUsuario}</span>`
-
-        card_titulo.innerHTML = `
-        <img src="assets/imgs/notas_mus_col.svg" alt="">
-        <div>Estatísticas</div>
-         ${nomeUsuario}!<img src="assets/imgs/notas_mus_col.svg" alt="">`
-
-        fetch(`/dashboard/post/${idUsuario}`)
-            .then(res => res.json())
-            .then(posts => {
-
-                if (posts.length >= 2) {
-                    var atual = posts[0].qtd_post
-                    var anterior = posts[1].qtd_post
-
-                    var mensagem = ''
-                    var imagem = ''
-
-                    if (atual > anterior) {
-                        imagem = 'assets/imgs/seta_verde.svg'
-                        mensagem = `<span>${atual} postagens nesta semana (${atual} é mais que ${anterior})<span>`
-                    } else if (atual < anterior) {
-                        imagem = 'assets/imgs/seta_vermelha.svg'
-                        mensagem = `<span class="vermelho">${atual} postagens nesta semana (menos que os ${anterior} da semana anterior)</span>`;
+                    <span>${posts[0].qtd_post} postagens nesta primeira semana</span>`
                     } else {
-                        imagem = 'assets/imgs/igual.svg'
-                        mensagem = `${atual} postagens nesta semana (mesma quantidade da anterior)`
+                        status_qtd_postagens.innerHTML = `
+                    <img src="assets/imgs/igual.svg" alt="">
+                    Nenhuma postagem registrada até agora.`
                     }
+                })
 
-                    status_qtd_postagens.innerHTML = `
-                        <img src="${imagem}" alt="">
-                         ${mensagem}`
+            fetch(`/dashboard/curtida/${idUsuario}`)
+                .then(res => res.json())
+                .then(curtidas => {
+                    if (curtidas.length >= 2) {
+                        var atual = curtidas[0].qtd_curtida
+                        var anterior = curtidas[1].qtd_curtida
 
-                } else if (posts.length === 1) {
-                    status_qtd_postagens.innerHTML = `
-                <img src="assets/imgs/seta_verde.svg" alt="">
-                <span>${posts[0].qtd_post} postagens nesta primeira semana</span>`
-                } else {
-                    status_qtd_postagens.innerHTML = `
-                <img src="assets/imgs/igual.svg" alt="">
-                Nenhuma postagem registrada até agora.`
-                }
-            })
+                        var mensagem = ''
+                        var imagem_status = ''
 
-        fetch(`/dashboard/curtida/${idUsuario}`)
-            .then(res => res.json())
-            .then(curtidas => {
-                if (curtidas.length >= 2) {
-                    var atual = curtidas[0].qtd_curtida
-                    var anterior = curtidas[1].qtd_curtida
+                        if (atual > anterior) {
+                            imagem_status = 'assets/imgs/seta_verde.svg'
+                            mensagem = `<span>${atual} curtidas nesta semana (${atual} é mais que ${anterior})</span>`
+                        } else if (atual < anterior) {
+                            imagem_status = 'assets/imgs/seta_vermelha.svg'
+                            mensagem = `<span class="vermelho">${atual} curtidas nesta semana (menos que os ${anterior} da semana anterior)</span>`;
+                        } else {
+                            imagem_status = 'assets/imgs/igual.svg'
+                            mensagem = `${atual} curtidas nesta semana (mesma quantidade da anterior)`
+                        }
 
-                    var mensagem = ''
-                    var imagem_status = ''
+                        status_qtd_curtidas.innerHTML = `
+                            <img src="${imagem_status}" alt="">
+                            ${mensagem}`
 
-                    if (atual > anterior) {
-                        imagem = 'assets/imgs/seta_verde.svg'
-                        mensagem = `<span>${atual} curtidas nesta semana (${atual} é mais que ${anterior})</span>`
-                    } else if (atual < anterior) {
-                        imagem = 'assets/imgs/seta_vermelha.svg'
-                        mensagem = `<span class="vermelho">${atual} curtidas nesta semana (menos que os ${anterior} da semana anterior)</span>`;
+                    } else if (curtidas.length === 1) {
+                        status_qtd_curtidas.innerHTML = `
+                    <img src="assets/imgs/seta_verde.svg" alt="">
+                    <span>${curtidas[0].qtd_curtida} curtidas nesta primeira semana</span>
+                `
                     } else {
-                        imagem = 'assets/imgs/igual.svg'
-                        mensagem = `${atual} curtidas nesta semana (mesma quantidade da anterior)`
+                        status_qtd_curtidas.innerHTML = `
+                    <img src="assets/imgs/igual.svg" alt="">
+                    Nenhuma curtida registrada até agora.`
                     }
+                })
 
-                    status_qtd_curtidas.innerHTML = `
-                        <img src="${imagem}" alt="">
-                         ${mensagem}`
+            fetch(`/dashboard/comentario/${idUsuario}`)
+                .then(res => res.json())
+                .then(comentarios => {
+                    if (comentarios.length >= 2) {
+                        var atual = comentarios[0].qtd_comentario
+                        var anterior = comentarios[1].qtd_comentario
 
-                } else if (curtidas.length === 1) {
-                    status_qtd_curtidas.innerHTML = `
-                <img src="assets/imgs/seta_verde.svg" alt="">
-                <span>${curtidas[0].qtd_curtida} curtidas nesta primeira semana</span>
-            `
-                } else {
-                    status_qtd_curtidas.innerHTML = `
-                <img src="assets/imgs/igual.svg" alt="">
-                Nenhuma curtida registrada até agora.`
-                }
-            })
+                        var mensagem = ''
+                        var imagem_status = ''
 
-        fetch(`/dashboard/comentario/${idUsuario}`)
-            .then(res => res.json())
-            .then(comentarios => {
-                if (comentarios.length >= 2) {
-                    var atual = comentarios[0].qtd_comentario
-                    var anterior = comentarios[1].qtd_comentario
+                        if (atual > anterior) {
+                            imagem_status = 'assets/imgs/seta_verde.svg'
+                            mensagem = `<span>${atual} comentarios nesta semana (${atual} é mais que ${anterior})</span>`
+                        } else if (atual < anterior) {
+                            imagem_status = 'assets/imgs/seta_vermelha.svg'
+                            mensagem = `<span class="vermelho">${atual} comentários nesta semana (menos que os ${anterior} da semana anterior)</span>`;
+                        } else {
+                            imagem_status = 'assets/imgs/igual.svg'
+                            mensagem = `${atual} comentarios nesta semana (mesma quantidade da anterior)`
+                        }
 
-                    var mensagem = ''
-                    var imagem = ''
+                        status_qtd_comentarios.innerHTML = `
+                            <img src="${imagem_status}" alt="">
+                            ${mensagem}`
 
-                    if (atual > anterior) {
-                        imagem = 'assets/imgs/seta_verde.svg'
-                        mensagem = `<span>${atual} comentarios nesta semana (${atual} é mais que ${anterior})</span>`
-                    } else if (atual < anterior) {
-                        imagem = 'assets/imgs/seta_vermelha.svg'
-                        mensagem = `<span class="vermelho">${atual} comentários nesta semana (menos que os ${anterior} da semana anterior)</span>`;
+                    } else if (comentarios.length === 1) {
+                        status_qtd_comentarios.innerHTML = `
+                    <img src="assets/imgs/seta_verde.svg" alt="">
+                    <span>${comentarios[0].qtd_comentario} comentarios nesta primeira semana</span>`
                     } else {
-                        imagem = 'assets/imgs/igual.svg'
-                        mensagem = `${atual} comentarios nesta semana (mesma quantidade da anterior)`
+                        status_qtd_comentarios.innerHTML = `
+                    <img src="assets/imgs/igual.svg" alt="">
+                    Nenhum comentário registrada até agora.`
                     }
+                })
 
-                    status_qtd_comentarios.innerHTML = `
-                        <img src="${imagem}" alt="">
-                         ${mensagem}`
+            fetch(`/dashboard/listarPost/${idUsuario}`)
+                .then(res => res.json())
+                .then(todos_post => {
+                    qtd_post.innerHTML = todos_post[0].qtd_post
+                })
 
-                } else if (comentarios.length === 1) {
-                    status_qtd_comentarios.innerHTML = `
-                <img src="assets/imgs/seta_verde.svg" alt="">
-                <span>${comentarios[0].qtd_comentario} comentarios nesta primeira semana</span>`
-                } else {
-                    status_qtd_comentarios.innerHTML = `
-                <img src="assets/imgs/igual.svg" alt="">
-                Nenhum comentário registrada até agora.`
-                }
-            })
+            fetch(`/dashboard/listarCurtida/${idUsuario}`)
+                .then(res => res.json())
+                .then(todas_curtida => {
+                    qtd_curtida.innerHTML = todas_curtida[0].qtd_curtida
+                })
 
-        fetch(`/dashboard/listarPost/${idUsuario}`)
-            .then(res => res.json())
-            .then(todos_post => {
-                qtd_post.innerHTML = todos_post[0].qtd_post
-            })
+            fetch(`/dashboard/listarComentario/${idUsuario}`)
+                .then(res => res.json())
+                .then(todos_comentario => {
+                    qtd_comentario.innerHTML = todos_comentario[0].qtd_comentario
+                })
 
-        fetch(`/dashboard/listarCurtida/${idUsuario}`)
-            .then(res => res.json())
-            .then(todas_curtida => {
-                qtd_curtida.innerHTML = todas_curtida[0].qtd_curtida
-            })
+            dados_dash()
+        }
 
-        fetch(`/dashboard/listarComentario/${idUsuario}`)
-            .then(res => res.json())
-            .then(todos_comentario => {
-                qtd_comentario.innerHTML = todos_comentario[0].qtd_comentario
-            })
-    }
+        function dados_dash() {
+            var semanas = [0, 0, 0, 0, 0, 0]
+            var data = ["", "", "", "", "", "", "",]
 
-    function sair() {
-        sessionStorage.clear()
-        window.location = "../index.html"
-    }
-</script>
+            fetch(`/dashboard/dashCurtida/${idUsuario}`)
+                .then(res => res.json())
+                .then(dados_curtida => {
+                    console.log(dados_curtida)
+                    for (var i = 0; i < dados_curtida.length; i++) {
+                        semanas[i] += dados_curtida[i].qtd_curtida
+                        data[i] = dados_curtida[i].semana
+                    }
+                    console.log(semanas)
+                    console.log(data)
+                })
+
+            fetch(`/dashboard/dashComentario/${idUsuario}`)
+                .then(res => res.json())
+                .then(dados_comentario => {
+                    console.log(dados_comentario)
+                    for (var i = 0; i < dados_comentario.length; i++) {
+                        semanas[i] += dados_comentario[i].qtd_comentario
+                        data[i] = dados_comentario[i].semana
+                    }
+                    console.log(semanas)
+                    console.log(data)
+
+                    const graficBar = document.getElementById('myChart');
+                    new Chart(graficBar, {
+                        type: 'bar',
+                        data: {
+                            labels: data,
+                            datasets: [{
+                                label: 'Interações na semana',
+                                data: semanas,
+                                borderWidth: 0,
+                                backgroundColor: '#fb86bb'
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    })
+                })
+
+        }
+
+        function sair() {
+            sessionStorage.clear()
+            window.location = "../index.html"
+        }
+    </script>

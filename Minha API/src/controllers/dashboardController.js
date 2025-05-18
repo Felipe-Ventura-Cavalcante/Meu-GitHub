@@ -134,11 +134,57 @@ function listarComentario(req, res) {
         )
 }
 
+function dashCurtida(req, res) {
+
+    var idUsuario = req.params.id
+
+    dashboardModel.dashCurtida(idUsuario)
+
+        .then(
+            function (resultado) {
+                res.json(resultado)
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao realizar a lista de comentario! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage)
+            }
+        )
+}
+function dashComentario(req, res) {
+
+    var idUsuario = req.params.id
+
+    dashboardModel.dashComentario(idUsuario)
+
+        .then(
+            function (resultado) {
+                res.json(resultado)
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao realizar a lista de comentario! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage)
+            }
+        )
+}
+
+
 module.exports = {
     post,
     curtida,
     comentario,
     listarPost,
     listarCurtida,
-    listarComentario
+    listarComentario,
+    dashCurtida,
+    dashComentario
 }
