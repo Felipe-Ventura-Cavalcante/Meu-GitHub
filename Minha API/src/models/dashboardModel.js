@@ -32,7 +32,7 @@ function comentario(idUsuario) {
 
 function listarPost(idUsuario) {
     var instrucaoSql = `
-select count(*) AS qtd from post where quem_postou = ${idUsuario};`
+select count(*) AS qtd_post from post where quem_postou = ${idUsuario};`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
     return database.executar(instrucaoSql)
@@ -40,7 +40,7 @@ select count(*) AS qtd from post where quem_postou = ${idUsuario};`
 
 function listarCurtida(idUsuario) {
     var instrucaoSql = `
-    SELECT COUNT(*) AS qtd FROM curtida WHERE dono_post_curtida = ${idUsuario};`
+    SELECT COUNT(*) AS qtd_curtida  FROM curtida WHERE dono_post_curtida = ${idUsuario};`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
     return database.executar(instrucaoSql)
@@ -48,7 +48,7 @@ function listarCurtida(idUsuario) {
 
 function listarComentario(idUsuario) {
     var instrucaoSql = `
-    SELECT COUNT(*) AS qtd FROM comentario WHERE dono_do_post = ${idUsuario};`
+    SELECT COUNT(*) AS qtd_comentario  FROM comentario WHERE dono_do_post = ${idUsuario};`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
     return database.executar(instrucaoSql)

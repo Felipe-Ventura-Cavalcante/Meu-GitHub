@@ -35,7 +35,7 @@
         </div>
         <div class="bar_e">
             <a href="">
-                <img src="assets/imgs/estatistica.svg" alt="">
+                <img src="assets/imgs/estatistica_branco.svg" alt="">
                 ESTATÍSTICAS
             </a>
         </div>
@@ -49,10 +49,7 @@
 
     <div class="container" id="container">
         <div class="titulo">
-            <div class="nome_user" id="card_titulo">    
-            </div>
-            <div class="sub_titulo">
-                Essas são as suas estatisticas!
+            <div class="nome_user" id="card_titulo">
             </div>
         </div>
         <div class="card_estatiscas">
@@ -125,7 +122,10 @@
         div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
         <span>Olá, ${nomeUsuario}</span>`
 
-        card_titulo.innerHTML = `<div>Bem-vindo,</div> ${nomeUsuario}!`
+        card_titulo.innerHTML = `
+        <img src="assets/imgs/notas_mus_col.svg" alt="">
+        <div>Estatísticas</div>
+         ${nomeUsuario}!<img src="assets/imgs/notas_mus_col.svg" alt="">`
 
         fetch(`/dashboard/post/${idUsuario}`)
             .then(res => res.json())
@@ -143,7 +143,7 @@
                         mensagem = `<span>${atual} postagens nesta semana (${atual} é mais que ${anterior})<span>`
                     } else if (atual < anterior) {
                         imagem = 'assets/imgs/seta_vermelha.svg'
-                        mensagem = `<span class="vermelho">${atual} postagens nesta semana (${anterior} era mais)<span>`
+                        mensagem = `<span class="vermelho">${atual} postagens nesta semana (menos que os ${anterior} da semana anterior)</span>`;
                     } else {
                         imagem = 'assets/imgs/igual.svg'
                         mensagem = `${atual} postagens nesta semana (mesma quantidade da anterior)`
@@ -168,18 +168,18 @@
             .then(res => res.json())
             .then(curtidas => {
                 if (curtidas.length >= 2) {
-                    var atual = curtidas[0].qtd_post
-                    var anterior = curtidas[1].qtd_post
+                    var atual = curtidas[0].qtd_curtida
+                    var anterior = curtidas[1].qtd_curtida
 
                     var mensagem = ''
-                    var imagem = ''
+                    var imagem_status = ''
 
                     if (atual > anterior) {
                         imagem = 'assets/imgs/seta_verde.svg'
                         mensagem = `<span>${atual} curtidas nesta semana (${atual} é mais que ${anterior})</span>`
                     } else if (atual < anterior) {
                         imagem = 'assets/imgs/seta_vermelha.svg'
-                        mensagem = `<span class="vermelho">${atual} curtidas nesta semana (${anterior} era mais)</span>`
+                        mensagem = `<span class="vermelho">${atual} curtidas nesta semana (menos que os ${anterior} da semana anterior)</span>`;
                     } else {
                         imagem = 'assets/imgs/igual.svg'
                         mensagem = `${atual} curtidas nesta semana (mesma quantidade da anterior)`
@@ -205,8 +205,8 @@
             .then(res => res.json())
             .then(comentarios => {
                 if (comentarios.length >= 2) {
-                    var atual = comentarios[0].qtd_post
-                    var anterior = comentarios[1].qtd_post
+                    var atual = comentarios[0].qtd_comentario
+                    var anterior = comentarios[1].qtd_comentario
 
                     var mensagem = ''
                     var imagem = ''
@@ -216,7 +216,7 @@
                         mensagem = `<span>${atual} comentarios nesta semana (${atual} é mais que ${anterior})</span>`
                     } else if (atual < anterior) {
                         imagem = 'assets/imgs/seta_vermelha.svg'
-                        mensagem = `<span class="vermelho">${atual} comentarios nesta semana (${anterior} era mais)</span>`
+                        mensagem = `<span class="vermelho">${atual} comentários nesta semana (menos que os ${anterior} da semana anterior)</span>`;
                     } else {
                         imagem = 'assets/imgs/igual.svg'
                         mensagem = `${atual} comentarios nesta semana (mesma quantidade da anterior)`
@@ -240,19 +240,19 @@
         fetch(`/dashboard/listarPost/${idUsuario}`)
             .then(res => res.json())
             .then(todos_post => {
-                qtd_post.innerHTML = todos_post[0].qtd
+                qtd_post.innerHTML = todos_post[0].qtd_post
             })
 
         fetch(`/dashboard/listarCurtida/${idUsuario}`)
             .then(res => res.json())
             .then(todas_curtida => {
-                qtd_curtida.innerHTML = todas_curtida[0].qtd
+                qtd_curtida.innerHTML = todas_curtida[0].qtd_curtida
             })
 
         fetch(`/dashboard/listarComentario/${idUsuario}`)
             .then(res => res.json())
             .then(todos_comentario => {
-                qtd_comentario.innerHTML = todos_comentario[0].qtd
+                qtd_comentario.innerHTML = todos_comentario[0].qtd_comentario
             })
     }
 

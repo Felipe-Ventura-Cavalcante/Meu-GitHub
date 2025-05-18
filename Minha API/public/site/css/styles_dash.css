@@ -113,6 +113,8 @@ button:hover {
 }
 
 .bar_e a {
+    width: 180px;
+    border-bottom: #ffffffff solid 2px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -158,34 +160,30 @@ button:hover {
 .titulo {
     margin-top: 30px;
     padding: 30px;
-    width: 600px;
+    width: 1100px;
     height: 150px;
     color: #121212;
-    background-color: aliceblue;
     border-radius: 20px;
     box-shadow: rgba(137, 137, 137, 0.279) 0px 0px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .titulo .nome_user {
+    background-color: #121212;
     width: 100%;
-    height: 50px;
+    height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     font-weight: 700;
     font-size: 2rem;
     margin-bottom: 10px;
-}
-
-.titulo .sub_titulo {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1.2rem;
+    gap: 20px;
+    padding: 10px;
+    color: #ffffffff;
 }
 
 .card_estatiscas {
@@ -232,7 +230,7 @@ button:hover {
 .card_imagem_c {
     width: 50px;
     height: 50px;
-    background-color: #ee84b4;
+    background-color: #f6abcd;
     border-radius: 50%;
     padding: 7px;
     display: flex;
