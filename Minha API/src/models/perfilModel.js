@@ -31,9 +31,18 @@ function atualizarInfo(id) {
     return database.executar(instrucaoSql)
 }
 
+function visitar(id) {
+    var instrucaoSql = `
+select * from usuario WHERE idUsuario = ${id};`
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql)
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     atualizarDesc,
     listar,
     enviarFotoPerfil,
-    atualizarInfo
+    atualizarInfo,
+    visitar
 }

@@ -63,6 +63,8 @@
     var descricaoUsuario = sessionStorage.DESCRICAO_USUARIO
     var imagem_perfil_user = sessionStorage.IMAGEM_PERFIL
 
+    console.log(idUsuario)
+
     div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
         <span>Olá, ${nomeUsuario}</span>`
 
@@ -96,8 +98,10 @@
                     <div class="post">
 
                         <div class="post_user" id="${quem_postou}">
-                           <img src="../assets/imagens perfil/${imagem_post_perfil}" alt="imagem de Perfil do Usuario">
-                            ${nome}
+                            <button onclick="buscar_perfil(${quem_postou})">
+                                <img src="../assets/imagens perfil/${imagem_post_perfil}" alt="imagem de Perfil do Usuario">
+                                ${nome}
+                            </button>
                         </div>
 
                         <div class ="botões_cc">
@@ -146,9 +150,11 @@
                     <div class="exibicao" id="exibicao">
                     <div class="post">
 
-                        <div class="post_user" id="${quem_postou}">
-                           <img src="../assets/imagens perfil/${imagem_post_perfil}" alt="imagem de Perfil do Usuario">
-                            ${nome}
+                         <div class="post_user" id="${quem_postou}">
+                            <button onclick="buscar_perfil(${quem_postou})">
+                                <img src="../assets/imagens perfil/${imagem_post_perfil}" alt="imagem de Perfil do Usuario">
+                                ${nome}
+                            </button>
                         </div>
 
                         <div class="img_post">
@@ -204,8 +210,10 @@
                     <div class="post">
 
                         <div class="post_user" id="${quem_postou}">
-                           <img src="../assets/imagens perfil/${imagem_post_perfil}" alt="imagem de Perfil do Usuario">
-                            ${nome}
+                            <button onclick="buscar_perfil(${quem_postou})">
+                                <img src="../assets/imagens perfil/${imagem_post_perfil}" alt="imagem de Perfil do Usuario">
+                                ${nome}
+                            </button>
                         </div>
 
                         <div class="img_post">
@@ -253,10 +261,9 @@
                             </div>
                     </div>`
                     }
-
                     qtd_curtida(idPost)
-                    listarCurtida()
                 }
+                listarCurtida()
             })
 
 
@@ -268,6 +275,7 @@
         fetch(`/curtida/listaCurtida/${idUsuario}`)
             .then(res => res.json())
             .then(lista_de_Curtida => {
+                console.log("Lista de curtidas recebida:", lista_de_Curtida);
 
                 for (var cont_lista_curtida = 0; cont_lista_curtida < lista_de_Curtida.length; cont_lista_curtida++) {
 
@@ -278,14 +286,13 @@
                     console.log(post_da_curtida)
 
                     var div_cond_curtida = document.getElementById(`condCurtida${post_da_curtida}`)
-                    div_cond_curtida.innerHTML = `<img src="assets/imgs/coração vermelho.png" alt="">`
+                    div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao vermelho.svg" alt="">`
                 }
             })
             .catch((erro) => {
 
                 console.log(erro)
-            }
-            )
+            })
     }
 
     // Função de adicionar curtida
@@ -295,7 +302,7 @@
         var div_cond_curtida = document.getElementById(`condCurtida${idPost}`)
 
         // Me responde um valor booleano = true ou false para eu verificar se está ou não curtido
-        var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes(`<img src="assets/imgs/coração vermelho.png" alt="">`)
+        var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes(`<img src="assets/imgs/coracao vermelho.svg" alt="">`)
 
         // Se for true
         if (curtida_coracao_vermelho) {
@@ -367,19 +374,19 @@
         var div = document.getElementById(`div_texto_comentario${idPost}`)
 
         // Seleciona todos os elementos HTML que tem essa classe
-        var todasDivsComentario = document.getElementsByClassName("texto_comentario");
+        var todasDivsComentario = document.getElementsByClassName("texto_comentario")
         for (var i = 0; i < todasDivsComentario.length; i++) {
 
             // Fecho todas as div de comentário que estão abertas
             todasDivsComentario[i].innerHTML = "";
 
             // estou pegando o numero do contador e colocando no id da minha div
-            var idAtual = todasDivsComentario[i].id.replace("div_texto_comentario", "");
+            var idAtual = todasDivsComentario[i].id.replace("div_texto_comentario", "")
             // estou pegando a div específica que tem esse id
-            var iconeComentario = document.getElementById(`comentario_aberto${idAtual}`);
+            var iconeComentario = document.getElementById(`comentario_aberto${idAtual}`)
 
             if (iconeComentario) {
-                iconeComentario.innerHTML = `<img src="assets/imgs/chat.svg" alt="">`;
+                iconeComentario.innerHTML = `<img src="assets/imgs/chat.svg" alt="">`
             }
         }
 
@@ -486,6 +493,14 @@
             console.log("Erro ao adicionar comentario")
             console.log(erro)
         })
+    }
+
+
+
+
+    function buscar_perfil(quem_postou) {
+        sessionStorage.PERFIL_CONVIDADO = quem_postou
+        window.location = "visitar_perfil.html"
     }
 
     // função para finalizar sessão e voltar para a home

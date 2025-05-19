@@ -130,8 +130,7 @@ button:hover {
 
 
 .container {
-  width: 100%;
-  height: 100%;
+  width: 95%;
   padding-left: 280px;
   display: flex;
   flex-direction: column;
@@ -190,9 +189,17 @@ button:hover {
   margin-left: 15px;
 }
 
+.post_user button {
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffffff;
+}
+
 .post_user img {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   object-fit: cover;
   border-radius: 50%;
 }
@@ -261,7 +268,7 @@ button:hover {
   margin-top: 10px;
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
@@ -277,7 +284,7 @@ button:hover {
 }
 
 .titulo_comentario1 img {
-  width: 35px;
+  width: 40px;
 }
 
 .titulo_comentario {
@@ -307,7 +314,7 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .adicionar_comentario button img {

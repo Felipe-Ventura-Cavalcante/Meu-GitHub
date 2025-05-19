@@ -82,9 +82,29 @@ function atualizarInfo(req, res) {
         )
 }
 
+function visitar(req, res) {
+    var id = req.params.idVisitante
+
+    perfilModel.visitar(id)
+
+        .then(resultado => {
+            res.status(200).json(resultado)
+        }).catch(
+            function (erro) {
+                console.log(erro)
+                console.log(
+                    "\nHouve um erro ao realizar a busca de dados de um perfil visitante! Erro: ",
+                    erro.sqlMessage
+                )
+                res.status(500).json(erro.sqlMessage)
+            }
+        )
+}
+
 module.exports = {
     atualizarDesc,
     listar,
     enviarFotoPerfil,
-    atualizarInfo
+    atualizarInfo,
+    visitar
 }

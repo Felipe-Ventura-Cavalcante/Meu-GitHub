@@ -16,4 +16,9 @@ router.get("/:id", function (req, res) {
 router.get("/atualizarInfo/:idUsuario", function (req, res) {
     perfilController.atualizarInfo(req, res)
 })
+
+router.get("/visitar/:idVisitante", function (req, res) {
+    perfilController.visitar(req, res)
+})
+
 module.exports = router
