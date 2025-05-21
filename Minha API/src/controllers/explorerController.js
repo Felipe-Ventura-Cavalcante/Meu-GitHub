@@ -25,21 +25,26 @@ function listarComentario(req, res) {
 
     var idPostComentario = req.params.idPost
 
-    explorerModel.listarComentario(idPostComentario)
+    if (idPostComentario == undefined) {
+        res.status(400).sendo("Seu idPostComentario está indefinido")
+    } else {
 
-        .then(resultado => {
-            res.status(200).json(resultado)
-        }
-        ).catch(
-            function (erro) {
-                console.log(erro)
-                console.log(
-                    "\nHouve um erro ao realizar a busca de dados dos comentarios dos Posts! Erro: ",
-                    erro.sqlMessage
-                )
-                res.status(500).json(erro.sqlMessage)
+        explorerModel.listarComentario(idPostComentario)
+
+            .then(resultado => {
+                res.status(200).json(resultado)
             }
-        )
+            ).catch(
+                function (erro) {
+                    console.log(erro)
+                    console.log(
+                        "\nHouve um erro ao realizar a busca de dados dos comentarios dos Posts! Erro: ",
+                        erro.sqlMessage
+                    )
+                    res.status(500).json(erro.sqlMessage)
+                }
+            )
+    }
 }
 
 
@@ -51,24 +56,34 @@ function novo_comentario(req, res) {
     var quem_postou = Number(req.body.quem_postouServer)
     var novo_comentarioVar = req.body.novo_comentarioServer
 
+    if (idUsuario_novo == undefined) {
+        res.status(400).sendo("Seu idUsuario_novo está indefinido")
+    } else if (idPost == undefined) {
+        res.status(400).sendo("Seu idPost está indefinido")
+    } else if (quem_postou == undefined) {
+        res.status(400).sendo("Seu quem_postou está indefinido")
+    } else if (novo_comentarioVar == undefined) {
+        res.status(400).sendo("Seu novo_comentarioVar está indefinido")
+    } else {
 
-    // a ordem da criação das variaveis importa
-    explorerModel.novo_comentario(idUsuario_novo, idPost, quem_postou, novo_comentarioVar)
+        // a ordem da criação das variaveis importa
+        explorerModel.novo_comentario(idUsuario_novo, idPost, quem_postou, novo_comentarioVar)
 
-        .then(
-            function (resultado) {
-                res.json(resultado)
-            }
-        ).catch(
-            function (erro) {
-                console.log(erro);
-                console.log(
-                    "\nHouve um erro ao realizar um novo comentário! Erro: ",
-                    erro.sqlMessage
-                );
-                res.status(500).json(erro.sqlMessage)
-            }
-        )
+            .then(
+                function (resultado) {
+                    res.json(resultado)
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar um novo comentário! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage)
+                }
+            )
+    }
 }
 
 module.exports = {

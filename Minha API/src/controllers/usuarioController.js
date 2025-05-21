@@ -8,6 +8,14 @@ function cadastrar(req, res) {
     var email = req.body.emailServer
     var senha = req.body.senhaServer
 
+    if (nome == undefined) {
+        res.status(400).sendo("Seu nom está indefinido")
+    } else if (email == undefined) {
+        res.status(400).send("Seu email está indefinido")
+    } else if (senha == undefined) {
+        res.status(400).send("Sua senha está indefinda")
+    }
+
     usuarioModel.cadastrar(nome, email, senha)
         .then(
             function (resultado) {

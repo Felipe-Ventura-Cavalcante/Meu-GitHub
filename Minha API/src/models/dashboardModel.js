@@ -61,7 +61,7 @@ function dashCurtida(idUsuario) {
     FROM curtida 
     WHERE quem_postou = ${idUsuario}
     GROUP BY semana 
-    ORDER BY semana ASC LIMIT 6;`
+    ORDER BY semana DESC LIMIT 6;`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
     return database.executar(instrucaoSql)
@@ -69,11 +69,11 @@ function dashCurtida(idUsuario) {
 function dashComentario(idUsuario) {
     var instrucaoSql = `
     SELECT YEARWEEK(dtComentario) AS semana, 
-    COUNT(*) AS qtd_comentario 
-    FROM comentario 
+    COUNT(*) AS qtd_comentario
+    FROM comentario
     WHERE quem_postou = ${idUsuario}
-    GROUP BY semana 
-    ORDER BY semana ASC LIMIT 6;`
+    GROUP BY semana
+    ORDER BY semana DESC LIMIT 6;`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql)
     return database.executar(instrucaoSql)

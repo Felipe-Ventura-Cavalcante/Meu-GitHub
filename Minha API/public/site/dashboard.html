@@ -263,13 +263,13 @@
 
     function dados_dash() {
         var semanas = [0, 0, 0, 0, 0, 0]
-        var data = ["", "", "", "", "", "", "",]
+        var data = ["", "", "", "", "", ""]
 
         fetch(`/dashboard/dashCurtida/${idUsuario}`)
             .then(res => res.json())
             .then(dados_curtida => {
                 console.log(dados_curtida)
-                for (var i = 0; i < dados_curtida.length; i++) {
+                for (var i = dados_curtida.length - 1; i >= 0; i--) {
                     semanas[i] += dados_curtida[i].qtd_curtida
                     data[i] = dados_curtida[i].semana
                 }
@@ -281,7 +281,7 @@
             .then(res => res.json())
             .then(dados_comentario => {
                 console.log(dados_comentario)
-                for (var i = 0; i < dados_comentario.length; i++) {
+                for (var i = dados_comentario.length - 1; i >= 0; i--) {
                     semanas[i] += dados_comentario[i].qtd_comentario
                     data[i] = dados_comentario[i].semana
                 }

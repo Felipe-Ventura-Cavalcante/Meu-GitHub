@@ -58,5 +58,5 @@ CONSTRAINT fkquem_postou_c
 
 select * from usuario;
 select * from post;
-select * from comentario;
 select * from curtida;
+select * from comentario;
