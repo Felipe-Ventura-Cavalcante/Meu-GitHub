@@ -25,12 +25,18 @@ var curtidaRouter = require("./src/routes/curtida")
 var newPostRouter = require("./src/routes/newPost");
 var fotoPerfilRouter = require("./src/routes/fotoPerfil");
 var dashboardRouter = require("./src/routes/dashboard");
+var bobIARouter = require("./src/routes/perguntar")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors())
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept');
+    next();
+});
 
 app.use("/usuario", usuarioRouter)
 app.use("/explorer", explorerRouter)
@@ -39,6 +45,7 @@ app.use("/curtida", curtidaRouter)
 app.use("/newPost", newPostRouter)
 app.use("/fotoPerfil", fotoPerfilRouter)
 app.use("/dashboard", dashboardRouter)
+app.use("/perguntar", bobIARouter)
 
 app.listen(PORTA_APP, function () {
     console.log(`

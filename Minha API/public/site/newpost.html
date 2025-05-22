@@ -66,8 +66,6 @@
 
                 </div>
 
-                <!-- o label ele é uma etiqueta para a input que está invisivel
-                 e o span é o texto dessas etiqueta -->
                 <label class="botao_add" for="foto">
                     <span>Selecione o seu arquivo</span>
                     <input type="file" accept="image/*, video/*" name="foto" id="foto" oninput="exibir()">
@@ -88,9 +86,28 @@
         </div>
 
         <div class="botao_enviar">
+            <div class="bobIA">
+                <button onclick="bob()">
+                    <img src="../assets/icon/bobIA_logo.png" alt="">
+                </button>
+            </div>
             <button onclick="enviar()">
                 ENVIAR
             </button>
+        </div>
+
+        <div class="IA" id="div_IA" style="display: none;">
+            <h1>BOB IA</h1>
+            <h3>Descreva o contexto do post</h3>
+            <textarea id="pergunta" type="text" placeholder="Contexto do post..."></textarea>
+            <button onclick="gerarResposta()">Gerar comentário</button>
+            <h3>Comentário da IA:</h3>
+            <div id="resposta"></div>
+            <div class="botao_copiar">
+                <button onclick="copiarResposta()">
+                    <img src="assets/imgs/botao_copiar.svg" alt="">
+                </button>
+            </div>
         </div>
 
     </div>
@@ -98,13 +115,13 @@
 
 </html>
 <script>
-        var emailUser = sessionStorage.EMAIL_USUARIO
-        var nomeUser = sessionStorage.NOME_USUARIO
-        var idUsuario = sessionStorage.ID_USUARIO
-        var descricaoUser = sessionStorage.DESCRICAO_USUARIO
-        var imagem_perfilUser = sessionStorage.IMAGEM_PERFIL
+    var emailUser = sessionStorage.EMAIL_USUARIO
+    var nomeUser = sessionStorage.NOME_USUARIO
+    var idUsuario = sessionStorage.ID_USUARIO
+    var descricaoUser = sessionStorage.DESCRICAO_USUARIO
+    var imagem_perfilUser = sessionStorage.IMAGEM_PERFIL
 
-        div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
+    div_nome_user.innerHTML = `<img src="assets/imgs/perfil.svg" alt="">
         Olá, ${nomeUser}`
 
     function exibir() {
@@ -198,6 +215,57 @@
                 console.log(erro)
             })
         }
+    }
+
+
+    var exibirIA = 0
+    function bob() {
+        if (exibirIA == 0) {
+
+            div_IA.style.display = "flex"
+            exibirIA++
+        } else {
+            div_IA.style.display = "none"
+            exibirIA--
+        }
+    }
+
+    async function gerarResposta() {
+        const pergunta = document.getElementById('pergunta');
+        const respostaDiv = document.getElementById('resposta');
+        respostaDiv.innerText = '';
+
+        const response = await fetch('/perguntar/pergunta', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ pergunta: pergunta.value })
+        });
+
+        const data = await response.json()
+        const texto = data.resultado;
+
+        resposta.style.display = 'block'
+        var html = ''
+        pergunta.value = ``
+        
+        for (var i = 0; i < texto.length; i++) {
+
+            html += texto[i]
+
+            respostaDiv.innerHTML = html;
+            await new Promise(resolve => setTimeout(resolve, 30))
+        }
+
+    }
+
+    function copiarResposta() {
+        var respostaDiv = document.getElementById('resposta');
+
+        var texto = respostaDiv.innerText;
+
+        navigator.clipboard.writeText(texto)
     }
 
     // função para finalizar sessão e voltar para a home

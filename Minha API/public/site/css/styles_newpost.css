@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Keania+One&family=Lalezar&family=League+Gothic&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+
 
 * {
     margin: 0;
@@ -149,24 +151,23 @@ button:hover {
 .container {
     height: 100%;
     width: 100%;
-    padding-left: 220px;
+    margin-left: 220px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: flex-end;
     gap: 1%;
     padding-top: 2%;
+    position: relative;
 }
 
 .card {
-    height: 80%;
-    width: 30%;
+    height: 600px;
+    width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    position: relative;
 }
 
 .titulo {
@@ -245,6 +246,15 @@ button:hover {
     cursor: pointer;
 }
 
+.botao_add span {
+    transition: .3s;
+}
+
+.botao_add span:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
 .add_arquivo .desc {
     width: 100%;
     height: 50%;
@@ -269,10 +279,10 @@ button:hover {
 }
 
 .botao_enviar {
-    width: 10%;
     height: 100%;
+    width: 100px;
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
 }
 
 .botao_enviar button {
@@ -301,4 +311,84 @@ button:hover {
     color: #666;
     margin-top: 5px;
     font-style: italic;
+}
+
+.bobIA {
+    width: 100%;
+}
+
+.bobIA button {
+    width: 100%;
+    background: none;
+    border: none;
+}
+
+.bobIA button img {
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.IA {
+    position: absolute;
+    z-index: 999;
+    width: 400px;
+    right: 30px;
+    top: 50px;
+    background-color: #9b59b6;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 10px;
+    gap: 10px;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.IA h1 {
+    font-family: "Barlow";
+}
+
+.IA textarea {
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+    resize: none;
+}
+
+.IA button {
+    background-color: #121212;
+    color: #fff;
+    width: 80%;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#resposta {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 5px;
+    word-wrap: break-word;
+    /* quebra palavras longas */
+    white-space: pre-wrap;
+    /* respeita \n e permite quebra de linha automática */
+    overflow-wrap: break-word;
+    /* quebra palavras que excedem a largura */
+    max-width: 100%;
+}
+
+.botao_copiar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.botao_copiar button {
+    width: auto;
+    background: none;
+    border: none;
+}
+
+.botao_copiar button img {
+    width: 30px;
 }
