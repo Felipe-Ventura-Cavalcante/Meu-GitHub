@@ -53,7 +53,7 @@
         </div>
 
         <div class="posts_do_user">
-            <div class="titulo_postagens">
+            <div class="titulo_postagens" id="titulo_postagens">
                 Postagens do usuario
             </div>
             <div class="exibicao_post" id="exibicao_post">
@@ -69,18 +69,16 @@
     var emailUser = sessionStorage.EMAIL_USUARIO
     var nomeUser = sessionStorage.NOME_USUARIO
     var idUsuario = sessionStorage.ID_USUARIO
-    var descricaoUser = sessionStorage.DESCRICAO_USUARIO
     var imagem_perfilUser = sessionStorage.IMAGEM_PERFIL
     console.log(sessionStorage.ID_USUARIO)
 
     var id_usuario_visitado = sessionStorage.PERFIL_CONVIDADO
+    var imagem_perfilVisita = ""
 
     window.onload = function () {
 
         div_nome_user.innerHTML = `<img src="assets/imgs/perfil_branco.svg" alt="">
         Olá, ${nomeUser}`
-
-        var imagem_perfil_u = ""
 
         fetch(`/perfil/visitar/${id_usuario_visitado}`)
             .then(res => res.json())
@@ -88,27 +86,28 @@
 
                 var dados_visita = dados_perfil_visita[0]
 
-                console.log(` chegueiiiiiiiiiiiiiiiiiiiiiiii${dados_visita}`)
-                var nome_u_visitado = dados_visita.nome
-                imagem_perfil_u = dados_visita.imagem_perfil
-                var descricao_u = dados_visita.descricao
+                var nomeVisita = dados_visita.nome
+                var descricaoVisita = dados_visita.descricao
+                imagem_perfilVisita = dados_visita.imagem_perfil
+                console.log(imagem_perfilVisita)
 
                 superior.innerHTML = `
         <div class="imagem_perfil" id="imagem_perfil">              
-    <span><img src="../assets/imagens perfil/${imagem_perfil_u}" alt=""></span>
+    <span><img src="../assets/imagens perfil/${imagem_perfilVisita}" alt=""></span>
             </div>
             <div class="info_perfil">
                 <div class="nome_do_usuario">
-                    ${nome_u_visitado}
+                    ${nomeVisita}
                 </div>
 
                 <div class="descricao_do_perfil">
                     <div class="div_editar" id="div_editar">
                     </div>
-                    ${descricao_u}
+                    ${descricaoVisita}
                 </div>
-            </div>
-            `
+            </div>`
+
+                titulo_postagens.innerHTML = `Postagens de ${nomeVisita}`
             })
 
 
@@ -122,39 +121,46 @@
                     var post = dados_post[i]
 
                     // para usar cada ojetivo individualmente eu utilizo o nome da var "post". "nome do campo"
-                    var nome = post.nome
-                    var quem_postou = post.quem_postou
-                    var idPost = post.idPost
-                    var descricao = post.descricao
-                    var imagem_post = post.imagem_post
+                    var nomeVisita = post.nome
+                    var quem_postouVisita = post.quem_postou
+                    var idPostVisita = post.idPost
+                    var descricaoVisita = post.descricao
+                    var imagem_postVisita = post.imagem_post
+                    console.log(imagem_postVisita)
 
-                    if (imagem_post === 'null') {
+                    if (imagem_postVisita === undefined) {
                         container.innerHTML += `
                     <div class="exibicao" id="exibicao">
                     <div class="post">
 
-                        <div class="post_user" id="${quem_postou}">
-                           <img src="../assets/imagens perfil/${imagem_perfil_u}" alt="imagem de Perfil do Usuario">
-                            ${nome}
+                        <div class="post_user" id="${quem_postouVisita}">
+                           <img src="../assets/imagens perfil/${imagem_perfilVisita}" alt="">
+                            ${nomeVisita}
+                        </div>
+
+                        <div class="desc_post">
+                                <div class="desc_txt">
+                                    ${descricaoVisita}
+                                </div>
                         </div>
 
                         <div class ="botões_cc">
                             <div class="curtida">
 
-                                <button onclick="curtida('${idPost}','${quem_postou}')">
-                                    <div class="cond_curtida" id="condCurtida${idPost}">
+                                <button onclick="curtida('${idPostVisita}','${quem_postouVisita}')">
+                                    <div class="cond_curtida" id="condCurtida${idPostVisita}">
                                         <img src="assets/imgs/coracao bordas vermelhas.png" alt="">
                                     </div>
                                 </button>
 
-                                <div class="qtd_curtida" id="qtd_curtida${idPost}"></div>
+                                <div class="qtd_curtida" id="qtd_curtida${idPostVisita}"></div>
 
                         </div>
 
-                        <div class="comentarios" id="comentarios${idPost}">
+                        <div class="comentarios" id="comentarios${idPostVisita}">
 
-                                <button onclick="comentario('${idPost}', '${quem_postou}')">
-                                    <div id="comentario_aberto${idPost}">
+                                <button onclick="comentario('${idPostVisita}', '${quem_postouVisita}')">
+                                    <div id="comentario_aberto${idPostVisita}">
                                     <img src="assets/imgs/chat.svg" alt="comentário">
                                     </div>
                                 </button>
@@ -162,36 +168,31 @@
                             </div>
 
                         </div>
-
-                        <div class="desc_post">
-
-                                <div class="desc_user">
-                                    ${nome}
-                                </div>
-                                <div class="desc_txt">
-                                    ${descricao}
-                                </div>
-                            </div>
-                        </div>
                         
                             <div class="todos_com">
-                            <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
+                            <div class="texto_comentario" id="div_texto_comentario${idPostVisita}"></div>
                             </div>
                     </div>`
-                    } else if (imagem_post.endsWith('.mp4')) {
+                    } else if (imagem_postVisita.endsWith('.mp4')) {
 
                         container.innerHTML += `
                     <div class="exibicao" id="exibicao">
                     <div class="post">
 
-                        <div class="post_user" id="${quem_postou}">
-                           <img src="../assets/imagens perfil/${imagem_perfil_u}" alt="imagem de Perfil do Usuario">
-                            ${nome}
+                        <div class="post_user" id="${quem_postouVisita}">
+                           <img src="../assets/imagens perfil/${imagem_perfilVisita}" alt="">
+                            ${nomeVisita}
+                        </div>
+
+                        <div class="desc_post">
+                                <div class="desc_txt">
+                                    ${descricaoVisita}
+                                </div>
                         </div>
 
                         <div class="img_post">
                             <video width="640" height="360" controls>
-                            <source src="../assets/imagens dos posts/${imagem_post}" type="video/mp4">
+                            <source src="../assets/imagens dos posts/${imagem_postVisita}" type="video/mp4">
                             Seu navegador não suporta a reprodução de vídeo.
                             </video>
                         </div>
@@ -199,20 +200,20 @@
                         <div class ="botões_cc">
                             <div class="curtida">
 
-                                <button onclick="curtida('${idPost}','${quem_postou}')">
-                                    <div class="cond_curtida" id="condCurtida${idPost}">
+                                <button onclick="curtida('${idPostVisita}','${quem_postouVisita}')">
+                                    <div class="cond_curtida" id="condCurtida${idPostVisita}">
                                         <img src="assets/imgs/coracao bordas vermelhas.png" alt="">
                                     </div>
                                 </button>
 
-                                <div class="qtd_curtida" id="qtd_curtida${idPost}"></div>
+                                <div class="qtd_curtida" id="qtd_curtida${idPostVisita}"></div>
 
                         </div>
 
-                        <div class="comentarios" id="comentarios${idPost}">
+                        <div class="comentarios" id="comentarios${idPostVisita}">
 
-                                <button onclick="comentario('${idPost}', '${quem_postou}')">
-                                    <div id="comentario_aberto${idPost}">
+                                <button onclick="comentario('${idPostVisita}', '${quem_postouVisita}')">
+                                    <div id="comentario_aberto${idPostVisita}">
                                     <img src="assets/imgs/chat.svg" alt="comentário">
                                     </div>
                                 </button>
@@ -220,20 +221,9 @@
                             </div>
 
                         </div>
-
-                        <div class="desc_post">
-
-                                <div class="desc_user">
-                                    ${nome}
-                                </div>
-                                <div class="desc_txt">
-                                    ${descricao}
-                                </div>
-                            </div>
-                        </div>
                         
                             <div class="todos_com">
-                            <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
+                            <div class="texto_comentario" id="div_texto_comentario${idPostVisita}"></div>
                             </div>
                     </div>`
                     } else {
@@ -241,32 +231,38 @@
                     <div class="exibicao" id="exibicao">
                     <div class="post">
 
-                        <div class="post_user" id="${quem_postou}">
-                           <img src="../assets/imagens perfil/${imagem_perfil_u}" alt="imagem de Perfil do Usuario">
-                            ${nome}
+                        <div class="post_user" id="${quem_postouVisita}">
+                           <img src="../assets/imagens perfil/${imagem_perfilVisita}" alt="">
+                            ${nomeVisita}
+                        </div>
+
+                        <div class="desc_post">
+                                <div class="desc_txt">
+                                    ${descricaoVisita}
+                                </div>
                         </div>
 
                         <div class="img_post">
-                            <img src="../assets/imagens dos posts/${imagem_post}" alt="">
+                            <img src="../assets/imagens dos posts/${imagem_postVisita}" alt="">
                         </div>
 
                         <div class ="botões_cc">
                             <div class="curtida">
 
-                                <button onclick="curtida('${idPost}','${quem_postou}')">
-                                    <div class="cond_curtida" id="condCurtida${idPost}">
+                                <button onclick="curtida('${idPostVisita}','${quem_postouVisita}')">
+                                    <div class="cond_curtida" id="condCurtida${idPostVisita}">
                                         <img src="assets/imgs/coracao bordas vermelhas.png" alt="">
                                     </div>
                                 </button>
 
-                                <div class="qtd_curtida" id="qtd_curtida${idPost}"></div>
+                                <div class="qtd_curtida" id="qtd_curtida${idPostVisita}"></div>
 
                         </div>
 
-                        <div class="comentarios" id="comentarios${idPost}">
+                        <div class="comentarios" id="comentarios${idPostVisita}">
 
-                                <button onclick="comentario('${idPost}', '${quem_postou}')">
-                                    <div id="comentario_aberto${idPost}">
+                                <button onclick="comentario('${idPostVisita}', '${quem_postouVisita}')">
+                                    <div id="comentario_aberto${idPostVisita}">
                                     <img src="assets/imgs/chat.svg" alt="comentário">
                                     </div>
                                 </button>
@@ -274,24 +270,13 @@
                             </div>
 
                         </div>
-
-                        <div class="desc_post">
-
-                                <div class="desc_user">
-                                    ${nome}
-                                </div>
-                                <div class="desc_txt">
-                                    ${descricao}
-                                </div>
-                            </div>
-                        </div>
                         
                             <div class="todos_com">
-                            <div class="texto_comentario" id="div_texto_comentario${idPost}"></div>
+                            <div class="texto_comentario" id="div_texto_comentario${idPostVisita}"></div>
                             </div>
                     </div>`
                     }
-                    qtd_curtida(idPost)
+                    qtd_curtida(idPostVisita)
 
                 }
                 listarCurtida()
@@ -302,7 +287,7 @@
 
     }
 
-   // Lista de curtida
+    // Lista de curtida
     function listarCurtida() {
 
         fetch(`/curtida/listaCurtida/${idUsuario}`)
@@ -329,25 +314,25 @@
     }
 
     // Função de adicionar curtida
-    function curtida(idPost, quem_postou) {
+    function curtida(idPostVisita, quem_postou) {
         var quem_postouVar = quem_postou
 
-        var div_cond_curtida = document.getElementById(`condCurtida${idPost}`)
+        var div_cond_curtida = document.getElementById(`condCurtida${idPostVisita}`)
 
         // Me responde um valor booleano = true ou false para eu verificar se está ou não curtido
-        var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes(`<img src="assets/imgs/coração vermelho.png" alt="">`)
+        var curtida_coracao_vermelho = div_cond_curtida.innerHTML.includes("coracao vermelho")
 
         // Se for true
         if (curtida_coracao_vermelho) {
 
-            fetch(`/curtida/deletarCurtida/${idPost}`, {
+            fetch(`/curtida/deletarCurtida/${idPostVisita}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 }, body: JSON.stringify({
 
                     idUsuarioServer: idUsuario,
-                    idPostServer: idPost,
+                    idPostVisitaServer: idPostVisita,
                 })
             }).then((res) => {
                 console.log(res)
@@ -355,18 +340,18 @@
                 div_cond_curtida.innerHTML = `<img src="assets/imgs/coracao bordas vermelhas.png" alt="">`
 
                 listarCurtida()
-                qtd_curtida(idPost)
+                qtd_curtida(idPostVisita)
             })
         } else {
 
-            fetch(`/curtida/${idPost}`, {
+            fetch(`/curtida/${idPostVisita}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 }, body: JSON.stringify({
 
                     idUsuarioServer: idUsuario,
-                    idPostServer: idPost,
+                    idPostVisitaServer: idPostVisita,
                     quem_postouServer: quem_postouVar
                 })
             }).then(res => res.json())
@@ -376,7 +361,7 @@
                     console.log("Deu certo a curtida")
 
                     listarCurtida()
-                    qtd_curtida(idPost)
+                    qtd_curtida(idPostVisita)
                 }).catch(erro => {
 
                     console.log(erro)
@@ -384,27 +369,27 @@
         }
     }
 
-    function qtd_curtida(idPost) {
-        console.log(`Função qtdCuritda: ${idPost}`)
+    function qtd_curtida(idPostVisita) {
+        console.log(`Função qtdCuritda: ${idPostVisita}`)
 
-        fetch(`/curtida/qtdCurtida/${idPost}`)
+        fetch(`/curtida/qtdCurtida/${idPostVisita}`)
             .then((res) => res.json())
             .then(quantidade => {
 
                 var quantidade_curtida = quantidade[0]
                 var qtd = quantidade_curtida.qtd
 
-                var div_qtd = document.getElementById(`qtd_curtida${idPost}`)
+                var div_qtd = document.getElementById(`qtd_curtida${idPostVisita}`)
                 div_qtd.innerHTML = `${qtd} curtidas`
             })
     }
 
     // Função de listar comentário
     var contador_comentário = 0
-    function comentario(idPost, quem_postou) {
+    function comentario(idPostVisita, quem_postou) {
 
-        var div_comentario = document.getElementById(`comentario_aberto${idPost}`)
-        var div = document.getElementById(`div_texto_comentario${idPost}`)
+        var div_comentario = document.getElementById(`comentario_aberto${idPostVisita}`)
+        var div = document.getElementById(`div_texto_comentario${idPostVisita}`)
 
         // Seleciona todos os elementos HTML que tem essa classe
         var todasDivsComentario = document.getElementsByClassName("texto_comentario");
@@ -426,7 +411,7 @@
 
         if (contador_comentário == 0) {
 
-            fetch(`/explorer/${idPost}`)
+            fetch(`/explorer/${idPostVisita}`)
                 .then((res) => res.json())
                 .then(todos_os_comentarios => {
 
@@ -443,7 +428,7 @@
                         <textarea type="text" id="input_add_comentario" maxlength="200" placeholder="Adicione um comentário"></textarea>
                             
 
-                            <button onclick="enviar_comentario(${idPost}, ${quem_postou})" id="${quem_postou}">
+                            <button onclick="enviar_comentario(${idPostVisita}, ${quem_postou})" id="${quem_postou}">
 
                                 <img src="assets/imgs/enviar.svg" alt="">
 
@@ -497,12 +482,12 @@
     }
 
     // Função de Adicionar um novo comentário
-    function enviar_comentario(idPost, quem_postou) {
+    function enviar_comentario(idPostVisita, quem_postou) {
 
         var novo_comentario = input_add_comentario.value
         var quem_postouVar = quem_postou
 
-        fetch(`/explorer/novoComentario/${idPost}`, {
+        fetch(`/explorer/novoComentario/${idPostVisita}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -511,7 +496,7 @@
             body: JSON.stringify({
 
                 idUsuarioServer: idUsuario,
-                idPostServer: idPost,
+                idPostVisitaServer: idPostVisita,
                 novo_comentarioServer: novo_comentario,
                 quem_postouServer: quem_postouVar
             })
@@ -520,7 +505,7 @@
 
             input_add_comentario.value = ""
             contador_comentário = 0
-            comentario(idPost, quem_postou)
+            comentario(idPostVisita, quem_postou)
         }).catch(function (erro) {
 
             console.log("Erro ao adicionar comentario")

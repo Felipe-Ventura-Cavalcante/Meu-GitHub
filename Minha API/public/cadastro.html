@@ -15,18 +15,13 @@
       <img src="assets/imgs/logo sem fundo 1.svg" alt="">
     </a>
     <nav>
-      <div class="nav_um">
-        <ul>
-          <li><a href="cadastro.html">
-              CADASTRAR
-            </a></li>
-        </ul>
-      </div>
-
       <div class="nav_dois">
         <ul>
           <li><a href="login.html">
               LOGIN
+            </a></li>
+          <li><a href="cadastro.html">
+              CADASTRAR
             </a></li>
         </ul>
       </div>
@@ -69,97 +64,96 @@
 </html>
 <script>
   function cadastrar() {
-
     var nomeVar = input_nome_user.value;
     var emailVar = input_email.value;
     var senhaVar = input_senha.value;
     var confirmar_senhaVar = input_confirmar_senha.value;
-    var mensagem_erro = ``
-    var nome_encontrado = false
+
+    var mensagem_erro = ``;
+
+    if (nomeVar === `` || emailVar === `` || senhaVar === `` || confirmar_senhaVar === ``) {
+      div_erro.innerHTML = `Preencha todos os campos para realizar o cadastro`;
+      return;
+    }
+
+    if (!emailVar.endsWith(".com") || emailVar.indexOf("@") === -1) {
+      div_erro.innerHTML = `Email incorreto`;
+      return;
+    }
+
+    if (senhaVar.length < 8) {
+      div_erro.innerHTML = `A senha deve ter pelo menos 8 caracteres`;
+      return;
+    }
+
+    if (
+      senhaVar.indexOf("!") === -1 &&
+      senhaVar.indexOf("@") === -1 &&
+      senhaVar.indexOf("#") === -1 &&
+      senhaVar.indexOf("$") === -1 &&
+      senhaVar.indexOf("%") === -1 &&
+      senhaVar.indexOf("&") === -1 &&
+      senhaVar.indexOf("*") === -1 &&
+      senhaVar.indexOf("?") === -1 &&
+      senhaVar.indexOf(";") === -1 &&
+      senhaVar.indexOf("|") === -1 &&
+      senhaVar.indexOf("/") === -1 &&
+      senhaVar.indexOf(":") === -1 &&
+      senhaVar.indexOf("-") === -1 &&
+      senhaVar.indexOf("_") === -1 &&
+      senhaVar.indexOf("+") === -1 &&
+      senhaVar.indexOf("=") === -1 &&
+      senhaVar.indexOf("§") === -1
+    ) {
+      div_erro.innerHTML = `Sua senha deve conter pelo menos um caractere especial`;
+      return;
+    }
+
+    if (senhaVar !== confirmar_senhaVar) {
+      div_erro.innerHTML = `As senhas não coincidem`;
+      return;
+    }
 
     fetch("usuario/listarNome")
       .then(res => res.json())
       .then(lista => {
+        var nome_encontrado = false;
 
-        console.log("lista de nomes:", lista);
         for (var i = 0; i < lista.length; i++) {
-          var lista_nome = lista[i];
-
-          if (lista_nome.nome === nomeVar) {
+          if (lista[i].nome === nomeVar) {
             nome_encontrado = true;
             break;
           }
         }
 
         if (nome_encontrado) {
-          console.log("Nome já existe, não pode cadastrar");
-          throw new Error("Erro ao cadastrar, nome já existe");
-        } else {
-          console.log("Cai no else")
-
-          if (nomeVar == `` ||
-            emailVar == `` ||
-            senhaVar == `` ||
-            confirmar_senhaVar == ``
-          ) {
-            mensagem_erro = `Preencha todos os campos para realizar o cadastro`
-          } else if (!emailVar.endsWith(".com") ||
-            emailVar.indexOf("@") == -1) {
-            mensagem_erro = `Email incorreto`
-          } else if (senhaVar.length < 8) {
-            mensagem_erro = `A senha deve ser maior do que 8 dígitos`
-          } else if (senhaVar.indexOf("!") &&
-            senhaVar.indexOf("@") == -1 &&
-            senhaVar.indexOf("#") == -1 &&
-            senhaVar.indexOf("$") == -1 &&
-            senhaVar.indexOf("%") == -1 &&
-            senhaVar.indexOf("&") == -1 &&
-            senhaVar.indexOf("*") == -1 &&
-            senhaVar.indexOf("?") == -1 &&
-            senhaVar.indexOf(";") == -1 &&
-            senhaVar.indexOf("|") == -1 &&
-            senhaVar.indexOf("/") == -1 &&
-            senhaVar.indexOf(":") == -1 &&
-            senhaVar.indexOf("-") == -1 &&
-            senhaVar.indexOf("_") == -1 &&
-            senhaVar.indexOf("+") == -1 &&
-            senhaVar.indexOf("=") == -1 &&
-            senhaVar.indexOf("§") == -1) {
-            mensagem_erro = `Sua senha de conter pelo menos um caractér especial`
-            console.log(`Falta um digito especial`)
-          } else if (senhaVar != confirmar_senhaVar) {
-            mensagem_erro = `Senhas incoerentes`
-          } else {
-            console.log(`Cheguei na função de inserir`)
-
-            fetch("/usuario/cadastrar", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                nomeServer: nomeVar,
-                emailServer: emailVar,
-                senhaServer: senhaVar
-              })
-            }).then(res => {
-              if (!res.ok) {
-                throw new Error("Erro ao cadastrar")
-              }
-              window.location = "login.html"
-            }).catch(err => {
-              console.error("Erro no cadastro:", err)
-              div_erro.innerHTML = `Email já está em uso`
-            })
-
-          }
+          div_erro.innerHTML = `Nome já está em uso, use outro nome`;
+          return;
         }
+
+        fetch("/usuario/cadastrar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nomeServer: nomeVar,
+            emailServer: emailVar,
+            senhaServer: senhaVar
+          })
+        }).then(res => {
+          if (!res.ok) {
+            throw new Error("Erro ao cadastrar");
+          }
+          window.location = "login.html";
+        }).catch(err => {
+          console.error("Erro no cadastro:", err);
+          div_erro.innerHTML = `Email já está em uso`;
+        });
+
       }).catch(err => {
-        console.error("Erro ao cadastrar, nome já existe", err)
-        div_erro.innerHTML = `Nome já está em uso, use outro nome`
-      })
-
-
-    div_erro.innerHTML = mensagem_erro
+        console.error("Erro ao verificar nomes:", err);
+        div_erro.innerHTML = `Erro ao verificar nomes`;
+      });
   }
 </script>

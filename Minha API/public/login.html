@@ -15,15 +15,14 @@
       <img src="assets/imgs/logo sem fundo 1.svg" alt="">
     </a>
     <nav>
-      <div class="nav_um">
-        <ul>
-          <li><a href="cadastro.html">CADASTRAR</a></li>
-        </ul>
-      </div>
-
       <div class="nav_dois">
         <ul>
-          <li><a href="login.html">LOGIN</a></li>
+          <li><a href="login.html">
+              LOGIN
+            </a></li>
+          <li><a href="cadastro.html">
+              CADASTRAR
+            </a></li>
         </ul>
       </div>
     </nav>
@@ -62,60 +61,60 @@
     var senhaVar = input_senha.value
 
 
-    if( emailVar == `` || senhaVar == ``) {
+    if (emailVar == `` || senhaVar == ``) {
       div_erro.innerHTML = `Preencha todos os campos`
     } else {
-    // Vá para routes.usuario
-    fetch("/usuario/logar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        emailServer: emailVar,
-        senhaServer: senhaVar
+      // Vá para routes.usuario
+      fetch("/usuario/logar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          emailServer: emailVar,
+          senhaServer: senhaVar
+        })
       })
-    })
 
-    // caso tudo der certo
-    .then(function (resposta) {
-      console.log("Estou no THEN do login()")
+        // caso tudo der certo
+        .then(function (resposta) {
+          console.log("Estou no THEN do login()")
 
-      // se a resposta for 200
-      if (resposta.ok) {
-        console.log(resposta);
+          // se a resposta for 200
+          if (resposta.ok) {
+            console.log(resposta);
 
-        // le a resposta do servidor e transforma em json
-        resposta.json().then(json => {
-          console.log(json)
-          console.log(JSON.stringify(json))
+            // le a resposta do servidor e transforma em json
+            resposta.json().then(json => {
+              console.log(json)
+              console.log(JSON.stringify(json))
 
-          // armazena as informações para uma sessão
-          sessionStorage.ID_USUARIO = json.idUsuario
-          sessionStorage.NOME_USUARIO = json.nome
-          sessionStorage.EMAIL_USUARIO = json.email
-          sessionStorage.DESCRICAO_USUARIO = json.descricao
-          sessionStorage.IMAGEM_PERFIL = json.imagem_perfil
+              // armazena as informações para uma sessão
+              sessionStorage.ID_USUARIO = json.idUsuario
+              sessionStorage.NOME_USUARIO = json.nome
+              sessionStorage.EMAIL_USUARIO = json.email
+              sessionStorage.DESCRICAO_USUARIO = json.descricao
+              sessionStorage.IMAGEM_PERFIL = json.imagem_perfil
 
-          window.location = "site/explorer.html"
+              window.location = "site/explorer.html"
+            })
+          } else {
+
+            div_erro.innerHTML = `Email/senha estão incorretos`
+            console.log("Houve um problema ao tentar realizar o login!")
+
+            resposta.text().then(texto => {
+              console.error(texto)
+              return true
+            })
+          }
         })
-      } else {
+        // caso tudo der errado
+        .catch(function (erro) {
+          console.log(erro)
 
-        div_erro.innerHTML = `Email/senha estão incorretos`
-        console.log("Houve um problema ao tentar realizar o login!")
-
-        resposta.text().then(texto => {
-          console.error(texto)
-          return true
         })
-      }
-    })
-    // caso tudo der errado
-    .catch(function (erro) {
-      console.log(erro)
-
-    })
-    return false
-  }
+      return false
+    }
   }
 </script>

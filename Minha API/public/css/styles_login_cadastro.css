@@ -25,11 +25,37 @@ body {
   align-items: center;
 }
 
+button {
+  transition: .3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.nav_dois ul li {
+  background-color: #D9D9D9;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.nav_dois ul li a {
+  display: block;
+  font-family: "Keania One";
+  color: black;
+  transition: 0.3s;
+}
+
+.nav_dois ul li a:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
 header {
   position: fixed;
   background-color: #ffffffff;
   display: flex;
-  justify-content: space-between;
   padding: 0px 40px;
   top: 0px;
   width: 100%;
@@ -48,20 +74,10 @@ header a img {
 
 nav {
   display: flex;
-  width: 45%;
+  width: 90%;
   align-items: center;
-  margin-right: 3%;
-  justify-content: space-between;
-}
-
-.nav_um ul {
-  width: auto;
-  height: 100%;
-  display: flex;
-  gap: 10%;
-  align-items: center;
-  padding-top: 10%;
-  padding-bottom: 10%;
+  justify-content: flex-end;
+  margin-left: 10%;
 }
 
 .nav_dois ul {
@@ -72,26 +88,6 @@ nav {
   align-items: center;
   padding-top: 10%;
   padding-bottom: 10%;
-}
-
-.nav_um ul li {
-  width: auto;
-  height: 100%;
-  background-color: #D9D9D9;
-  padding: 10%;
-  padding-left: 15%;
-  padding-right: 15%;
-  border-radius: 10px;
-}
-
-.nav_dois ul li {
-  width: auto;
-  height: 100%;
-  background-color: #D9D9D9;
-  padding: 20%;
-  padding-left: 15%;
-  padding-right: 15%;
-  border-radius: 10px;
 }
 
 .nav_dois ul li a,

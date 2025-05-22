@@ -242,12 +242,16 @@ button {
     width: 430px;
     display: flex;
     margin-bottom: 10px;
+    padding: 10px;
 }
 
-.div_editar button {
+.botao_editar button {
     background-color: #fff;
+    border: none;
+    color: #121212;
+    padding: 8px;
     border-radius: 10px;
-    padding: 5px;
+    cursor: pointer;
 }
 
 .div_editar input {
@@ -353,6 +357,7 @@ button {
 }
 
 .botões_cc {
+    width: 100%;
     display: flex;
     gap: 5%;
     align-items: center;
